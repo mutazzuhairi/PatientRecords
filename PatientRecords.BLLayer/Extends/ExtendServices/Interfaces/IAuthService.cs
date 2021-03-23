@@ -1,8 +1,8 @@
 ﻿using PatientRecords.BLLayer.EntityDTOs;
-using PatientRecords.BLLayer.Extend.ExtendModelClasses;
+using PatientRecords.BLLayer.Extends.ExtendModelClasses;
 using System.Threading.Tasks;
 
-namespace PatientRecords.BLLayer.Extend.ExtendServices.Interfaces
+namespace PatientRecords.BLLayer.Extends.ExtendServices.Interfaces
 {
     public interface IAuthService
     {

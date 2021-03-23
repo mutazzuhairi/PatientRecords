@@ -11,9 +11,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using PatientRecords.BLLayer.Extend.ExtendServices;
-using PatientRecords.BLLayer.Extend.ExtendServices.Interfaces;
-using PatientRecords.DataLayer.DataBasics.BasicService;
+using PatientRecords.BLLayer.Extends.ExtendServices;
+using PatientRecords.BLLayer.Extends.ExtendServices.Interfaces;
+using PatientRecords.DataLayer.DataBasics.HelperServices;
 using PatientRecords.DataLayer.Data.Entities;
 using AutoMapper;
 

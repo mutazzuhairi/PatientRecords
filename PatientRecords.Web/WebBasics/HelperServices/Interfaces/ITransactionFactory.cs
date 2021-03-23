@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Transactions;
 
-namespace PatientRecords.Web.WebBasics.BasicServices.Interfaces
+namespace PatientRecords.Web.WebBasics.HelperServices.Interfaces
 {
     public interface ITransactionFactory
     {

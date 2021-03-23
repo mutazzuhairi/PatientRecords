@@ -7,7 +7,7 @@ using AutoMapper;
 using PatientRecords.BLLayer.Mapping.Interfaces;
 using PatientRecords.DataLayer.Data.Repositries.Interfaces;
 using PatientRecords.BLLayer.Validating.Interfaces;
-using PatientRecords.BLLayer.BLBasics.BasicServices.Interfaces;
+using PatientRecords.BLLayer.BLBasics.HelperServices.Interfaces;
 using System;
 
 namespace PatientRecords.BLLayer.UpdateServices

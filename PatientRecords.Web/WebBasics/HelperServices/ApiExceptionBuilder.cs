@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
-using PatientRecords.Web.WebBasics.BasicServices.Interfaces;
+using PatientRecords.Web.WebBasics.HelperServices.Interfaces;
 using System;
  
 
-namespace PatientRecords.Web.WebBasics.BasicServices 
+namespace PatientRecords.Web.WebBasics.HelperServices 
 {
     public class ApiExceptionBuilder: IApiExceptionBuildercs
     {

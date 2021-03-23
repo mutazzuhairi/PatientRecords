@@ -6,13 +6,12 @@ using PatientRecords.BLLayer.BLBasics.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using System.Transactions;
 using PatientRecords.BLLayer.BLBasics.Abstractions;
-using PatientRecords.Web.WebBasics.BasicServices.Interfaces;
+using PatientRecords.Web.WebBasics.HelperServices.Interfaces;
 
 namespace PatientRecords.Web.WebBasics.Abstractions
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize(Roles = "Admin")]
     public abstract class CustomBaseController<TEntityDTO, TEntityView, TUpdateService, TQueryService> : ControllerBase
         where TEntityDTO : BaseEntityDTO
         where TUpdateService : IUpdateService<TEntityDTO>

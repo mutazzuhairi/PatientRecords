@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using AutoMapper;
 using System.Threading.Tasks;
 using PatientRecords.BLLayer.BLBasics.Interfaces;
-using PatientRecords.BLLayer.BLBasics.BasicServices;
-using PatientRecords.BLLayer.BLBasics.BasicServices.Interfaces;
+using PatientRecords.BLLayer.BLBasics.HelperServices;
+using PatientRecords.BLLayer.BLBasics.HelperServices.Interfaces;
 
 namespace PatientRecords.BLLayer.BLBasics.Abstractions
 {

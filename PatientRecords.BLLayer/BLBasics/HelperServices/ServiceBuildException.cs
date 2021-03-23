@@ -1,9 +1,9 @@
-﻿using PatientRecords.BLLayer.BLBasics.BasicServices.Interfaces;
+﻿using PatientRecords.BLLayer.BLBasics.HelperServices.Interfaces;
 using System;
 using System.Linq;
 
 
-namespace PatientRecords.BLLayer.BLBasics.BasicServices
+namespace PatientRecords.BLLayer.BLBasics.HelperServices
 {
     public class ServiceBuildException: IServiceBuildException
     {

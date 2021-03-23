@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PatientRecords.Web.WebBasics.BasicServices.Interfaces
+namespace PatientRecords.Web.WebBasics.HelperServices.Interfaces
 {
     public interface IApiExceptionBuildercs
     {

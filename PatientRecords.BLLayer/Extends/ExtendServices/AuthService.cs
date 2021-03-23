@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using PatientRecords.BLLayer.Extend.ExtendServices.Interfaces;
-using PatientRecords.BLLayer.Extend.ExtendModelClasses;
+using PatientRecords.BLLayer.Extends.ExtendServices.Interfaces;
+using PatientRecords.BLLayer.Extends.ExtendModelClasses;
 using PatientRecords.DataLayer.Data.Entities;
 using System.Threading.Tasks;
 using Microsoft.IdentityModel.Tokens;
@@ -10,7 +10,7 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.Extensions.Configuration;
 
-namespace PatientRecords.BLLayer.Extend.ExtendServices
+namespace PatientRecords.BLLayer.Extends.ExtendServices
 {
     public class AuthService : IAuthService
     {

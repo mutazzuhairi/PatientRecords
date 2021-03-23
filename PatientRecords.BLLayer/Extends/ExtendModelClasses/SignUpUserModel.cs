@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PatientRecords.BLLayer.Extend.ExtendModelClasses
+namespace PatientRecords.BLLayer.Extends.ExtendModelClasses
 {
     public class SignUpUserModel
     {

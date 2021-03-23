@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using PatientRecords.BLLayer.EntityDTOs;
-using PatientRecords.BLLayer.Extend.ExtendModelClasses;
+using PatientRecords.BLLayer.Extends.ExtendModelClasses;
 using PatientRecords.DataLayer.Data.Entities;
 
 

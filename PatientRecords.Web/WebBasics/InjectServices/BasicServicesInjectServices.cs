@@ -1,7 +1,7 @@
 ﻿
 using Microsoft.Extensions.DependencyInjection;
-using PatientRecords.Web.WebBasics.BasicServices;
-using PatientRecords.Web.WebBasics.BasicServices.Interfaces;
+using PatientRecords.Web.WebBasics.HelperServices;
+using PatientRecords.Web.WebBasics.HelperServices.Interfaces;
 
 namespace PatientRecords.Web.WebBasics.InjectServices
 {

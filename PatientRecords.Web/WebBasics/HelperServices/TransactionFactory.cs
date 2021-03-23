@@ -1,11 +1,11 @@
-﻿using PatientRecords.Web.WebBasics.BasicServices.Interfaces;
+﻿using PatientRecords.Web.WebBasics.HelperServices.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Transactions;
 
-namespace PatientRecords.Web.WebBasics.BasicServices
+namespace PatientRecords.Web.WebBasics.HelperServices
 {
     public class TransactionFactory: ITransactionFactory
     {

@@ -4,7 +4,7 @@ using System;
 using PatientRecords.BLLayer.EntityViews;
 using PatientRecords.BLLayer.QueryServices.Interfaces;
 using PatientRecords.BLLayer.UpdateServices.Interfaces;
-using PatientRecords.Web.WebBasics.BasicServices.Interfaces;
+using PatientRecords.Web.WebBasics.HelperServices.Interfaces;
 
 namespace PatientRecords.Web.Controllers.Views
 {

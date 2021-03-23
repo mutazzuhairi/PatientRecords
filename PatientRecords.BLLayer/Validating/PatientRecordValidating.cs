@@ -1,4 +1,4 @@
-﻿using PatientRecords.BLLayer.BLBasics.BasicServices.Interfaces;
+﻿using PatientRecords.BLLayer.BLBasics.HelperServices.Interfaces;
 using PatientRecords.BLLayer.EntityDTOs;
 using PatientRecords.BLLayer.QueryServices.Interfaces;
 using PatientRecords.BLLayer.Validating.Interfaces;

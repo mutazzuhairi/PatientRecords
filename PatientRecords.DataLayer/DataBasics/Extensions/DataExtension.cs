@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
-namespace PatientRecords.DataLayer.DataBasics.Extension
+namespace PatientRecords.DataLayer.DataBasics.Extensions
 {
     public static class DataExtension
     {

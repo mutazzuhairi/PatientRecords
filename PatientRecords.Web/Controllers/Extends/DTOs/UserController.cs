@@ -4,15 +4,15 @@ using Microsoft.AspNetCore.Authorization;
 using System.Transactions;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using PatientRecords.BLLayer.Extend.ExtendModelClasses;
+using PatientRecords.BLLayer.Extends.ExtendModelClasses;
 using AutoMapper;
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
-using PatientRecords.BLLayer.Extend.ExtendServices.Interfaces;
+using PatientRecords.BLLayer.Extends.ExtendServices.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using PatientRecords.DataLayer.Data.Entities;
-using PatientRecords.Web.WebBasics.BasicServices.Interfaces;
+using PatientRecords.Web.WebBasics.HelperServices.Interfaces;
 
 namespace PatientRecords.Web.Controllers.DTOs
 {

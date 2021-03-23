@@ -8,7 +8,7 @@ using PatientRecords.BLLayer.Mapping.Interfaces;
 using PatientRecords.DataLayer.Data.Repositries.Interfaces;
 using PatientRecords.BLLayer.UpdateServices.Interfaces;
 using System;
-using PatientRecords.BLLayer.BLBasics.BasicServices.Interfaces;
+using PatientRecords.BLLayer.BLBasics.HelperServices.Interfaces;
 
 namespace PatientRecords.BLLayer.UpdateServices
 {

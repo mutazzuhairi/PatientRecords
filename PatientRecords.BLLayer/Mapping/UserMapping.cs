@@ -2,7 +2,7 @@
 using PatientRecords.BLLayer.EntityDTOs;
 using PatientRecords.BLLayer.Mapping.Interfaces;
 using PatientRecords.DataLayer.Data.Entities;
-using PatientRecords.DataLayer.DataBasics.BasicService;
+using PatientRecords.DataLayer.DataBasics.HelperServices;
 using System;
 
 namespace PatientRecords.BLLayer.Mapping

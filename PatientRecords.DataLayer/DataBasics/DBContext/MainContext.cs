@@ -7,10 +7,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using PatientRecords.DataLayer.DataBasics.Abstractions;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using PatientRecords.DataLayer.DataBasics.BasicService;
+using PatientRecords.DataLayer.DataBasics.HelperServices;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
-using PatientRecords.DataLayer.DataBasics.Extension;
+using PatientRecords.DataLayer.DataBasics.Extensions;
 
 namespace PatientRecords.DataLayer.DataBasics.DBContext
 {

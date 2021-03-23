@@ -1,6 +1,6 @@
 ﻿ 
 
-namespace PatientRecords.BLLayer.Extend.ExtendModelClasses
+namespace PatientRecords.BLLayer.Extends.ExtendModelClasses
 {
     public class AuthResponseModel
     {

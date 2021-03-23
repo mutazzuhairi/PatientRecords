@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
  
 
-namespace PatientRecords.BLLayer.Extend.ExtendModelClasses
+namespace PatientRecords.BLLayer.Extends.ExtendModelClasses
 {
     public class UserAuthModel
     {

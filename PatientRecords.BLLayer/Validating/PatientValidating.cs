@@ -4,8 +4,8 @@ using PatientRecords.BLLayer.BLBasics.Interfaces;
 using PatientRecords.BLLayer.Validating.Interfaces;
 using PatientRecords.BLLayer.QueryServices.Interfaces;
 using System;
-using PatientRecords.BLLayer.BLBasics.BasicServices;
-using PatientRecords.BLLayer.BLBasics.BasicServices.Interfaces;
+using PatientRecords.BLLayer.BLBasics.HelperServices;
+using PatientRecords.BLLayer.BLBasics.HelperServices.Interfaces;
 
 namespace PatientRecords.BLLayer.Validating
 {

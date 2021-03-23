@@ -5,14 +5,13 @@ using System.Threading.Tasks;
 using PatientRecords.BLLayer.BLBasics.Interfaces;
 using System.Transactions;
 using Microsoft.AspNetCore.Authorization;
-using PatientRecords.Web.WebBasics.BasicServices.Interfaces;
+using PatientRecords.Web.WebBasics.HelperServices.Interfaces;
 
 namespace PatientRecords.Web.WebBasics.Abstractions
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize(Roles = "Admin")]
-    public class CustomBaseViewController<TEntityDTO, TEntityView, TQueryService> : ControllerBase
+     public class CustomBaseViewController<TEntityDTO, TEntityView, TQueryService> : ControllerBase
         where TQueryService : IQueryService<TEntityDTO, TEntityView>
     {
 

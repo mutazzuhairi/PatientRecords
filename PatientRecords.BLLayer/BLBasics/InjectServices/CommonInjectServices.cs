@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using PatientRecords.BLLayer.Extend.ExtendServices.Interfaces;
-using PatientRecords.BLLayer.Extend.ExtendServices;
-using PatientRecords.BLLayer.BLBasics.BasicServices;
-using PatientRecords.BLLayer.BLBasics.BasicServices.Interfaces;
+using PatientRecords.BLLayer.Extends.ExtendServices.Interfaces;
+using PatientRecords.BLLayer.Extends.ExtendServices;
+using PatientRecords.BLLayer.BLBasics.HelperServices;
+using PatientRecords.BLLayer.BLBasics.HelperServices.Interfaces;
 
 namespace PatientRecords.BLLayer.BLBasics.InjectServices
 {

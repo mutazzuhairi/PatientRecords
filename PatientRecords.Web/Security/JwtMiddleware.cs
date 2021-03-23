@@ -9,7 +9,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using PatientRecords.BLLayer.Extend.ExtendServices;
+using PatientRecords.BLLayer.Extends.ExtendServices;
 
 namespace PatientRecords.Web.Security
 {

@@ -1,6 +1,6 @@
 ﻿using PatientRecords.BLLayer.BLBasics.Interfaces;
 using PatientRecords.DataLayer.DataBasics.Abstractions;
-using PatientRecords.DataLayer.DataBasics.BasicService;
+using PatientRecords.DataLayer.DataBasics.HelperServices;
 using System;
 
 namespace PatientRecords.BLLayer.BLBasics.Abstractions
