@@ -1,10 +1,11 @@
-﻿using System;
+﻿using PatientRecords.Web.WebBasics.BasicServices.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Transactions;
 
-namespace PatientRecords.DataLayer.DataBasics.BasicService
+namespace PatientRecords.Web.WebBasics.BasicServices
 {
     public class TransactionFactory: ITransactionFactory
     {
@@ -22,28 +23,7 @@ namespace PatientRecords.DataLayer.DataBasics.BasicService
             return transactionScope;
 
         }
-        public   TransactionScope GetNewReadCommittedTransaction(TimeSpan? timeOut = null)
-        {
-            if (timeOut != null)
-            {
-                return new TransactionScope(TransactionScopeOption.RequiresNew, new TransactionOptions() { IsolationLevel = IsolationLevel.ReadCommitted, Timeout = timeOut.Value });
-            }
-
-            return new TransactionScope(TransactionScopeOption.RequiresNew, new TransactionOptions() { IsolationLevel = IsolationLevel.ReadCommitted });
-        }
-
-
-        public TransactionScope GetAsyncNewReadCommittedTransaction(TimeSpan? timeOut = null)
-        {
-            if (timeOut != null)
-            {
-                return new TransactionScope(TransactionScopeOption.RequiresNew, new TransactionOptions() { IsolationLevel = IsolationLevel.ReadCommitted, Timeout = timeOut.Value }, TransactionScopeAsyncFlowOption.Enabled);
-            }
-
-            return new TransactionScope(TransactionScopeOption.RequiresNew, new TransactionOptions() { IsolationLevel = IsolationLevel.ReadCommitted }, TransactionScopeAsyncFlowOption.Enabled);
-        }
-
-
+ 
         private TransactionScope GetTransactionScope(TimeSpan? timeOut = null,bool isAsync=false)
         {
             TransactionOptions transactionOptions = new TransactionOptions() { IsolationLevel = IsolationLevel.Snapshot };

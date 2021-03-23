@@ -9,10 +9,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System;
-using PatientRecords.Web.InjectServices;
 using Microsoft.AspNetCore.Identity;
 using PatientRecords.DataLayer.Data.Entities;
- 
+using PatientRecords.Web.WebBasics.InjectServices;
+
 namespace PatientRecords.Web
 {
     public class Startup

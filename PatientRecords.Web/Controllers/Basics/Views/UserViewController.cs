@@ -3,8 +3,7 @@ using PatientRecords.BLLayer.QueryServices;
 using PatientRecords.Web.WebBasics.Abstractions;
 using System;
 using PatientRecords.BLLayer.EntityViews;
-using PatientRecords.Web.WebBasics.Interfaces;
-using PatientRecords.DataLayer.DataBasics.BasicService;
+using PatientRecords.Web.WebBasics.BasicServices.Interfaces;
 
 namespace PatientRecords.Web.Controllers.Views
 {

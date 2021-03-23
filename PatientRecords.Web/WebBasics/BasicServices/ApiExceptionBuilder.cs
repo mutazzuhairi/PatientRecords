@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
-using PatientRecords.Web.WebBasics.Interfaces;
+using PatientRecords.Web.WebBasics.BasicServices.Interfaces;
 using System;
  
 
-namespace PatientRecords.Web.WebBasics
+namespace PatientRecords.Web.WebBasics.BasicServices 
 {
     public class ApiExceptionBuilder: IApiExceptionBuildercs
     {
@@ -32,6 +32,8 @@ namespace PatientRecords.Web.WebBasics
 
             return apiException;
         }
+
+
         public  APIException BuildModelException(ModelStateDictionary modelState)
         {
             APIException apiException;

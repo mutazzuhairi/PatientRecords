@@ -1,14 +1,11 @@
-﻿using PatientRecords.BLLayer.BLBasics;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using PatientRecords.BLLayer.BLBasics.Interfaces;
-using PatientRecords.DataLayer.DataBasics.Abstractions;
-using PatientRecords.Web.WebBasics.Interfaces;
 using System.Transactions;
-using PatientRecords.DataLayer.DataBasics.BasicService;
 using Microsoft.AspNetCore.Authorization;
+using PatientRecords.Web.WebBasics.BasicServices.Interfaces;
 
 namespace PatientRecords.Web.WebBasics.Abstractions
 {

@@ -1,24 +1,18 @@
-﻿using PatientRecords.BLLayer.EntityDTOs;
-using PatientRecords.BLLayer.QueryServices;
-using PatientRecords.BLLayer.UpdateServices;
-using PatientRecords.Web.WebBasics.Abstractions;
+﻿
 using System;
-using PatientRecords.BLLayer.EntityViews;
-using PatientRecords.Web.WebBasics.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using System.Transactions;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using PatientRecords.BLLayer.Extend.ExtendModelClasses;
 using AutoMapper;
-using PatientRecords.DataLayer.DataBasics.BasicService;
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using PatientRecords.BLLayer.Extend.ExtendServices.Interfaces;
 using Microsoft.AspNetCore.Identity;
-using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using PatientRecords.DataLayer.Data.Entities;
+using PatientRecords.Web.WebBasics.BasicServices.Interfaces;
 
 namespace PatientRecords.Web.Controllers.DTOs
 {
