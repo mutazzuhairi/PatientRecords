@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using PatientRecords.DataLayer.DataBasics.DBContext;
+using PatientRecords.DataLayer.DataUtilities.DBContext;
 
 namespace PatientRecords.DataLayer.Migrations
 {

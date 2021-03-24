@@ -1,5 +1,5 @@
 ﻿using PatientRecords.BLLayer.EntityDTOs;
-using PatientRecords.BLLayer.BLBasics.Interfaces;
+using PatientRecords.BLLayer.BLUtilities.Interfaces;
 
 namespace PatientRecords.BLLayer.UpdateServices.Interfaces
 {

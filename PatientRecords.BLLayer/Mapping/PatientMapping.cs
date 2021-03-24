@@ -1,4 +1,5 @@
-﻿using PatientRecords.BLLayer.BLBasics.Abstractions;
+﻿using Microsoft.AspNetCore.Http;
+using PatientRecords.BLLayer.BLUtilities.Abstractions;
 using PatientRecords.BLLayer.EntityDTOs;
 using PatientRecords.BLLayer.Mapping.Interfaces;
 using PatientRecords.DataLayer.Data.Entities;
@@ -7,7 +8,14 @@ namespace PatientRecords.BLLayer.Mapping
 {
     public class PatientMapping : EntityMapping<Patient, PatientDTO>, IPatientMapping
     {
-        public override void MapEntity(Patient entity, PatientDTO entityDTO, bool isNewEntity)
+
+        public PatientMapping(IHttpContextAccessor httpContextAccessor):base(httpContextAccessor)
+        {
+
+        }
+        public override void MapEntity(Patient entity, 
+                                       PatientDTO entityDTO,
+                                       bool isNewEntity)
         {
             base.MapEntity(entity, entityDTO, isNewEntity);
             if (isNewEntity)

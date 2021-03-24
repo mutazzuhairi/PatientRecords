@@ -12,9 +12,9 @@ using PatientRecords.BLLayer.Extends.ExtendServices.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using PatientRecords.DataLayer.Data.Entities;
-using PatientRecords.Web.WebBasics.HelperServices.Interfaces;
-using PatientRecords.BLLayer.BLBasics.HelperClasses;
-using PatientRecords.BLLayer.BLBasics.HelperServices;
+using PatientRecords.Web.WebUtilities.HelperServices.Interfaces;
+using PatientRecords.BLLayer.BLUtilities.HelperClasses;
+using PatientRecords.BLLayer.BLUtilities.HelperServices;
 
 namespace PatientRecords.Web.Controllers.DTOs
 {
@@ -43,8 +43,7 @@ namespace PatientRecords.Web.Controllers.DTOs
         [AllowAnonymous]
         public async Task<ActionResult<AuthResponseModel>> Login(UserAuthModel userAuthModel)
         {
-
-
+ 
             AuthResponseModel authResult = await _iAuthService.Value.Login(userAuthModel);
             if (authResult == null)
                 return Unauthorized(new AuthResponseModel { ErrorMessage = "Invalid Authentication" });
@@ -81,10 +80,18 @@ namespace PatientRecords.Web.Controllers.DTOs
         }
 
 
-        [Authorize(AuthenticationSchemes = "Bearer")]
+        //[Authorize(AuthenticationSchemes = "Bearer")]
         [HttpGet]
         [Route("api/Tokens")]
         public IActionResult TestAuthorization()
+        {
+            return Ok("You're Authorized");
+        }
+
+        [Authorize]
+        [HttpGet]
+        [Route("api/Test")]
+        public IActionResult TestAuthorizationSchemes()
         {
             return Ok("You're Authorized");
         }

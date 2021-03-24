@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using PatientRecords.DataLayer.Data.Entities;
-using PatientRecords.DataLayer.DataBasics.Abstractions;
-using PatientRecords.DataLayer.DataBasics.DBContext;
+using PatientRecords.DataLayer.DataUtilities.Abstractions;
+using PatientRecords.DataLayer.DataUtilities.DBContext;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
@@ -45,10 +45,20 @@ namespace PatientRecords.DataLayer.Data.Repositries
         {
           return await  _userManager.FindByIdAsync((string)keyValues.First());
         }
- 
+
+        public async Task<User> FindByEmailAsync(string email)
+        {
+            return await _userManager.FindByEmailAsync(email);
+        }
+
+        public async Task<bool> CheckPasswordAsync(User user , string password)
+        {
+            return await _userManager.CheckPasswordAsync(user , password);
+        }
+
         public override  Task<int> SubmitChanges()
         {
-            return null;
+            return Task.FromResult<int>(0);
         }
 
     }

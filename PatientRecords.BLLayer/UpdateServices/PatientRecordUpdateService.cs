@@ -1,4 +1,4 @@
-﻿using PatientRecords.BLLayer.BLBasics.Abstractions;
+﻿using PatientRecords.BLLayer.BLUtilities.Abstractions;
 using PatientRecords.BLLayer.EntityDTOs;
 using PatientRecords.DataLayer.Data.Entities;
 using System.Threading.Tasks;
@@ -8,7 +8,8 @@ using PatientRecords.BLLayer.Mapping.Interfaces;
 using PatientRecords.DataLayer.Data.Repositries.Interfaces;
 using PatientRecords.BLLayer.UpdateServices.Interfaces;
 using System;
-using PatientRecords.BLLayer.BLBasics.HelperServices.Interfaces;
+using PatientRecords.BLLayer.BLUtilities.HelperServices.Interfaces;
+using Microsoft.AspNetCore.Http;
 
 namespace PatientRecords.BLLayer.UpdateServices
 {

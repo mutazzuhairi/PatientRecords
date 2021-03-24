@@ -1,4 +1,4 @@
-﻿using PatientRecords.BLLayer.BLBasics.Abstractions;
+﻿using PatientRecords.BLLayer.BLUtilities.Abstractions;
 using System;
 using System.ComponentModel.DataAnnotations;
 

@@ -1,9 +1,9 @@
 ﻿using PatientRecords.BLLayer.EntityDTOs;
 using PatientRecords.BLLayer.QueryServices;
-using PatientRecords.Web.WebBasics.Abstractions;
+using PatientRecords.Web.WebUtilities.Abstractions;
 using System;
 using PatientRecords.BLLayer.EntityViews;
-using PatientRecords.Web.WebBasics.HelperServices.Interfaces;
+using PatientRecords.Web.WebUtilities.HelperServices.Interfaces;
 using PatientRecords.BLLayer.QueryServices.Interfaces;
 
 namespace PatientRecords.Web.Controllers.Views
