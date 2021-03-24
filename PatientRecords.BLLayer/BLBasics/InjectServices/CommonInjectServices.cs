@@ -13,6 +13,7 @@ namespace PatientRecords.BLLayer.BLBasics.InjectServices
         {
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IServiceBuildException, ServiceBuildException>();
+            services.AddScoped<IPaginationHelper,  PaginationHelper>();
 
         }
     }

@@ -6,82 +6,44 @@ using PatientRecords.BLLayer.BLBasics.Interfaces;
 using System.Transactions;
 using Microsoft.AspNetCore.Authorization;
 using PatientRecords.Web.WebBasics.HelperServices.Interfaces;
+using PatientRecords.BLLayer.BLBasics.HelperClasses;
 
 namespace PatientRecords.Web.WebBasics.Abstractions
 {
     [ApiController]
     [Route("api/[controller]")]
-     public class CustomBaseViewController<TEntityDTO, TEntityView, TQueryService> : ControllerBase
+    public class CustomBaseViewController<TEntityDTO, TEntityView, TQueryService> : ControllerBase
         where TQueryService : IQueryService<TEntityDTO, TEntityView>
     {
 
         private readonly Lazy<TQueryService> _entityQueryService;
-        private readonly Lazy<IApiExceptionBuildercs> _iApiExceptionBuildercs;
-        private readonly Lazy<ITransactionFactory> _iTransactionFactory;
+        private readonly Lazy<IApiExceptionBuilder> _iApiExceptionBuildercs;
 
         public CustomBaseViewController(Lazy<TQueryService> entityQueryService,
-                                        Lazy<IApiExceptionBuildercs> iApiExceptionBuildercs,
-                                        Lazy<ITransactionFactory> transactionFactory)
+                                        Lazy<IApiExceptionBuilder> iApiExceptionBuildercs)
         {
             _entityQueryService = entityQueryService;
             _iApiExceptionBuildercs = iApiExceptionBuildercs;
-            _iTransactionFactory = transactionFactory;
 
         }
 
         [HttpGet]
-        public virtual async Task<ActionResult<List<TEntityView>>> GetAll()
+        public virtual async Task<ActionResult<PagedResponse<List<TEntityView>>>> GetAll([FromQuery] PaginationFilter filter)
         {
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    using (TransactionScope scope = _iTransactionFactory.Value.GetAsyncTransaction())
-                    {
-                        List<TEntityView> tEntityViews = await _entityQueryService.Value.GetAllView();
-                        scope.Complete();
-                        return Ok(tEntityViews);
-                    }
-                }
+            string route = Request.Path.Value;
+            PagedResponse<List<TEntityView>> tEntityViews = await _entityQueryService.Value.GetPaginationViewAsync(filter, route);
+            return Ok(new Response<PagedResponse<List<TEntityView>>>(tEntityViews));
 
-                catch (Exception ex)
-                {
-                    return BadRequest(_iApiExceptionBuildercs.Value.BuildException(ex));
-                }
-            }
-
-            else
-            {
-                return BadRequest(_iApiExceptionBuildercs.Value.BuildModelException(ModelState));
-            }
         }
 
 
         [HttpGet("{id}")]
         public virtual async Task<ActionResult<TEntityView>> Get(int id)
         {
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    using (TransactionScope scope = _iTransactionFactory.Value.GetAsyncTransaction())
-                    {
-                        TEntityView tEntityView = await _entityQueryService.Value.GetSingleView(id);
-                        scope.Complete();
-                        return Ok(tEntityView);
-                    }
-                }
+ 
+            TEntityView tEntityView = await _entityQueryService.Value.GetSingleViewAsync(id);
+            return Ok(new Response<TEntityView>(tEntityView));
 
-                catch (Exception ex)
-                {
-                    return BadRequest(_iApiExceptionBuildercs.Value.BuildException(ex));
-                }
-            }
-
-            else
-            {
-                return BadRequest(_iApiExceptionBuildercs.Value.BuildModelException(ModelState));
-            }
         }
 
     }

@@ -10,7 +10,7 @@ namespace PatientRecords.Web.WebBasics.InjectServices
 
         public static void AddBasicServicesToScoped(this IServiceCollection services)
         {
-            services.AddScoped<IApiExceptionBuildercs, ApiExceptionBuilder>();
+            services.AddScoped<IApiExceptionBuilder, ApiExceptionBuilder>();
             services.AddScoped<ITransactionFactory,  TransactionFactory>();
 
         }

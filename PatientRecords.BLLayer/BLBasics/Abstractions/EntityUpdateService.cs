@@ -39,7 +39,7 @@ namespace PatientRecords.BLLayer.BLBasics.Abstractions
 
         }
 
-        public virtual async Task<TEntityDTO> Create(TEntityDTO entityDTO)
+        public virtual async Task<TEntityDTO> CreateAsync(TEntityDTO entityDTO)
         {
             _isNewEntity = true;
             _entityPoco = (TEntity)Activator.CreateInstance(typeof(TEntity)); 
@@ -58,7 +58,7 @@ namespace PatientRecords.BLLayer.BLBasics.Abstractions
             return entityDTO;
         }
 
-        public virtual async Task<TEntityDTO> Update(TEntityDTO entityDTO, params object[] keyValues)
+        public virtual async Task<TEntityDTO> UpdateAsync(TEntityDTO entityDTO, params object[] keyValues)
         { 
             _isNewEntity = false;
             this._entityeValidating.Validate(entityDTO, _vealidationErrors, _isNewEntity);
@@ -77,7 +77,7 @@ namespace PatientRecords.BLLayer.BLBasics.Abstractions
             return entityDTO;
         }
 
-        public virtual async Task<TEntityDTO> Delete(params object[] keyValues)
+        public virtual async Task<TEntityDTO> DeleteAsync(params object[] keyValues)
         {
 
             _entityPoco = await _entityRepositry.FindAsync(keyValues);

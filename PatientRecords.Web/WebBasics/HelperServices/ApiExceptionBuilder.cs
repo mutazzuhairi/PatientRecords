@@ -1,17 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using PatientRecords.BLLayer.BLBasics.HelperClasses;
 using PatientRecords.Web.WebBasics.HelperServices.Interfaces;
 using System;
  
 
 namespace PatientRecords.Web.WebBasics.HelperServices 
 {
-    public class ApiExceptionBuilder: IApiExceptionBuildercs
+    public class ApiExceptionBuilder: IApiExceptionBuilder
     {
-        public  APIException BuildException(Exception ex)
+        public Response<object> BuildException(Exception ex)
         {
-
-            APIException apiException;
-
+ 
             string errorMessage = ex.Message + Environment.NewLine;
             string shortErrorMessage = ex.Message + Environment.NewLine;
             if (ex.InnerException != null)
@@ -21,8 +20,10 @@ namespace PatientRecords.Web.WebBasics.HelperServices
                 shortErrorMessage = shortErrorMessage + " (" + (ex.InnerException.InnerException != null ? ex.InnerException.InnerException.Message : ex.InnerException.Message) + ")" + Environment.NewLine;
             }
 
-            apiException = new APIException()
+            Response<object> response = new Response<object>()
             {
+                Succeeded = false,
+                Data  =null,
                 ErrorType = ex.GetType().Name,
                 ErrorMessage = errorMessage,
                 ShortErrorMessage = shortErrorMessage
@@ -30,33 +31,9 @@ namespace PatientRecords.Web.WebBasics.HelperServices
 
 
 
-            return apiException;
+            return response;
         }
 
-
-        public  APIException BuildModelException(ModelStateDictionary modelState)
-        {
-            APIException apiException;
-            string errorMessage = "";
-            string shortErrorMessage = "";
-
-            foreach (var modValue in modelState.Values)
-            {
-                foreach (var error in modValue.Errors)
-                {
-                    errorMessage += error.ErrorMessage + Environment.NewLine;
-                    shortErrorMessage += error.ErrorMessage + Environment.NewLine;
-                }
-            }
-
-            apiException = new APIException()
-            {
-                ErrorType = "ModelStateError",
-                ErrorMessage = errorMessage,
-                ShortErrorMessage = shortErrorMessage,
-            };
-
-            return apiException;
-        }
+ 
     }
 }

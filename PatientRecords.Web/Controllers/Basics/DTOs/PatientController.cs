@@ -15,9 +15,8 @@ namespace PatientRecords.Web.Controllers.Views
 
         public PatientsController(Lazy<IPatientQueryService> entityQueryService,
                                      Lazy<IPatientUpdateService> entityUpdateService,
-                                     Lazy<IApiExceptionBuildercs> iApiExceptionBuildercs,
-                                     Lazy<ITransactionFactory> transactionFactory) :
-            base(entityQueryService, entityUpdateService, iApiExceptionBuildercs, transactionFactory)
+                                     Lazy<IApiExceptionBuilder> iApiExceptionBuilder) :
+            base(entityQueryService, entityUpdateService, iApiExceptionBuilder)
         {
 
 

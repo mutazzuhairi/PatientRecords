@@ -12,6 +12,10 @@ using System;
 using Microsoft.AspNetCore.Identity;
 using PatientRecords.DataLayer.Data.Entities;
 using PatientRecords.Web.WebBasics.InjectServices;
+using PatientRecords.Web.WebBasics.Middlewares;
+using PatientRecords.BLLayer.BLBasics.HelperServices.Interfaces;
+using PatientRecords.BLLayer.BLBasics.HelperServices;
+using Microsoft.AspNetCore.Http;
 
 namespace PatientRecords.Web
 {
@@ -29,6 +33,14 @@ namespace PatientRecords.Web
         {
             
             services.AddDbContext<MainContext>(options => options.UseSqlServer(Configuration.GetConnectionString("PatientRecordConnectionString")));
+            services.AddHttpContextAccessor();
+            services.AddSingleton<IUriService>(o =>
+            {
+                var accessor = o.GetRequiredService<IHttpContextAccessor>();
+                var request = accessor.HttpContext.Request;
+                var uri = string.Concat(request.Scheme, "://", request.Host.ToUriComponent());
+                return new UriService(uri);
+            });
             services.AddAutoMapper(typeof(AutoMapperConfiguration));
             services.AddControllers();
             services.AddCors();
@@ -55,6 +67,8 @@ namespace PatientRecords.Web
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseMiddleware<ErrorHandlerMiddleware>();
+
             app.UseEndpoints(endpoints => endpoints.MapControllers());
  
 

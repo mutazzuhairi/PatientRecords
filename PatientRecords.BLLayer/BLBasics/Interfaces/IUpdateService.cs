@@ -6,8 +6,8 @@ namespace PatientRecords.BLLayer.BLBasics.Interfaces
 {
     public interface IUpdateService<TEntityDTO>
     {
-        Task<TEntityDTO> Create(TEntityDTO entityDTO);
-        Task<TEntityDTO> Delete(params object[] keyValues);
-        Task<TEntityDTO> Update(TEntityDTO entityDTO, params object[] keyValues);
+        Task<TEntityDTO> CreateAsync(TEntityDTO entityDTO);
+        Task<TEntityDTO> DeleteAsync(params object[] keyValues);
+        Task<TEntityDTO> UpdateAsync(TEntityDTO entityDTO, params object[] keyValues);
     }
 }
