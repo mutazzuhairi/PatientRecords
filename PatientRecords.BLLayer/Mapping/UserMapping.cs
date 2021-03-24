@@ -1,29 +1,36 @@
-﻿using PatientRecords.BLLayer.BLBasics.Abstractions;
+﻿using Microsoft.AspNetCore.Http;
 using PatientRecords.BLLayer.EntityDTOs;
 using PatientRecords.BLLayer.Mapping.Interfaces;
 using PatientRecords.DataLayer.Data.Entities;
-using PatientRecords.DataLayer.DataBasics.HelperServices;
+using System.Security.Claims;
 using System;
 
 namespace PatientRecords.BLLayer.Mapping
 {
     public class UserMapping  : IUserMapping
     {
-        public void MapEntity(User entity, UserDTO entityDTO, bool isNewEntity)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public UserMapping(IHttpContextAccessor httpContextAccessor)  
         {
-            var loggedInUser = WebsiteContext.LoggedInUser;
+            _httpContextAccessor = httpContextAccessor;
+        }
+        public void MapEntity(User entity, 
+                              UserDTO entityDTO,
+                              bool isNewEntity)
+        {
+            var loggedInUserName = _httpContextAccessor?.HttpContext?.User?.FindFirst(ClaimTypes.Name)?.Value;
 
             if (isNewEntity)
             {
                 entity.Email = entityDTO.Email;
                 entity.PasswordHash = entityDTO.PasswordHash;
                 entityDTO.CreatedDate = DateTime.UtcNow;
-                entityDTO.CreatedBy = loggedInUser?.Id;
+                entityDTO.CreatedBy = loggedInUserName;
                 entity.CreatedBy = entityDTO.CreatedBy;
                 entity.CreatedDate = entityDTO.CreatedDate;
             }
             entityDTO.UpdatedDate = DateTime.UtcNow;
-            entityDTO.UpdatedBy = loggedInUser?.Id;
+            entityDTO.UpdatedBy = loggedInUserName;
             entity.UpdatedDate = entityDTO.UpdatedDate;
             entity.UpdatedBy = entityDTO.UpdatedBy;
             entity.UserName = entityDTO.UserName;

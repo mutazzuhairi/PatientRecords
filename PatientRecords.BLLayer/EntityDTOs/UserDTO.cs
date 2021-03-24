@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using PatientRecords.BLLayer.BLBasics.Abstractions;
-using PatientRecords.DataLayer.DataBasics.Abstractions;
+using System.Text.Json.Serialization;
+using PatientRecords.BLLayer.BLUtilities.Abstractions;
+using PatientRecords.DataLayer.DataUtilities.Abstractions;
 
 namespace PatientRecords.BLLayer.EntityDTOs
 {
@@ -20,6 +21,7 @@ namespace PatientRecords.BLLayer.EntityDTOs
         [Required]
         [StringLength(200)]
         public string UserName { get; set; }
+        [JsonIgnore]
         public string PasswordHash { get; set; }
 
     }

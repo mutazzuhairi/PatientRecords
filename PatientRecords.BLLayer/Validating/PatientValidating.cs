@@ -1,11 +1,11 @@
 ﻿using PatientRecords.BLLayer.EntityDTOs;
 using System.Collections.Generic;
-using PatientRecords.BLLayer.BLBasics.Interfaces;
+using PatientRecords.BLLayer.BLUtilities.Interfaces;
 using PatientRecords.BLLayer.Validating.Interfaces;
 using PatientRecords.BLLayer.QueryServices.Interfaces;
 using System;
-using PatientRecords.BLLayer.BLBasics.HelperServices;
-using PatientRecords.BLLayer.BLBasics.HelperServices.Interfaces;
+using PatientRecords.BLLayer.BLUtilities.HelperServices;
+using PatientRecords.BLLayer.BLUtilities.HelperServices.Interfaces;
 
 namespace PatientRecords.BLLayer.Validating
 {

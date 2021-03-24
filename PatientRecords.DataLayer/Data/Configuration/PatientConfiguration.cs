@@ -1,5 +1,5 @@
 ﻿using PatientRecords.DataLayer.Data.Entities;
-using PatientRecords.DataLayer.DataBasics.Interfaces;
+using PatientRecords.DataLayer.DataUtilities.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;

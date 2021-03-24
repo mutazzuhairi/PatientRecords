@@ -1,4 +1,4 @@
-﻿using PatientRecords.DataLayer.DataBasics.Abstractions;
+﻿using PatientRecords.DataLayer.DataUtilities.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

@@ -1,21 +1,10 @@
-using PatientRecords.BLLayer.BLBasics.Configuration;
-using PatientRecords.BLLayer.BLBasics.InjectServices;
-using PatientRecords.DataLayer.DataBasics.DBContext;
+using PatientRecords.BLLayer.BLUtilities.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
-using System;
-using Microsoft.AspNetCore.Identity;
-using PatientRecords.DataLayer.Data.Entities;
-using PatientRecords.Web.WebBasics.InjectServices;
-using PatientRecords.Web.WebBasics.Middlewares;
-using PatientRecords.BLLayer.BLBasics.HelperServices.Interfaces;
-using PatientRecords.BLLayer.BLBasics.HelperServices;
-using Microsoft.AspNetCore.Http;
+using PatientRecords.Web.WebUtilities.InjectServices;
 
 namespace PatientRecords.Web
 {
@@ -32,25 +21,19 @@ namespace PatientRecords.Web
         public void ConfigureServices(IServiceCollection services)
         {
             
-            services.AddDbContext<MainContext>(options => options.UseSqlServer(Configuration.GetConnectionString("PatientRecordConnectionString")));
+            services.AddDbContextToConfigure(Configuration);
             services.AddHttpContextAccessor();
-            services.AddSingleton<IUriService>(o =>
-            {
-                var accessor = o.GetRequiredService<IHttpContextAccessor>();
-                var request = accessor.HttpContext.Request;
-                var uri = string.Concat(request.Scheme, "://", request.Host.ToUriComponent());
-                return new UriService(uri);
-            });
-            services.AddAutoMapper(typeof(AutoMapperConfiguration));
+            services.AddUriToConfigure();
+            services.AddAutoMapperToConfigure();
             services.AddControllers();
             services.AddCors();
+            services.AddIdentityToConfigure();
             services.SetJwtSettingsConfigure(Configuration);
-            services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "PatientRecord.Web", Version = "v1" }));
-            services.AddBasicServicesToScoped();
-            services.AddEntityServicesToScoped();
-            services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<MainContext>();
-            services.AddCommonServiceToScoped();
-            services.AddScoped(typeof(Lazy<>), typeof(Lazier<>));
+            services.AddSwagger();
+            services.AddBasicServicesToConfigure();
+            services.AddEntityServicesToConfigure();
+            services.AddCommonServiceToConfigure();
+            services.AddLazierToConfigure();
  
         }
 
@@ -60,26 +43,16 @@ namespace PatientRecords.Web
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "PatientRecord.Web v1"));
+                app.UseSwaggerInterface();
             }
             app.UseHttpsRedirection();
             app.UseRouting();
-            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            app.UseCorsSecurity();
             app.UseAuthentication();
             app.UseAuthorization();
-            app.UseMiddleware<ErrorHandlerMiddleware>();
-
-            app.UseEndpoints(endpoints => endpoints.MapControllers());
+            app.UseErrorHandlerMiddleware();
+            app.UseSystemEndpoints();
+        }
  
-
-        }
-
-        internal class Lazier<T> : Lazy<T> where T : class
-        {
-            public Lazier(IServiceProvider provider)
-                : base(() => provider.GetRequiredService<T>())
-            {
-            }
-        }
     }
 }

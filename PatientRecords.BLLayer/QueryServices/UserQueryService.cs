@@ -1,13 +1,15 @@
 ﻿using AutoMapper;
-using PatientRecords.BLLayer.BLBasics.Abstractions;
+using PatientRecords.BLLayer.BLUtilities.Abstractions;
 using PatientRecords.BLLayer.EntityDTOs;
 using PatientRecords.BLLayer.EntityViews;
 using PatientRecords.DataLayer.Data.Entities;
 using PatientRecords.BLLayer.QueryServices.Interfaces;
 using PatientRecords.DataLayer.Data.Repositries.Interfaces;
-using PatientRecords.BLLayer.BLBasics.HelperServices.Interfaces;
+using PatientRecords.BLLayer.BLUtilities.HelperServices.Interfaces;
 using System;
-using PatientRecords.BLLayer.BLBasics.HelperServices;
+using PatientRecords.BLLayer.BLUtilities.HelperServices;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace PatientRecords.BLLayer.QueryServices
 {
@@ -27,6 +29,17 @@ namespace PatientRecords.BLLayer.QueryServices
              _mapper = mapper;
 
         }
- 
+
+
+        public async Task<User> FindByEmailAsync(string email)
+        {
+            return await _iEntityRepositry.FindByEmailAsync(email);
+        }
+
+
+        public async Task<bool> CheckPasswordAsync(User user, string password)
+        {
+            return await _iEntityRepositry.CheckPasswordAsync(user, password);
+         }
     }
 }

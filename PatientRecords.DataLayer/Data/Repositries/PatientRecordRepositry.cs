@@ -1,7 +1,7 @@
 ﻿using PatientRecords.DataLayer.Data.Entities;
 using PatientRecords.DataLayer.Data.Repositries.Interfaces;
-using PatientRecords.DataLayer.DataBasics.Abstractions;
-using PatientRecords.DataLayer.DataBasics.DBContext;
+using PatientRecords.DataLayer.DataUtilities.Abstractions;
+using PatientRecords.DataLayer.DataUtilities.DBContext;
 
 
 namespace PatientRecords.DataLayer.Data.Repositries

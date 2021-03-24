@@ -1,14 +1,14 @@
 ﻿using AutoMapper;
-using PatientRecords.BLLayer.BLBasics.Abstractions;
+using PatientRecords.BLLayer.BLUtilities.Abstractions;
 using PatientRecords.BLLayer.EntityDTOs;
 using PatientRecords.BLLayer.EntityViews;
 using PatientRecords.DataLayer.Data.Entities;
 using PatientRecords.BLLayer.QueryServices.Interfaces;
 using PatientRecords.DataLayer.Data.Repositries.Interfaces;
 using System.Linq;
-using PatientRecords.BLLayer.BLBasics.HelperServices.Interfaces;
+using PatientRecords.BLLayer.BLUtilities.HelperServices.Interfaces;
 using System;
-using PatientRecords.BLLayer.BLBasics.HelperServices;
+using PatientRecords.BLLayer.BLUtilities.HelperServices;
 
 namespace PatientRecords.BLLayer.QueryServices
 {

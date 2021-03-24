@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using PatientRecords.BLLayer.BLBasics.Abstractions;
-using PatientRecords.BLLayer.BLBasics.HelperServices;
-using PatientRecords.BLLayer.BLBasics.HelperServices.Interfaces;
+using PatientRecords.BLLayer.BLUtilities.Abstractions;
+using PatientRecords.BLLayer.BLUtilities.HelperServices;
+using PatientRecords.BLLayer.BLUtilities.HelperServices.Interfaces;
 using PatientRecords.BLLayer.EntityDTOs;
 using PatientRecords.BLLayer.EntityViews;
 using PatientRecords.BLLayer.QueryServices.Interfaces;

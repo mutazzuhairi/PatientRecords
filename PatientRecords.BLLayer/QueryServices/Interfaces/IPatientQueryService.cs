@@ -1,4 +1,4 @@
-﻿using PatientRecords.BLLayer.BLBasics.Interfaces;
+﻿using PatientRecords.BLLayer.BLUtilities.Interfaces;
 using PatientRecords.BLLayer.EntityDTOs;
 using PatientRecords.BLLayer.EntityViews;
  
