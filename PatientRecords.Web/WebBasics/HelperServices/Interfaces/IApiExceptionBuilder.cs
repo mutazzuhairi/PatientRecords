@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using PatientRecords.BLLayer.BLBasics.HelperClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace PatientRecords.Web.WebBasics.HelperServices.Interfaces
 {
-    public interface IApiExceptionBuildercs
+    public interface IApiExceptionBuilder
     {
-        public  APIException BuildException(Exception ex);
-        public  APIException BuildModelException(ModelStateDictionary modelState);
-    }
+        public Response<object> BuildException(Exception ex);
+     }
 }

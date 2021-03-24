@@ -26,15 +26,15 @@ namespace PatientRecords.BLLayer.UpdateServices
         }
 
 
-        public override async Task<PatientRecordDTO> Create(PatientRecordDTO entityDTO)
+        public override async Task<PatientRecordDTO> CreateAsync(PatientRecordDTO entityDTO)
         {
-          return await base.Create(entityDTO);
+          return await base.CreateAsync(entityDTO);
 
         }
 
-        public override async Task<PatientRecordDTO> Update(PatientRecordDTO entityDTO, params object[] keyValues)
+        public override async Task<PatientRecordDTO> UpdateAsync(PatientRecordDTO entityDTO, params object[] keyValues)
         {
-            return await base.Update(entityDTO, keyValues);
+            return await base.UpdateAsync(entityDTO, keyValues);
 
         }
     }

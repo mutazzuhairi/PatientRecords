@@ -9,7 +9,7 @@ namespace PatientRecords.BLLayer.BLBasics.HelperServices
     {
         public void BuildException(params string[] errors)
         {
-            throw new Exception(string.Join(", ", errors.ToArray()));
+            throw new AppException(string.Join(", ", errors.ToArray()));
         }
     }
 }

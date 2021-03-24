@@ -7,6 +7,7 @@ namespace PatientRecords.BLLayer.EntityDTOs
 {
     public  class UserDTO : BaseEntityDTO
     {
+        public string Id { get; set; }
         [Required]
         [StringLength(100)]
         public string FirstName { get; set; }
@@ -17,7 +18,7 @@ namespace PatientRecords.BLLayer.EntityDTOs
         [StringLength(100)]
         public string Email { get; set; }
         [Required]
-        [StringLength(210)]
+        [StringLength(200)]
         public string UserName { get; set; }
         public string PasswordHash { get; set; }
 

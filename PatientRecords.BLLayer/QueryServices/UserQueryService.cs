@@ -5,6 +5,9 @@ using PatientRecords.BLLayer.EntityViews;
 using PatientRecords.DataLayer.Data.Entities;
 using PatientRecords.BLLayer.QueryServices.Interfaces;
 using PatientRecords.DataLayer.Data.Repositries.Interfaces;
+using PatientRecords.BLLayer.BLBasics.HelperServices.Interfaces;
+using System;
+using PatientRecords.BLLayer.BLBasics.HelperServices;
 
 namespace PatientRecords.BLLayer.QueryServices
 {
@@ -14,7 +17,10 @@ namespace PatientRecords.BLLayer.QueryServices
         private readonly IUserRepositry _iEntityRepositry;
         private readonly IMapper _mapper;
 
-        public UserQueryService(IUserRepositry iEntityRepositry, IMapper mapper) : base(iEntityRepositry, mapper)
+        public UserQueryService(IUserRepositry iEntityRepositry, IMapper mapper,
+                                IUriService _uriService,
+                                Lazy<IPaginationHelper> _paginationHelper) :
+            base(iEntityRepositry, mapper, _uriService, _paginationHelper)
         {
 
             _iEntityRepositry = iEntityRepositry;

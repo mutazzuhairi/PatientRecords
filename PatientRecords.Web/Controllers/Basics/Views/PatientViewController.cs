@@ -11,17 +11,15 @@ namespace PatientRecords.Web.Controllers.Views
     public class PatientViewController : CustomBaseViewController<PatientDTO, PatientView, IPatientQueryService>
     {
         private readonly Lazy<IPatientQueryService> _entityQueryService;
-        private readonly Lazy<IApiExceptionBuildercs> _iApiExceptionBuildercs;
+        private readonly Lazy<IApiExceptionBuilder> _iApiExceptionBuilder;
         private readonly Lazy<ITransactionFactory> _iTransactionFactory;
 
         public PatientViewController(Lazy<IPatientQueryService> entityQueryService, 
-                                  Lazy<IApiExceptionBuildercs> iApiExceptionBuildercs,
-                                  Lazy<ITransactionFactory> transactionFactory) :
-            base(entityQueryService, iApiExceptionBuildercs, transactionFactory)
+                                  Lazy<IApiExceptionBuilder> iApiExceptionBuilder) :
+            base(entityQueryService, iApiExceptionBuilder)
         {
             _entityQueryService = entityQueryService;
-            _iApiExceptionBuildercs = iApiExceptionBuildercs;
-            _iTransactionFactory = transactionFactory;
+            _iApiExceptionBuilder = iApiExceptionBuilder;
 
         }
 
