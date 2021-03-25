@@ -4,10 +4,8 @@ using System.Collections.Generic;
 using AutoMapper;
 using System.Threading.Tasks;
 using PatientRecords.BLLayer.BLUtilities.Interfaces;
-using PatientRecords.BLLayer.BLUtilities.HelperServices;
 using PatientRecords.BLLayer.BLUtilities.HelperServices.Interfaces;
-using Microsoft.AspNetCore.Http;
-
+ 
 namespace PatientRecords.BLLayer.BLUtilities.Abstractions
 {
     public abstract class EntityUpdateService<TEntity,TEntityRepositry, TEntityDTO, TEntityMapping,TEntityValidating> : IUpdateService<TEntityDTO> 
@@ -17,18 +15,18 @@ namespace PatientRecords.BLLayer.BLUtilities.Abstractions
 
     {
         private bool _isNewEntity;
-        private readonly TEntityRepositry _entityRepositry;
+        private readonly Lazy<TEntityRepositry> _entityRepositry;
         private TEntity _entityPoco;
-        private TEntityMapping _entityeMapping;
-        private TEntityValidating _entityeValidating;
+        private Lazy<TEntityMapping> _entityeMapping;
+        private Lazy<TEntityValidating> _entityeValidating;
         private List<string> _vealidationErrors;
         private readonly IMapper _mapper;
         private readonly Lazy<IServiceBuildException> _serviceBuildException;
-         public EntityUpdateService(TEntityRepositry entityRepositry , 
-                                   TEntityValidating entityValidating , 
-                                   TEntityMapping entityMapping,
-                                   Lazy<IServiceBuildException> serviceBuildException,
-                                   IMapper mapper )
+         public EntityUpdateService(Lazy<TEntityRepositry> entityRepositry ,
+                                    Lazy<TEntityValidating> entityValidating , 
+                                    Lazy<TEntityMapping> entityMapping,
+                                    Lazy<IServiceBuildException> serviceBuildException,
+                                    IMapper mapper )
         {
             
             _entityRepositry = entityRepositry;
@@ -44,12 +42,12 @@ namespace PatientRecords.BLLayer.BLUtilities.Abstractions
         {
             _isNewEntity = true;
             _entityPoco = (TEntity)Activator.CreateInstance(typeof(TEntity)); 
-            this._entityeValidating.Validate(entityDTO, _vealidationErrors, _isNewEntity);
+            this._entityeValidating.Value.Validate(entityDTO, _vealidationErrors, _isNewEntity);
             if (this._vealidationErrors.Count == 0)
             {
-                this._entityeMapping.MapEntity(_entityPoco, entityDTO, _isNewEntity);
-                this._entityRepositry.Add(_entityPoco);
-                await this._entityRepositry.SubmitChanges();
+                this._entityeMapping.Value.MapEntity(_entityPoco, entityDTO, _isNewEntity);
+                this._entityRepositry.Value.Add(_entityPoco);
+                await this._entityRepositry.Value.SubmitChanges();
             }
             else
             {
@@ -62,13 +60,13 @@ namespace PatientRecords.BLLayer.BLUtilities.Abstractions
         public virtual async Task<TEntityDTO> UpdateAsync(TEntityDTO entityDTO, params object[] keyValues)
         { 
             _isNewEntity = false;
-            this._entityeValidating.Validate(entityDTO, _vealidationErrors, _isNewEntity);
+            this._entityeValidating.Value.Validate(entityDTO, _vealidationErrors, _isNewEntity);
             if (this._vealidationErrors.Count == 0)
             {
-                _entityPoco = await _entityRepositry.FindAsync(keyValues);
-                this._entityeMapping.MapEntity(_entityPoco, entityDTO, _isNewEntity);
-                this._entityRepositry.Update(_entityPoco);
-                await this._entityRepositry.SubmitChanges();
+                _entityPoco = await _entityRepositry.Value.FindAsync(keyValues);
+                this._entityeMapping.Value.MapEntity(_entityPoco, entityDTO, _isNewEntity);
+                this._entityRepositry.Value.Update(_entityPoco);
+                await this._entityRepositry.Value.SubmitChanges();
             }
             else
             {
@@ -81,11 +79,11 @@ namespace PatientRecords.BLLayer.BLUtilities.Abstractions
         public virtual async Task<TEntityDTO> DeleteAsync(params object[] keyValues)
         {
 
-            _entityPoco = await _entityRepositry.FindAsync(keyValues);
+            _entityPoco = await _entityRepositry.Value.FindAsync(keyValues);
             if (_entityPoco!=null)
             {
-                this._entityRepositry.Remove(_entityPoco);
-                await this._entityRepositry.SubmitChanges();
+                this._entityRepositry.Value.Remove(_entityPoco);
+                await this._entityRepositry.Value.SubmitChanges();
             }
             else
             {

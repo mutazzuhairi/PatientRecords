@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
+ 
 namespace PatientRecords.BLLayer.BLUtilities.HelperClasses
 {
     public class PagedResponse<T> : Response<T>
@@ -23,8 +20,7 @@ namespace PatientRecords.BLLayer.BLUtilities.HelperClasses
             this.ErrorMessage = null;
             this.Succeeded = true;
             this.ErrorType = null;
-            this.ShortErrorMessage = null;
-
+ 
         }
     }
 }

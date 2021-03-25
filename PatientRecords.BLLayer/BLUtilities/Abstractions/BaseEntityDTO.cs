@@ -1,5 +1,4 @@
-﻿using PatientRecords.BLLayer.EntityDTOs;
-using System;
+﻿using System;
  
 namespace PatientRecords.BLLayer.BLUtilities.Abstractions
 {

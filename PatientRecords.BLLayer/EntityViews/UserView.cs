@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System;
-using System.Text.Json.Serialization;
-
+﻿ 
 namespace PatientRecords.BLLayer.EntityViews
 {
     public class UserView 

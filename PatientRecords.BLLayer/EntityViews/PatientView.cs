@@ -1,6 +1,5 @@
 ﻿
 using System;
-using System.Collections.Generic;
 
 namespace PatientRecords.BLLayer.EntityViews
 {
@@ -15,7 +14,7 @@ namespace PatientRecords.BLLayer.EntityViews
         public DateTime UpdatedDate { get; set; }
         public string UpdatedBy { get; set; }
         public string CreatedBy { get; set; }
-        public ICollection<PatientRecordView> PatientRecords { get; set; }
+        public  PatientRecordView LastEntry  { get; set; }
 
     }
 }

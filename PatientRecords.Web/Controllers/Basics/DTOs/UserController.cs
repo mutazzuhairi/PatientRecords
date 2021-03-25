@@ -5,14 +5,17 @@ using PatientRecords.BLLayer.EntityViews;
 using PatientRecords.BLLayer.QueryServices.Interfaces;
 using PatientRecords.BLLayer.UpdateServices.Interfaces;
 using PatientRecords.Web.WebUtilities.HelperServices.Interfaces;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using PatientRecords.BLLayer.BLUtilities.HelperClasses;
 
-namespace PatientRecords.Web.Controllers.Basics.Views
+namespace PatientRecords.Web.Controllers.Basics.DTOs
 {
 
     public class UserController : CustomBaseController<UserDTO, UserView, IUserUpdateService, IUserQueryService>
     {
 
-
+        private readonly Lazy<IUserUpdateService> _iUserUpdateService;
         public UserController(Lazy<IUserQueryService> entityQueryService,
                               Lazy<IUserUpdateService> entityUpdateService,
                               Lazy<IApiExceptionBuilder> iApiExceptionBuilder) :
@@ -20,8 +23,18 @@ namespace PatientRecords.Web.Controllers.Basics.Views
             base(entityQueryService, entityUpdateService, iApiExceptionBuilder)
         {
 
-
+            _iUserUpdateService = entityUpdateService;
         }
+
+
+        [HttpPut]
+        public override async Task<ActionResult<UserDTO>> Put(UserDTO userDTO)
+        {
+            await _iUserUpdateService.Value.CustomUpdateAsync(userDTO);
+            return Ok(new Response<UserDTO>(userDTO));
+        }
+
+
 
 
     }

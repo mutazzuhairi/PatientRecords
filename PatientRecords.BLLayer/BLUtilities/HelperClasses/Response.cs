@@ -15,14 +15,12 @@ namespace PatientRecords.BLLayer.BLUtilities.HelperClasses
             Succeeded = true;
             ErrorMessage = string.Empty;
             ErrorType = null;
-            ShortErrorMessage = null;
             Data = data;
         }
         public T Data { get; set; }
         public bool Succeeded { get; set; }
         public string  ErrorType { get; set; }
         public string ErrorMessage { get; set; }
-        public string ShortErrorMessage { get; set; }
-
+ 
     }
 }

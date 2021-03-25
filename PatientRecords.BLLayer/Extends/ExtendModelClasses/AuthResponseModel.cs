@@ -1,6 +1,4 @@
-﻿
-
-using PatientRecords.BLLayer.EntityViews;
+﻿using PatientRecords.BLLayer.EntityViews;
 
 namespace PatientRecords.BLLayer.Extends.ExtendModelClasses
 {

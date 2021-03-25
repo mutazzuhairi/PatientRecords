@@ -2,12 +2,9 @@
 using PatientRecords.DataLayer.Data.Entities;
 using PatientRecords.DataLayer.DataUtilities.Abstractions;
 using PatientRecords.DataLayer.DataUtilities.DBContext;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
+using PatientRecords.DataLayer.Data.Repositries.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using System.Linq;
-using System;
-using PatientRecords.DataLayer.Data.Repositries.Interfaces;
 
 namespace PatientRecords.DataLayer.Data.Repositries
 {
@@ -31,9 +28,39 @@ namespace PatientRecords.DataLayer.Data.Repositries
           await _userManager.CreateAsync(entity);
         }
 
+        public async Task CreateAsync(User entity,string password)
+        {
+            await _userManager.CreateAsync(entity, password);
+        }
+
         public override async void Update(User entity)
         {
             await _userManager.UpdateAsync(entity);
+        }
+
+        public  async Task UpdateAsync(User entity)
+        {
+            await _userManager.UpdateAsync(entity);
+        }
+
+        public async Task UpdatePasswordAsync(User entity,string currentPassword,string newPassword)
+        {
+            await _userManager.ChangePasswordAsync(entity, currentPassword, newPassword);
+        }
+
+        public async Task RemoveFromRoleAsync(User entity, string role)
+        {
+            await _userManager.RemoveFromRoleAsync(entity, role);
+        }
+
+        public async Task SetLockoutEnabledAsync(User entity,bool enabled)
+        {
+            await _userManager.SetLockoutEnabledAsync(entity, enabled);
+        }
+
+        public async Task AddToRoleAsync(User entity,string role)
+        {
+            await _userManager.AddToRoleAsync(entity, role);
         }
 
         public override async void Remove(User entity)

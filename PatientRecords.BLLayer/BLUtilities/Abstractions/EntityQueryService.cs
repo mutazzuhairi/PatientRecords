@@ -27,41 +27,41 @@ namespace PatientRecords.BLLayer.BLUtilities.Abstractions
              _entityRepositry = entityRepositry;
              _mapper = mapper;
              _uriService = uriService;
-            _paginationHelper = paginationHelper;
+             _paginationHelper = paginationHelper;
         }
 
-        public async Task<List<TEntityDTO>> GetAllAsync()
+        public virtual async Task<List<TEntityDTO>> GetAllAsync()
         {
             var pocoList = await this._entityRepositry.GetAll().ToListAsync();
 
-            return this._mapper.Map<List<TEntityDTO>>(pocoList);
+            return _mapper.Map<List<TEntityDTO>>(pocoList);
 
         }
 
-        public async Task<List<TEntityView>> GetAllViewAsync()
+        public virtual async Task<List<TEntityView>> GetAllViewAsync()
         {
             var pocoList = await this._entityRepositry.GetAll().ToListAsync();
 
-            return this._mapper.Map<List<TEntityView>>(pocoList);
+            return _mapper.Map<List<TEntityView>>(pocoList);
 
         }
          
-        public async Task<TEntityDTO> GetSingleAsync(params object[] keyValues)
+        public virtual async Task<TEntityDTO> GetSingleAsync(params object[] keyValues)
         {
             var poco = await this._entityRepositry.FindAsync(keyValues);
  
-            return this._mapper.Map<TEntityDTO>(poco);
+            return  _mapper.Map<TEntityDTO>(poco);
         }
 
-        public async Task<TEntityView> GetSingleViewAsync(params object[] keyValues)
+        public virtual async Task<TEntityView> GetSingleViewAsync(params object[] keyValues)
         {
             var poco = await this._entityRepositry.FindAsync(keyValues);
 
-            return  this._mapper.Map<TEntityView>(poco);
+            return  _mapper.Map<TEntityView>(poco);
         }
 
 
-        public async Task<PagedResponse<List<TEntityDTO>>> GetPaginationAsync(PaginationFilter filter, string route)
+        public virtual async Task<PagedResponse<List<TEntityDTO>>> GetPaginationAsync(PaginationFilter filter, string route)
         {
 
             var paginationData = await GetPaginationData(filter, route);
@@ -71,7 +71,7 @@ namespace PatientRecords.BLLayer.BLUtilities.Abstractions
  
         }
 
-        public async Task<PagedResponse<List<TEntityView>>> GetPaginationViewAsync(PaginationFilter filter, string route)
+        public virtual async  Task<PagedResponse<List<TEntityView>>> GetPaginationViewAsync(PaginationFilter filter, string route)
         {
 
             var paginationData = await GetPaginationData(filter, route);
@@ -98,9 +98,34 @@ namespace PatientRecords.BLLayer.BLUtilities.Abstractions
             return paginationData;
         }
 
-        private async Task<List<TEntity>> GetPaginationRecoreds(PaginationFilter validFilter)
+        private  async Task<List<TEntity>> GetPaginationRecoreds(PaginationFilter validFilter)
         {
             var pagedData = await this._entityRepositry.GetAll()
+                                  .Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
+                                  .Take(validFilter.PageSize)
+                                  .ToListAsync();
+
+            return pagedData;
+        }
+
+ 
+        public virtual async Task<PagedResponse<List<TEntityView>>> GetCustomPaginationAsync<EntityType>(PaginationFilter filter, 
+                                                                                                             string route, 
+                                                                                                             IQueryable<EntityType> entityData)
+        {
+
+            var paginationData = await GetPaginationData(filter, route);
+            var pagedData = await GetCustomPaginationRecoreds<EntityType>(paginationData.ValidFilter, entityData);
+            var pagedDataDTO = this._mapper.Map<List<TEntityView>>(pagedData);
+            return _paginationHelper.Value.CreatePagedReponse<TEntityView>(pagedDataDTO, paginationData);
+
+        }
+ 
+
+        public virtual async Task<List<EntityType>> GetCustomPaginationRecoreds<EntityType>(PaginationFilter validFilter, 
+                                                                                            IQueryable<EntityType> entityData)
+        {
+            var pagedData = await entityData
                                   .Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
                                   .Take(validFilter.PageSize)
                                   .ToListAsync();

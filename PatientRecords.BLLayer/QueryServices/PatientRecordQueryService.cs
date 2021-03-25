@@ -16,17 +16,15 @@ namespace PatientRecords.BLLayer.QueryServices
     {
         
         private readonly IPatientRecordRepositry _iEntityRepositry;
-        private readonly IMapper _mapper;
-
+ 
         public PatientRecordQueryService(IPatientRecordRepositry iEntityRepositry, IMapper mapper,
-                                         IUriService _uriService,
-                                         Lazy<IPaginationHelper> _paginationHelper) :
-            base(iEntityRepositry, mapper, _uriService, _paginationHelper)
+                                         IUriService  uriService,
+                                         Lazy<IPaginationHelper>  paginationHelper) :
+            base(iEntityRepositry, mapper, uriService, paginationHelper)
         {
 
              _iEntityRepositry = iEntityRepositry;
-             _mapper = mapper;
-
+ 
         }
 
         public bool IsDiseaseNameAlreadyExist(string diseaseName)
