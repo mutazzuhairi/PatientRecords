@@ -3,23 +3,16 @@ using PatientRecords.Web.WebUtilities.Abstractions;
 using System;
 using PatientRecords.BLLayer.EntityViews;
 using PatientRecords.BLLayer.QueryServices.Interfaces;
-using PatientRecords.Web.WebUtilities.HelperServices.Interfaces;
 
-namespace PatientRecords.Web.Controllers.Views
+namespace PatientRecords.Web.Controllers.Basics.Views
 {
      
     public class PatientRecordViewController : CustomBaseViewController<PatientRecordDTO, PatientRecordView, IPatientRecordQueryService>
-    {
-        private readonly Lazy<IPatientRecordQueryService> _entityQueryService;
-        private readonly Lazy<IApiExceptionBuilder> _iApiExceptionBuilder;
-
-        public PatientRecordViewController(Lazy<IPatientRecordQueryService> entityQueryService, 
-                                         Lazy<IApiExceptionBuilder> iApiExceptionBuilder) :
-            base(entityQueryService, iApiExceptionBuilder)
+    { 
+        public PatientRecordViewController(Lazy<IPatientRecordQueryService> entityQueryService) :
+            base(entityQueryService)
         {
-            _entityQueryService = entityQueryService;
-            _iApiExceptionBuilder = iApiExceptionBuilder;
-
+  
         }
 
 

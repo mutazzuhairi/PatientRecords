@@ -1,11 +1,10 @@
 ﻿using PatientRecords.BLLayer.BLUtilities.Abstractions;
-using PatientRecords.DataLayer.DataUtilities.Abstractions;
 using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace PatientRecords.BLLayer.EntityDTOs
 {
-    public class PatientRecordDTO: BaseEntityDTO
+    public class PatientRecordDTO : BaseEntityDTO
     {
  
         [Required]

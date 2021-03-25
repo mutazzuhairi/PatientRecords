@@ -36,6 +36,7 @@ namespace PatientRecords.BLLayer.Mapping
             entity.UserName = entityDTO.UserName;
             entity.FirstName = entityDTO.FirstName;
             entity.LastName = entityDTO.LastName;
+            entity.LockoutEnabled = false;
         }
     }
 }

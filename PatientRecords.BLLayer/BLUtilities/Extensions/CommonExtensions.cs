@@ -14,6 +14,7 @@ namespace PatientRecords.BLLayer.BLUtilities.Extensions
             services.AddScoped<IAuthService, AuthenticateService>();
             services.AddScoped<IServiceBuildException, ServiceBuildException>();
             services.AddScoped<IPaginationHelper,  PaginationHelper>();
+            services.AddScoped<ICommonServices,CommonServices>();
 
         }
     }

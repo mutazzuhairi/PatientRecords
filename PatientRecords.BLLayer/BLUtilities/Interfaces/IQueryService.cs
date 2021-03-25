@@ -13,5 +13,6 @@ namespace PatientRecords.BLLayer.BLUtilities.Interfaces
         Task<List<TEntityView>> GetAllViewAsync();
         Task<PagedResponse<List<TEntityDTO>>> GetPaginationAsync(PaginationFilter filter, string route);
         Task<PagedResponse<List<TEntityView>>> GetPaginationViewAsync(PaginationFilter filter, string route);
+
     }
 }

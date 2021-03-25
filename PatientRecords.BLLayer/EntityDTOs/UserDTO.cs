@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 using PatientRecords.BLLayer.BLUtilities.Abstractions;
-using PatientRecords.DataLayer.DataUtilities.Abstractions;
-
+ 
 namespace PatientRecords.BLLayer.EntityDTOs
 {
     public  class UserDTO : BaseEntityDTO

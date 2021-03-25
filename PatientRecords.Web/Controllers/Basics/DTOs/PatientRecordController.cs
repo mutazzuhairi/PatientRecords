@@ -6,7 +6,7 @@ using PatientRecords.BLLayer.QueryServices.Interfaces;
 using PatientRecords.BLLayer.UpdateServices.Interfaces;
 using PatientRecords.Web.WebUtilities.HelperServices.Interfaces;
 
-namespace PatientRecords.Web.Controllers.Basics.Views
+namespace PatientRecords.Web.Controllers.Basics.DTOs
 {
 
     public class PatientRecordController : CustomBaseController<PatientRecordDTO, PatientRecordView, IPatientRecordUpdateService, IPatientRecordQueryService>

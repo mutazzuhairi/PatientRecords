@@ -12,8 +12,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Builder;
 using System;
 using PatientRecords.Web.WebUtilities.Middlewares;
+using PatientRecords.BLLayer.BLUtilities.SystemConstants;
 
-namespace PatientRecords.Web.WebUtilities.InjectServices
+namespace PatientRecords.Web.WebUtilities.Extensions
 {
     public static class CommonExtensions
     {
@@ -27,8 +28,8 @@ namespace PatientRecords.Web.WebUtilities.InjectServices
             services.AddSingleton<IUriService>(o =>
             {
                 var accessor = o.GetRequiredService<IHttpContextAccessor>();
-                var request = accessor.HttpContext.Request;
-                var uri = string.Concat(request.Scheme, "://", request.Host.ToUriComponent());
+                var request = accessor?.HttpContext?.Request;
+                var uri = string.Concat(request?.Scheme, "://", request?.Host.ToUriComponent());
                 return new UriService(uri);
             });
 
@@ -45,13 +46,17 @@ namespace PatientRecords.Web.WebUtilities.InjectServices
         }
         public static void UseSwaggerInterface(this IApplicationBuilder app)
         {
-            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "PatientRecord.Web v1"));
+            app.UseSwaggerUI(c => c.SwaggerEndpoint(SystemConstatnts.Others.SwaggerRoute, 
+                                                    SystemConstatnts.Others.SwaggesrName));
 
         }
 
         public static void AddSwagger(this IServiceCollection services)
         {
-            services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "PatientRecord.Web", Version = "v1" }));
+            services.AddSwaggerGen(c => c.SwaggerDoc(SystemConstatnts.Others.SwaggerVersion, 
+                                                           new OpenApiInfo { Title = SystemConstatnts.Others.SwaggerTitle,
+                                                                             Version = SystemConstatnts.Others.SwaggerVersion
+            }));
  
         }
 
@@ -63,7 +68,7 @@ namespace PatientRecords.Web.WebUtilities.InjectServices
         public static void AddDbContextToConfigure(this IServiceCollection services,IConfiguration configuration)
         {
             services.AddDbContext<MainContext>(options => 
-                                 options.UseSqlServer(configuration.GetConnectionString("PatientRecordConnectionString")));
+                   options.UseSqlServer(configuration.GetConnectionString(SystemConstatnts.ConnectionString.PatientRecord)));
         }
 
         public static void AddAutoMapperToConfigure(this IServiceCollection services)

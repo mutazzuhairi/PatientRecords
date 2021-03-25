@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using PatientRecords.BLLayer.BLUtilities.Interfaces;
 using Microsoft.AspNetCore.Authorization;
-using PatientRecords.Web.WebUtilities.HelperServices.Interfaces;
 using PatientRecords.BLLayer.BLUtilities.HelperClasses;
 
 namespace PatientRecords.Web.WebUtilities.Abstractions
@@ -17,14 +16,11 @@ namespace PatientRecords.Web.WebUtilities.Abstractions
     {
 
         private readonly Lazy<TQueryService> _entityQueryService;
-        private readonly Lazy<IApiExceptionBuilder> _iApiExceptionBuildercs;
-
-        public CustomBaseViewController(Lazy<TQueryService> entityQueryService,
-                                        Lazy<IApiExceptionBuilder> iApiExceptionBuildercs)
+ 
+        public CustomBaseViewController(Lazy<TQueryService> entityQueryService)
         {
             _entityQueryService = entityQueryService;
-            _iApiExceptionBuildercs = iApiExceptionBuildercs;
-
+ 
         }
 
         [HttpGet]
