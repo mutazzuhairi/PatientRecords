@@ -5,7 +5,8 @@ const Header = (props) => {
  
     const [searchValue, setsearchValue] = useState('');
     const [sidebar, setSidebar] = useState("iconsidebar-menu");
- 
+    const [username, setUsername] = useState(JSON.parse(localStorage.getItem('username')));
+
     const escFunction = useCallback((event) => {
         if(event.keyCode === 27) {
           setsearchValue('')
@@ -44,6 +45,7 @@ const Header = (props) => {
     }
      
 
+  
     return (
         <div className="page-main-header">
         <div className="main-header-right">
@@ -60,7 +62,7 @@ const Header = (props) => {
               <li>
             
               </li>
-              <li><h4> Hi, Mutaz <span><LogOut className="LogOut" onClick={()=>signOut()} /></span></h4></li>
+              <li><h4> Hi, {username} <span><LogOut className="LogOut" onClick={()=>signOut()} /></span></h4></li>
             </ul>
           </div>
           
