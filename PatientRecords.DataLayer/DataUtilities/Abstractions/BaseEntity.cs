@@ -11,10 +11,8 @@ namespace PatientRecords.DataLayer.DataUtilities.Abstractions
         public virtual DateTime CreatedDate { get; set; }
         [Required]
         public virtual DateTime UpdatedDate { get; set; }
-        [Required]
         [StringLength(200)]
         public string UpdatedBy { get; set; } = string.Empty;
-        [Required]
         [StringLength(200)]
         public string CreatedBy { get; set; } = string.Empty;
 

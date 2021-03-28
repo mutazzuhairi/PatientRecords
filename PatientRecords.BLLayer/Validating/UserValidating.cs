@@ -29,7 +29,7 @@ namespace PatientRecords.BLLayer.Validating
             {
                 _serviceBuildException.Value.BuildException(SystemConstatnts.ValidationMessage.EmailNotValid);
             }
-            else if (IsUserNameAlreadyExist(entityDTO.UserName))
+            else if (IsUserNameAlreadyExist(entityDTO.UserName, entityDTO.Id))
             {
                 _serviceBuildException.Value.BuildException(SystemConstatnts.ValidationMessage.UserNameAlreadyExist);
             }
@@ -41,9 +41,9 @@ namespace PatientRecords.BLLayer.Validating
             return _iCommonServices.Value.IsEmailValid(email);
         }
 
-        private bool IsUserNameAlreadyExist(string userName)
+        private bool IsUserNameAlreadyExist(string userName,string entityId)
         {
-            return _iUserQueryService.Value.IsUserNameAlreadyExist(userName);
+            return _iUserQueryService.Value.IsUserNameAlreadyExist(userName, entityId);
         }
     }
 }

@@ -1,0 +1,72 @@
+@import "assets/scss/app.scss";
+
+
+.justify-search{
+    margin: 20px;
+    overflow: hidden;
+    width: 90%;
+    border: 1px solid gainsboro;
+}
+select option {
+    border: 5px solid black;;
+    font-size: 18px;
+}
+
+Label{
+    font-size: 16px; color: grey; font-weight: bold; 
+}
+
+.center-pagination{
+    height: 100px;
+    width: 100%;
+    position: absolute;
+    left: 40%;
+    bottom: 0; 
+
+}
+
+.pagination {
+   margin-left: calc(50% - 200px);
+   margin-top: 40px;
+  }
+  
+  .pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    border: 1px solid #ddd;
+  }
+  
+  .pagination a.active {
+    background-color: #4CAF50;
+    color: white;
+    border: 1px solid #4CAF50;
+  }
+  
+  .pagination a:hover:not(.active) {background-color: #ddd;}
+  
+  .pagination a:first-child {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
+  
+  .pagination a:last-child {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+  Button{
+    
+    margin: 20px;
+    float: right;
+}
+.form-header{
+    height: 100px;
+}
+select {
+    width: 100px;
+    height: 35px;
+    margin: 20px;
+    border: 1px solid gainsboro;
+}
+  tr:hover {background-color:#f5f5f5;cursor: pointer;}

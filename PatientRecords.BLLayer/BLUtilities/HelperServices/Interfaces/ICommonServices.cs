@@ -9,7 +9,7 @@ namespace PatientRecords.BLLayer.BLUtilities.HelperServices.Interfaces
 {
     public interface ICommonServices
     {
-        public DataTable ExecuteSQLQuery(string sql);
+        Task<DataTable> ExecuteSQLQuery(string sqlQuery);
         public bool IsEmailValid(string email);
     }
 }

@@ -17,10 +17,8 @@ namespace PatientRecords.DataLayer.Data.Entities
         public DateTime CreatedDate { get; set; }
         [Required]
         public DateTime UpdatedDate { get; set; }
-        [Required]
         [StringLength(200)]
         public string UpdatedBy { get; set; } = string.Empty;
-        [Required]
         [StringLength(200)]
         public string CreatedBy { get; set; } = string.Empty;
 

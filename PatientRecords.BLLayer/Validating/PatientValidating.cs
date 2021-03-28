@@ -27,11 +27,11 @@ namespace PatientRecords.BLLayer.Validating
         public void Validate(PatientDTO entityDTO, List<string> validationErrors, bool isNewEntity)
         {
 
-            if (IsOfficialIdAlreadyExist(entityDTO.OfficialId))
+            if (IsOfficialIdAlreadyExist(entityDTO.OfficialId , entityDTO.Id))
             {
                 _serviceBuildException.Value.BuildException(SystemConstatnts.ValidationMessage.OfficialIdAlreadyExist);
             }
-            else if (!string.IsNullOrEmpty(entityDTO.Email) && IsEmailAlreadyExist(entityDTO.Email))
+            else if (!string.IsNullOrEmpty(entityDTO.Email) && IsEmailAlreadyExist(entityDTO.Email, entityDTO.Id))
             {
                 _serviceBuildException.Value.BuildException(SystemConstatnts.ValidationMessage.EmailAlreadyExist);
             }
@@ -42,14 +42,14 @@ namespace PatientRecords.BLLayer.Validating
         }
 
 
-        private bool IsOfficialIdAlreadyExist(string officialId)
+        private bool IsOfficialIdAlreadyExist(string officialId , int entityId)
         {
-            return _iPatientQueryService.Value.IsOfficialIdAlreadyExist(officialId);
+            return _iPatientQueryService.Value.IsOfficialIdAlreadyExist(officialId,entityId);
         }
 
-        private bool IsEmailAlreadyExist(string email)
+        private bool IsEmailAlreadyExist(string email, int entityId)
         {
-            return _iPatientQueryService.Value.IsEmailAlreadyExist(email);
+            return _iPatientQueryService.Value.IsEmailAlreadyExist(email, entityId);
         }
 
         private bool IsEmailValid(string email)

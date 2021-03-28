@@ -65,7 +65,7 @@ namespace PatientRecords.Web.WebUtilities.Abstractions
         [HttpPut]
         public virtual async Task<ActionResult<TEntityDTO>> Put(TEntityDTO entityDTO)
         {
-
+      
             entityDTO = await _entityUpdateService.Value.UpdateAsync(entityDTO, entityDTO.Id);
             return Ok(new Response<TEntityDTO>(entityDTO));
 

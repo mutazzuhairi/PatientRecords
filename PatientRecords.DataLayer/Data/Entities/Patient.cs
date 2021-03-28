@@ -19,7 +19,7 @@ namespace PatientRecords.DataLayer.Data.Entities
         public DateTime? DateOfBirth { get; set; }
         [StringLength(256)]
         public string Email { get; set; }
-        public ICollection<PatientRecord > PatientRecords { get; set; }
+        public ICollection<PatientRecord> PatientRecords { get; set; }
 
     }
 }

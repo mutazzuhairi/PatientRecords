@@ -1,10 +1,14 @@
 ﻿
 using System;
-using Microsoft.AspNetCore.Authorization;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using PatientRecords.BLLayer.BLUtilities.HelperServices.Interfaces;
 using System.Data;
-using Newtonsoft.Json;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using PatientRecords.BLLayer.BLUtilities.HelperClasses;
+using PatientRecords.Web.WebUtilities.Extensions;
+
 
 namespace PatientRecords.Web.Controllers.Extends.Views
 {
@@ -22,22 +26,23 @@ namespace PatientRecords.Web.Controllers.Extends.Views
         }
 
 
-
         [HttpGet("NameAndAge/{id}")]
-        public JsonResult GetNameAndAge(int id)
+        public async Task<ActionResult<List<Dictionary<string, object>>>> GetNameAndAge(int id)
         {
             string query = string.Format(@"
                                   select Name, FLOOR(DATEDIFF(DAY, DateOfBirth, GETDATE()) / 365.25) AS Age
                                   from dbo.Patients 
                                   where Id ={0}", id);
 
-            DataTable table = _iCommonServices.Value.ExecuteSQLQuery(query);
-            return new JsonResult(JsonConvert.SerializeObject(table));
+            var table = await _iCommonServices.Value.ExecuteSQLQuery(query);
+
+            return Ok(new Response<List<Dictionary<string, object>>>(table.ToJson()));  
         }
 
+ 
 
         [HttpGet("AverageOfBillsRemovingOutliers/{id}")]
-        public JsonResult GetAverageOfBillsRemovingOutliers(int id)
+        public async Task<ActionResult<List<Dictionary<string, object>>>> GetAverageOfBillsRemovingOutliers(int id)
         {
             string query = string.Format(@"
                              WITH AvgStd AS (
@@ -53,26 +58,29 @@ namespace PatientRecords.Web.Controllers.Extends.Views
                                       CROSS JOIN AvgStd
                                       WHERE n.PatientId=120 and n.Bill < (AvgStd.avgnum + 2* AvgStd.stdnum)
                                       AND n.Bill > (AvgStd.avgnum - 2* AvgStd.stdnum)", id);
-            
-            DataTable table = _iCommonServices.Value.ExecuteSQLQuery(query);
-            return new JsonResult(JsonConvert.SerializeObject(table));
+
+            var table = await _iCommonServices.Value.ExecuteSQLQuery(query);
+
+            return Ok(new Response<List<Dictionary<string, object>>>(table.ToJson()));
         }
 
+
         [HttpGet("AverageOfBills/{id}")]
-        public JsonResult GetAverageOfBills(int id)
+        public async Task<ActionResult<List<Dictionary<string, object>>>> GetAverageOfBills(int id)
         {
             string query = string.Format(@"
                                  select AVG(Bill) AS AverageOfBills 
                                  from PatientRecords 
                                  where PatientId ={0}", id);
 
-            DataTable table = _iCommonServices.Value.ExecuteSQLQuery(query);
-            return new JsonResult(JsonConvert.SerializeObject(table));
+            var table = await _iCommonServices.Value.ExecuteSQLQuery(query);
+
+            return Ok(new Response<List<Dictionary<string, object>>>(table.ToJson()));
         }
 
 
         [HttpGet("5thRecordEntryOfPatient/{id}")]
-        public JsonResult Get5thRecordEntryOfPatient(int id)
+        public async Task<ActionResult<List<Dictionary<string, object>>>> Get5thRecordEntryOfPatient(int id)
         {
             string query = string.Format(@"
                                   SELECT * FROM (   
@@ -82,13 +90,14 @@ namespace PatientRecords.Web.Controllers.Extends.Views
                                            ) sorty
                                   WHERE RowNum = 5;", id);
 
-            DataTable table = _iCommonServices.Value.ExecuteSQLQuery(query);
-            return new JsonResult(JsonConvert.SerializeObject(table));
+            DataTable table = await _iCommonServices.Value.ExecuteSQLQuery(query);
+            return Ok(new Response<List<Dictionary<string, object>>>(table.ToJson()));
         }
 
 
+
         [HttpGet("PatientsWithSimilarDiseases/{id}")]
-        public JsonResult GetPatientsWithSimilarDiseases(int id)
+        public async Task<ActionResult<List<Dictionary<string, object>>>> GetPatientsWithSimilarDiseases(int id)
         {
             string query = string.Format(@"
                                  SELECT * FROM dbo.Patients WHERE Id IN(
@@ -102,12 +111,15 @@ namespace PatientRecords.Web.Controllers.Extends.Views
                                 HAVING COUNT(*)>=2
                                  )", id);
 
-            DataTable table = _iCommonServices.Value.ExecuteSQLQuery(query);
-            return new JsonResult(JsonConvert.SerializeObject(table));
+            var table = await _iCommonServices.Value.ExecuteSQLQuery(query);
+            return Ok(new Response<List<Dictionary<string, object>>>(table.ToJson()));
         }
 
+
+
+
         [HttpGet("MonthContainsHighestNumberOfVisits/{id}")]
-        public JsonResult GetMonthContainsHighestNumberOfVisits(int id)
+        public async Task<ActionResult<List<Dictionary<string, object>>>> GetMonthContainsHighestNumberOfVisits(int id)
         {
             string query = string.Format(@"
                                 SELECT TOP 1 FORMAT(TimeOfEntry, 'MMMM') AS MonthName  
@@ -116,8 +128,8 @@ namespace PatientRecords.Web.Controllers.Extends.Views
                                 GROUP BY FORMAT(TimeOfEntry, 'MMMM') 
                                 ORDER BY COUNT(1) DESC", id);
 
-            DataTable table = _iCommonServices.Value.ExecuteSQLQuery(query);
-            return new JsonResult(JsonConvert.SerializeObject(table));
+            var table = await _iCommonServices.Value.ExecuteSQLQuery(query);
+            return Ok(new Response<List<Dictionary<string, object>>>(table.ToJson()));
         }
 
     }

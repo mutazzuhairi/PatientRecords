@@ -2,6 +2,7 @@
 using Microsoft.Data.SqlClient;
 using PatientRecords.BLLayer.BLUtilities.HelperServices.Interfaces;
 using System.Data;
+using System.Threading.Tasks;
 using PatientRecords.BLLayer.BLUtilities.SystemConstants;
 
 namespace PatientRecords.BLLayer.BLUtilities.HelperServices
@@ -14,7 +15,7 @@ namespace PatientRecords.BLLayer.BLUtilities.HelperServices
             _configuration = configuration;
         }
 
-        public DataTable ExecuteSQLQuery(string sqlQuery)
+        public async Task<DataTable> ExecuteSQLQuery(string sqlQuery)
         {
  
             DataTable table = new DataTable();
@@ -25,7 +26,7 @@ namespace PatientRecords.BLLayer.BLUtilities.HelperServices
                 connection.Open();
                 using (SqlCommand myCommand = new SqlCommand(sqlQuery, connection))
                 {
-                    myReader = myCommand.ExecuteReader();
+                    myReader = await myCommand.ExecuteReaderAsync();
                     table.Load(myReader);
 
                     myReader.Close();

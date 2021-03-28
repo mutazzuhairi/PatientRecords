@@ -70,7 +70,7 @@ namespace PatientRecords.DataLayer.Data.Repositries
 
         public override async Task<User> FindAsync(params object[] keyValues)
         {
-          return await  _userManager.FindByIdAsync((string)keyValues.First());
+          return await  _userManager.FindByIdAsync(keyValues.First().ToString());
         }
 
         public async Task<User> FindByEmailAsync(string email)

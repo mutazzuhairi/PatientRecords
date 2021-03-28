@@ -11,6 +11,9 @@ using PatientRecords.DataLayer.DataUtilities.DBContext;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Builder;
 using System;
+using System.Collections.Generic;
+using System.Data;
+using Newtonsoft.Json;
 using PatientRecords.Web.WebUtilities.Middlewares;
 using PatientRecords.BLLayer.BLUtilities.SystemConstants;
 
@@ -80,6 +83,33 @@ namespace PatientRecords.Web.WebUtilities.Extensions
         {
             services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<MainContext>();
         }
+
+
+        public static List<Dictionary<string, object>> ToJson(this DataTable dt)
+        {
+            var list = new List<Dictionary<string, object>>();
+
+            foreach (DataRow row in dt.Rows)
+            {
+                var dict = new Dictionary<string, object>();
+
+                foreach (DataColumn col in dt.Columns)
+                {
+                    if (row[col].ToString().StartsWith('{') || row[col].ToString().StartsWith('['))
+                    {
+                        dict[col.ColumnName] = JsonConvert.DeserializeObject(row[col].ToString());
+                    }
+                    else
+                    {
+                        dict[col.ColumnName] = row[col];
+                    }
+                }
+                list.Add(dict);
+            }
+
+            return list;
+        }
+
 
         internal class Lazier<T> : Lazy<T> where T : class
         {

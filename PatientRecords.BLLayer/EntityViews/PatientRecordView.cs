@@ -13,7 +13,7 @@ namespace PatientRecords.BLLayer.EntityViews
         public string Description { get; set; }
         public decimal Bill { get; set; }
         public int PatientId { get; set; }
-        public PatientDTO PatientDTO { get; set; }
+        public PatientView Patient { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
         public string UpdatedBy { get; set; }

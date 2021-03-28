@@ -63,13 +63,13 @@ namespace PatientRecords.BLLayer.QueryServices
 
  
 
-        public bool IsOfficialIdAlreadyExist(string officialId)
+        public bool IsOfficialIdAlreadyExist(string officialId , int entityId)
         {
-            return _iEntityRepositry.GetAll().Where(s => s.OfficialId == officialId).Any();
+            return _iEntityRepositry.GetAll().Where(s => s.OfficialId == officialId && s.Id!= entityId).Any();
         }
-        public bool IsEmailAlreadyExist(string email)
+        public bool IsEmailAlreadyExist(string email , int entityId)
         {
-            return _iEntityRepositry.GetAll().Where(s => s.Email == email).Any();
+            return _iEntityRepositry.GetAll().Where(s => s.Email == email && s.Id!= entityId).Any();
         }
 
     }

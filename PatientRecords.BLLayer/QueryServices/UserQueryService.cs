@@ -42,9 +42,9 @@ namespace PatientRecords.BLLayer.QueryServices
             return  _mapper.Map<UserDTO>(user);
         }
 
-        public bool IsUserNameAlreadyExist(string userName)
+        public bool IsUserNameAlreadyExist(string userName,string entityId)
         {
-            return _iEntityRepositry.GetAll().Where(s => s.UserName == userName).Any();
+            return _iEntityRepositry.GetAll().Where(s => s.UserName == userName && s.Id != entityId).Any();
         }
 
         public async Task<bool> CheckPasswordAsync(User user, string password)
