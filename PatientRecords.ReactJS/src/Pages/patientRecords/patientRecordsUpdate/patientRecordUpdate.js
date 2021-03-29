@@ -97,7 +97,7 @@ class PatientRecordUpdate  extends Component {
 
 
      componentWillReceiveProps(nextProps){
-         if(this.state.pationtRecordId){
+         if(this.state.pationtRecordId && nextProps.PationtRecordContext.pationtRecord?.diseaseName){
             this.setState({
                 clonePationtRecord:JSON.parse(JSON.stringify(nextProps.PationtRecordContext.pationtRecord)),
             })

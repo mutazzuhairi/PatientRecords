@@ -89,14 +89,14 @@ class PatientStatistics   extends Component {
                   <Col sm="12" xl="6">
                   <h5>{AverageOfBills!=0? AverageOfBills?.map((item, i) => {  
                             return (
-                                <div className="report-data">{item.AverageOfBills} $</div>
+                                <div className="report-data">{ !isNaN(item.AverageOfBills)?item.AverageOfBills:0} $</div>
                                  )
                              }):null} </h5>
 
                      <h5>
                         {AverageOfBillsRemovingOutliers!=0? AverageOfBillsRemovingOutliers?.map((item, i) => {  
                             return (
-                                      <div className="report-data">{item.AverageOfBills} $</div>
+                                      <div className="report-data">{ !isNaN(item.AverageOfBills)?item.AverageOfBills:0} $</div>
                                  )
                              }):null}</h5>
 

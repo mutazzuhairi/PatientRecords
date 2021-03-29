@@ -21,24 +21,27 @@ namespace PatientRecords.BLLayer.QueryServices
         
         private readonly IPatientRepositry _iEntityRepositry;
         private readonly IMapper _mapper;
- 
+        private readonly Lazy<ICommonServices> _commonServices;
         public PatientQueryService(IPatientRepositry iEntityRepositry, 
                                    IMapper mapper,
                                    IUriService  uriService,
-                                   Lazy<IPaginationHelper>  paginationHelper) : 
+                                   Lazy<IPaginationHelper>  paginationHelper,
+                                   Lazy<ICommonServices> commonServices) : 
             base(iEntityRepositry, mapper, uriService, paginationHelper)
         {
              _iEntityRepositry = iEntityRepositry;
-             _mapper = mapper; 
- 
+             _mapper = mapper;
+            _commonServices = commonServices;
         }
 
 
 
         public override async Task<PagedResponse<List<PatientView>>> GetPaginationViewAsync(PaginationFilter filter, string route)
         {
+            var dataView = ApplyFilters(filter);
 
-            var result =  _iEntityRepositry.GetAll()
+            var result =  dataView.
+                          OrderByDescending(s=>s.CreatedDate)
                          .Include(a => a.PatientRecords)
                          .Select(x => new PatientView()
                          {
@@ -56,10 +59,28 @@ namespace PatientRecords.BLLayer.QueryServices
                                                                              FirstOrDefault(p => p.PatientId == x.Id)),
                          });
 
+         
 
-
-            return await base.GetCustomPaginationAsync<PatientView>(filter, route, result);
+            return await base.GetCustomPaginationAsync<PatientView>(filter, route, result, dataView.Count());
         }
+
+
+        private IQueryable<Patient> ApplyFilters(PaginationFilter filter)
+        {
+            var dataView = _iEntityRepositry.GetAll();
+            if (!string.IsNullOrEmpty(filter.SearchField))
+                dataView = dataView.Where(s => s.SearchField.Contains(filter.SearchField));
+            if (!string.IsNullOrEmpty(filter.DateFilter))
+            {
+                var dateFilter = _commonServices.Value.GetQueryDateFilter(filter.DateFilter);
+                if (dateFilter != null)
+                    dataView = dataView.Where(s => s.CreatedDate > dateFilter.Value);
+            }
+
+            return dataView;
+ 
+        }
+
 
  
 

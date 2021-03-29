@@ -19,6 +19,7 @@ class users extends Component {
            ],
            pageSize:Math.floor(window.innerHeight/70),
            pageNumber:1,
+           searchField:'',
        };
     
     }
@@ -29,7 +30,8 @@ class users extends Component {
 
     componentDidUpdate(prevProps, prevState){
         if (this.state.pageSize !== prevState.pageSize ||
-            this.state.pageNumber !== prevState.pageNumber) {
+            this.state.pageNumber !== prevState.pageNumber || 
+            this.state.searchField !== prevState.searchField){
                this.refreshList();
           }
     }
@@ -37,7 +39,9 @@ class users extends Component {
     changePageSize =(event) =>{
         this.setState({pageSize:event.target.value});
     }
-
+    changePageSearchField =(event) =>{
+        this.setState({searchField:event.target.value});
+    }
 
     goToUpdatePage =(id)=> {
         this.props.history.push('/userUpdate/'+id);
@@ -48,7 +52,7 @@ class users extends Component {
        }
 
     refreshList =()=>{
-        this.props.dispatch(userAction.requestGetAll(this.state.pageSize,this.state.pageNumber));
+        this.props.dispatch(userAction.requestGetAll(this.state.pageSize,this.state.pageNumber,this.state.searchField));
     }
  
   
@@ -67,7 +71,7 @@ class users extends Component {
           <Col sm="8">
           <Label>Page Size: </Label>  
             <select onChange={this.changePageSize}>
-                <option disabled defaultValue value>Select size</option>
+                <option disabled selected value>Select size</option>
                 <option>10</option>
                 <option>20</option>
                 <option>50</option>
@@ -79,11 +83,12 @@ class users extends Component {
              <Button onClick={this.goToCreatePage} color="info">New User</Button>
          </Col> */}
           <Col sm="4">
-                 <Input
+                 {/* <Input
                        className="form-control justify-search"
                         type="text"
                         placeholder="Start Searching ..."
-                      />
+                        onChange={this.changePageSearchField}
+                      /> */}
                  </Col>
          </Row>     
           <div className="card-block row">

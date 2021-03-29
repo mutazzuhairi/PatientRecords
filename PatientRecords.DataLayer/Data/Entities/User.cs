@@ -21,6 +21,8 @@ namespace PatientRecords.DataLayer.Data.Entities
         public string UpdatedBy { get; set; } = string.Empty;
         [StringLength(200)]
         public string CreatedBy { get; set; } = string.Empty;
+        public string SearchField { get; set; } = string.Empty;
+
 
     }
 }

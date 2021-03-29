@@ -4,7 +4,7 @@ import Header from './component/common/header/header'
 import Sidebar from './component/common/sidebar/sidebar'
 import Footer from './component/common/footer/footer'
 import 'react-toastify/dist/ReactToastify.css';
-
+import './App.scss'
 const App = ({children}) =>  {
   return (
     <Fragment> 
@@ -13,7 +13,7 @@ const App = ({children}) =>  {
       <div className="page-body-wrapper">
         <Header/>
         <Sidebar/>
-          <div className="page-body">
+          <div className="main-body">
               {children} 
           </div>
         <Footer/> 

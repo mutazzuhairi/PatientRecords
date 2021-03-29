@@ -33,9 +33,9 @@ export default class UserAction {
     };
   }
 
-  static requestGetAll(pageNum=1,pageSize=20) {
+  static requestGetAll(pageNum=1,pageSize=20,searchField='') {
     return async (dispatch, getState) => {
-      await ActionUtility.createThunkEffect(dispatch, UserAction.REQUEST_User_GETALL, UserEffect.requestUserGetAll,pageNum,pageSize);
+      await ActionUtility.createThunkEffect(dispatch, UserAction.REQUEST_User_GETALL, UserEffect.requestUserGetAll,pageNum,pageSize,searchField);
     };
   }
  

@@ -17,6 +17,7 @@ namespace PatientRecords.BLLayer.EntityDTOs
         [Required]
         public int PatientId { get; set; }
         public PatientDTO Patient { get; set; }
-  
+
+        public string SearchField { get; set; }
     }
 }

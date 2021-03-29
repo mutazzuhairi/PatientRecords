@@ -32,9 +32,9 @@ export default class PationtRecordAction {
     };
   }
 
-  static requestGetAll(pageNum=1,pageSize=20) {
+  static requestGetAll(pageNum=1,pageSize=20,searchField='',dateFilter=null) {
     return async (dispatch, getState) => {
-      await ActionUtility.createThunkEffect(dispatch, PationtRecordAction.REQUEST_PATIONTRECORD_GETALL, PationtEffect.requestPationtRecordGetAll,pageNum,pageSize);
+      await ActionUtility.createThunkEffect(dispatch, PationtRecordAction.REQUEST_PATIONTRECORD_GETALL, PationtEffect.requestPationtRecordGetAll,pageNum,pageSize,searchField,dateFilter);
     };
   }
  

@@ -99,7 +99,8 @@ class pationtUpdate  extends Component {
 
 
      componentWillReceiveProps(nextProps){
-         if(this.state.pationtId){    this.setState({
+         if(this.state.pationtId && nextProps.PationtContext.pationt?.name){ 
+        this.setState({
             clonePationt:JSON.parse(JSON.stringify(nextProps.PationtContext.pationt)),
         })}
     

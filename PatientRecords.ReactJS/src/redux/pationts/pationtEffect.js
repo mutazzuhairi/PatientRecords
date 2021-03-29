@@ -24,8 +24,8 @@ export default class PationtEffect {
     return EffectUtility.putToModel(PationtDTO, endpoint, pationt);
   }
 
-  static async requestPationtGetAll(pageNum,pageSize) {
-    const endpoint = PationtEffect.apiurl+"view?PageSize="+pageSize+"&PageNumber="+pageNum;
+  static async requestPationtGetAll(pageNum,pageSize,searchField,dateFilter) {
+    const endpoint = PationtEffect.apiurl+"view?PageSize="+pageSize+"&PageNumber="+pageNum+"&SearchField="+searchField+"&DateFilter="+dateFilter;
 
     return EffectUtility.getToModel(PagedResponse, endpoint);
   }

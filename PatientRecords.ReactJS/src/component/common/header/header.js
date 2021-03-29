@@ -62,7 +62,7 @@ const Header = (props) => {
               <li>
             
               </li>
-              <li><h4> Hi, {username} <span><LogOut className="LogOut" onClick={()=>signOut()} /></span></h4></li>
+              <li><h4> {username} <span><LogOut className="LogOut" onClick={()=>signOut()} /></span></h4></li>
             </ul>
           </div>
           

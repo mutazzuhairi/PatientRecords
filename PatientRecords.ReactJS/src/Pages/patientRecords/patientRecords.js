@@ -21,6 +21,8 @@ class PatientRecords extends Component {
            ],
            pageSize:Math.floor(window.innerHeight/70),
            pageNumber:1,
+           searchField:'',
+           dateFilter:this.props.match.params.date,
        };
     
     }
@@ -31,8 +33,9 @@ class PatientRecords extends Component {
 
     componentDidUpdate(prevProps, prevState){
         if (this.state.pageSize !== prevState.pageSize ||
-            this.state.pageNumber !== prevState.pageNumber) {
-               this.refreshList();
+            this.state.pageNumber !== prevState.pageNumber|| 
+            this.state.searchField !== prevState.searchField){
+                this.refreshList();
           }
     }
 
@@ -44,10 +47,12 @@ class PatientRecords extends Component {
         this.props.history.push('/patientRecordUpdate/'+id);
        }
  
- 
+    changePageSearchField =(event) =>{
+        this.setState({searchField:event.target.value});
+    }
 
     refreshList =()=>{
-        this.props.dispatch(patientRecordAction.requestGetAll(this.state.pageNumber,this.state.pageSize));
+        this.props.dispatch(patientRecordAction.requestGetAll(this.state.pageNumber,this.state.pageSize,this.state.searchField,this.state.dateFilter));
     }
  
   
@@ -68,7 +73,7 @@ class PatientRecords extends Component {
           <Col sm="8">
           <Label>Page Size: </Label>  
               <select onChange={this.changePageSize} >
-              <option disabled defaultValue value>Select size</option>
+              <option disabled selected value>Select size</option>
                 <option>10</option>
                 <option>20</option>
                 <option>50</option>
@@ -81,6 +86,7 @@ class PatientRecords extends Component {
                        className="form-control justify-search"
                         type="text"
                         placeholder="Start Searching ..."
+                        onChange={this.changePageSearchField}
                       />
                  </Col>
          </Row>     
@@ -119,13 +125,18 @@ class PatientRecords extends Component {
                  </Col>
                </div>
                <div>
-        <Pagination
-          activePage={pationtRecords.pageNumber}
-          itemsCountPerPage={pationtRecords.pageSize}
-          totalItemsCount={pationtRecords.totalRecords}
-          pageRangeDisplayed={5}
-          onChange={this.handlePageChange.bind(this)}
-        />
+               {pationtRecords.totalRecords?(
+             <Pagination
+                  activePage={pationtRecords.pageNumber}
+                  itemsCountPerPage={pationtRecords.pageSize}
+                  totalItemsCount={pationtRecords.totalRecords}
+                   pageRangeDisplayed={5}
+                 onChange={this.handlePageChange.bind(this)}
+               />
+
+
+                   ):null}
+     
       </div>
          
             </div>

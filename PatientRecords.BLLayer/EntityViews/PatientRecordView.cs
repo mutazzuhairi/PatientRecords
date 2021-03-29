@@ -18,5 +18,7 @@ namespace PatientRecords.BLLayer.EntityViews
         public DateTime UpdatedDate { get; set; }
         public string UpdatedBy { get; set; }
         public string CreatedBy { get; set; }
+        public string SearchField { get; set; }
+
     }
 }

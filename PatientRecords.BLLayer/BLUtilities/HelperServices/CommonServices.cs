@@ -4,6 +4,7 @@ using PatientRecords.BLLayer.BLUtilities.HelperServices.Interfaces;
 using System.Data;
 using System.Threading.Tasks;
 using PatientRecords.BLLayer.BLUtilities.SystemConstants;
+using System;
 
 namespace PatientRecords.BLLayer.BLUtilities.HelperServices
 {
@@ -36,6 +37,39 @@ namespace PatientRecords.BLLayer.BLUtilities.HelperServices
 
             return table;
         }
+
+
+
+
+        public DateTime? GetQueryDateFilter(string filterName)
+        {
+            var dateCriteria = DateTime.Now;
+            switch (filterName.ToLower())
+            {
+                case "lastweek":
+                    {
+                        dateCriteria = dateCriteria.Date.AddDays(-7);
+                        break;
+                    }
+                case "lastmonth":
+                    {
+                        dateCriteria = dateCriteria.Date.AddMonths(-1);
+                        break;
+                    }
+                case "lastyear":
+                    {
+                        dateCriteria = dateCriteria.Date.AddYears(-1);
+                        break;
+                    }
+                default:
+                    {
+                        return null;
+                    }
+            }
+ 
+            return dateCriteria;
+        }
+
 
 
         public bool IsEmailValid(string email)

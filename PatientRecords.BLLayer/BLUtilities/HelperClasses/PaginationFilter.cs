@@ -8,6 +8,8 @@ namespace PatientRecords.BLLayer.BLUtilities.HelperClasses
     public class PaginationFilter
     {
         public int PageNumber { get; set; }
+        public string SearchField { get; set; }
+        public string DateFilter { get; set; }
         public int PageSize { get; set; }
         public PaginationFilter()
         {

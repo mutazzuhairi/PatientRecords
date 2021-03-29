@@ -24,7 +24,7 @@ class Login extends Component {
             if(!this.state.AuthContext && !this.props.AuthContext.error){
                 const {loogedUsser} = this.props.AuthContext;
                 localStorage.setItem('token', JSON.stringify("Bearer "+loogedUsser.token));
-                localStorage.setItem('username', JSON.stringify(loogedUsser.loggedUser.firstName));
+                localStorage.setItem('username', JSON.stringify(loogedUsser.loggedUser.firstName+" "+loogedUsser.loggedUser.lastName));
                 this.setState({loading:false});
                 this.props.history.push('/patients');
                 window.location.reload();  

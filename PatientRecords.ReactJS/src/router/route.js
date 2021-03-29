@@ -11,7 +11,10 @@ import PatientStatistics from '../Pages/PatientStatistics/PatientStatistics'
 export const routes = [
     { path:"/users", Component: users }, 
     { path:"/patients", Component: pationts }, 
+    { path:"/patients/:date", Component: pationts }, 
     { path:"/patientRecords", Component: patientRecords }, 
+    { path:"/patientRecords/:date", Component: patientRecords }, 
+
     //For Update
     { path:"/pationtUpdate/:id", Component: pationtUpdate }, 
     { path:"/patientRecordUpdate/:id", Component: patientRecordUpdate }, 
@@ -21,5 +24,8 @@ export const routes = [
     { path:"/patientRecordUpdate/:pationtname/:pationtid", Component: patientRecordUpdate }, 
     { path:"/userUpdate", Component: userUpdate }, 
     { path:"/Statistics/:id", Component: PatientStatistics }, 
+
+
+
 
 ]

@@ -20,12 +20,17 @@ class Pationts extends  Component   {
            ],
            pageSize:Math.floor(window.innerHeight/70),
            pageNumber:1,
+           searchField:'',
            lastEntryShow:false,
            statisticShow:false,
+           dateFilter:this.props.match.params.date,
        };
     
     }
 
+    changePageSearchField =(event) =>{
+        this.setState({searchField:event.target.value});
+    }
     handleClose=()=>{
         this.setState({lastEntryShow:false});
     }
@@ -41,7 +46,8 @@ class Pationts extends  Component   {
 
     componentDidUpdate(prevProps, prevState){
         if (this.state.pageSize !== prevState.pageSize ||
-            this.state.pageNumber !== prevState.pageNumber) {
+            this.state.pageNumber !== prevState.pageNumber|| 
+            this.state.searchField !== prevState.searchField){
                this.refreshList();
           }
     }
@@ -58,7 +64,7 @@ class Pationts extends  Component   {
       }
 
     refreshList =()=>{
-        this.props.dispatch(pationtAction.requestGetAll(this.state.pageNumber,this.state.pageSize));
+        this.props.dispatch(pationtAction.requestGetAll(this.state.pageNumber,this.state.pageSize,this.state.searchField,this.state.dateFilter));
     }
  
  
@@ -77,7 +83,7 @@ class Pationts extends  Component   {
           <Col sm="3">
           <Label>Page Size: </Label>  
               <select onChange={this.changePageSize}>
-              <option disabled defaultValue value>Select size</option>
+              <option disabled selected value>Select size</option>
                 <option>10</option>
                 <option>20</option>
                 <option>50</option>
@@ -93,6 +99,7 @@ class Pationts extends  Component   {
                        className="form-control justify-search"
                         type="text"
                         placeholder="Start Searching ..."
+                        onChange={this.changePageSearchField}
                       />
                  </Col>
          </Row>     

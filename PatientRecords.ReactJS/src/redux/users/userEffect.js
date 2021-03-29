@@ -27,8 +27,8 @@ export default class UserEffect {
     return EffectUtility.putToModel(UserDTO, endpoint,user);
   }
 
-  static async requestUserGetAll(pageSize,pageNum) {
-    const endpoint = UserEffect.apiurl+"View?PageSize="+pageSize+"&PageNumber="+pageNum;
+  static async requestUserGetAll(pageSize,pageNum,searchField) {
+    const endpoint = UserEffect.apiurl+"View?PageSize="+pageSize+"&PageNumber="+pageNum+"&SearchField="+searchField;
 
     return EffectUtility.getToModel(PagedResponse, endpoint);
   }

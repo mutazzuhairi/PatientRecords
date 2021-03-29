@@ -23,8 +23,8 @@ export default class PationtRecordEffect {
     return EffectUtility.postToModel(PatientRecordDTO, endpoint,patientRecord);
   }
 
-  static async requestPationtRecordGetAll(pageNum,pageSize) {
-    const endpoint = PationtRecordEffect.apiurl+"View?PageSize="+pageSize+"&PageNumber="+pageNum;
+  static async requestPationtRecordGetAll(pageNum,pageSize,searchField,dateFilter) {
+    const endpoint = PationtRecordEffect.apiurl+"View?PageSize="+pageSize+"&PageNumber="+pageNum+"&SearchField="+searchField+"&DateFilter="+dateFilter;
 
     return EffectUtility.getToModel(PagedResponse, endpoint);
   }

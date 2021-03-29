@@ -188,6 +188,9 @@ namespace PatientRecords.DataLayer.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
+                    b.Property<string>("SearchField")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("UpdatedBy")
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
@@ -228,6 +231,9 @@ namespace PatientRecords.DataLayer.Migrations
 
                     b.Property<int>("PatientId")
                         .HasColumnType("int");
+
+                    b.Property<string>("SearchField")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("TimeOfEntry")
                         .ValueGeneratedOnAdd()
@@ -308,6 +314,9 @@ namespace PatientRecords.DataLayer.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("SearchField")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");

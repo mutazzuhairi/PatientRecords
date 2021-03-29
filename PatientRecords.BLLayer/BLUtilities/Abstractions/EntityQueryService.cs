@@ -9,6 +9,7 @@ using PatientRecords.BLLayer.BLUtilities.HelperClasses;
 using PatientRecords.BLLayer.BLUtilities.HelperServices;
 using PatientRecords.BLLayer.BLUtilities.HelperServices.Interfaces;
 using System;
+using System.Reflection;
 
 namespace PatientRecords.BLLayer.BLUtilities.Abstractions
 {
@@ -83,13 +84,13 @@ namespace PatientRecords.BLLayer.BLUtilities.Abstractions
 
 
 
-        private async Task<PaginationData> GetPaginationData(PaginationFilter filter, string route)
+        private async Task<PaginationData> GetPaginationData(PaginationFilter filter, string route ,int? totalRecordsCount = null)
         {
             var validFilter = new PaginationFilter(filter.PageNumber, filter.PageSize);
             var totalRecords = await this._entityRepositry.GetAll().CountAsync();
             var paginationData = new PaginationData()
             {
-                TotalRecords = totalRecords,
+                TotalRecords = totalRecordsCount!=null? (int)totalRecordsCount:totalRecords,
                 ValidFilter = validFilter,
                 Route = route,
                 UriService = _uriService,
@@ -98,8 +99,25 @@ namespace PatientRecords.BLLayer.BLUtilities.Abstractions
             return paginationData;
         }
 
-        private  async Task<List<TEntity>> GetPaginationRecoreds(PaginationFilter validFilter)
+
+        public virtual async Task<PagedResponse<List<TEntityView>>> GetCustomPaginationAsync<EntityType>(PaginationFilter filter, 
+                                                                                                             string route, 
+                                                                                                             IQueryable<EntityType> entityData,
+                                                                                                             int? totalRecords=null)
         {
+
+            var paginationData = await GetPaginationData(filter, route, totalRecords);
+            var pagedData = await GetCustomPaginationRecoreds<EntityType>(paginationData.ValidFilter, entityData);
+            var pagedDataDTO = this._mapper.Map<List<TEntityView>>(pagedData);
+            return _paginationHelper.Value.CreatePagedReponse<TEntityView>(pagedDataDTO, paginationData);
+
+        }
+
+
+
+        private async Task<List<TEntity>> GetPaginationRecoreds(PaginationFilter validFilter)
+        {
+
             var pagedData = await this._entityRepositry.GetAll()
                                   .Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
                                   .Take(validFilter.PageSize)
@@ -108,19 +126,6 @@ namespace PatientRecords.BLLayer.BLUtilities.Abstractions
             return pagedData;
         }
 
- 
-        public virtual async Task<PagedResponse<List<TEntityView>>> GetCustomPaginationAsync<EntityType>(PaginationFilter filter, 
-                                                                                                             string route, 
-                                                                                                             IQueryable<EntityType> entityData)
-        {
-
-            var paginationData = await GetPaginationData(filter, route);
-            var pagedData = await GetCustomPaginationRecoreds<EntityType>(paginationData.ValidFilter, entityData);
-            var pagedDataDTO = this._mapper.Map<List<TEntityView>>(pagedData);
-            return _paginationHelper.Value.CreatePagedReponse<TEntityView>(pagedDataDTO, paginationData);
-
-        }
- 
 
         public virtual async Task<List<EntityType>> GetCustomPaginationRecoreds<EntityType>(PaginationFilter validFilter, 
                                                                                             IQueryable<EntityType> entityData)

@@ -2,13 +2,16 @@
 using PatientRecords.BLLayer.BLUtilities.Abstractions;
 using PatientRecords.BLLayer.EntityDTOs;
 using PatientRecords.BLLayer.Mapping.Interfaces;
+using PatientRecords.BLLayer.QueryServices;
 using PatientRecords.DataLayer.Data.Entities;
 using System;
+using System.Threading.Tasks;
 
 namespace PatientRecords.BLLayer.Mapping
 {
     public class  PatientRecordMapping : EntityMapping<PatientRecord , PatientRecordDTO>, IPatientRecordMapping
     {
+
         public PatientRecordMapping(IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
         {
 
@@ -27,7 +30,14 @@ namespace PatientRecords.BLLayer.Mapping
             entity.Description = entityDTO.Description;
             entity.TimeOfEntry = entityDTO.TimeOfEntry == null ? DateTime.UtcNow : (DateTime) entityDTO.TimeOfEntry;
 
+            entity.SearchField = entityDTO.SearchField;
 
-        }
+         }
+
+
+
+      
+
+
     }
 }

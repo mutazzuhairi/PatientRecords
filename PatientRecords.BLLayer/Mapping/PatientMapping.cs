@@ -25,6 +25,7 @@ namespace PatientRecords.BLLayer.Mapping
             entity.Email = entityDTO.Email;
             entity.Name = entityDTO.Name;
             entity.DateOfBirth = entityDTO.DateOfBirth;
+            entity.SearchField = string.Join(",", entity.Email, entity.Name, entity.OfficialId);
         }
     }
 }

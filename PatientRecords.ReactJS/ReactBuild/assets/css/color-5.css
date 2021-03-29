@@ -4193,7 +4193,6 @@ body.dark-only .page-wrapper .page-body-wrapper .page-sidebar .sidebar-menu > li
   background-color: #fff; }
   .page-wrapper .page-body-wrapper .page-body {
     min-height: calc(100vh - 95px);
-    margin-top: 95px;
     padding: 0 30px;
     position: relative;
     background-color: #fdfeff;
@@ -4829,7 +4828,7 @@ body.dark-only .page-wrapper .page-body-wrapper .page-sidebar .sidebar-menu > li
         vertical-align: middle; }
     .page-wrapper .page-body-wrapper .iconsidebar-menu .iconMenu-bar .iconbar-mainmenu {
       position: fixed;
-      top: 95px;
+      top: 55px;
       height: calc(100vh - 95px);
       overflow: auto;
       left: 90px;

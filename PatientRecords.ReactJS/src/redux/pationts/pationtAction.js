@@ -33,9 +33,9 @@ export default class PationtAction {
     };
   }
 
-  static requestGetAll(pageNum=1,pageSize=20) {
+  static requestGetAll(pageNum=1,pageSize=20,searchField='',dateFilter=null) {
     return async (dispatch, getState) => {
-      await ActionUtility.createThunkEffect(dispatch, PationtAction.REQUEST_PATIONT_GETALL, PationtEffect.requestPationtGetAll,pageNum,pageSize);
+      await ActionUtility.createThunkEffect(dispatch, PationtAction.REQUEST_PATIONT_GETALL, PationtEffect.requestPationtGetAll,pageNum,pageSize,searchField,dateFilter);
     };
   }
  

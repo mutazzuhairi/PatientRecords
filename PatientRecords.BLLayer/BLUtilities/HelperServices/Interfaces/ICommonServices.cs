@@ -9,7 +9,8 @@ namespace PatientRecords.BLLayer.BLUtilities.HelperServices.Interfaces
 {
     public interface ICommonServices
     {
-        Task<DataTable> ExecuteSQLQuery(string sqlQuery);
+        public Task<DataTable> ExecuteSQLQuery(string sqlQuery);
         public bool IsEmailValid(string email);
+        public DateTime? GetQueryDateFilter(string filterName);
     }
 }

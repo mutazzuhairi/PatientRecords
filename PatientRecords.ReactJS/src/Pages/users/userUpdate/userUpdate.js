@@ -112,6 +112,7 @@ class UserUpdate  extends Component {
                   placeholder="Name"
                   value={this.state.cloneUser?.firstName}
                   onChange={this.handleChange.bind(this, "firstName")}
+                  disabled
                   />
                   <span style={{color: "red"}}>{this.state.errors["firstName"]}</span>
               </Col>
@@ -130,6 +131,7 @@ class UserUpdate  extends Component {
                   placeholder="Name"
                   value={this.state.cloneUser?.lastName}
                   onChange={this.handleChange.bind(this, "lastName")}
+                  disabled
                   />
                   <span style={{color: "red"}}>{this.state.errors["lastName"]}</span>
               </Col>
@@ -148,6 +150,7 @@ class UserUpdate  extends Component {
                   placeholder="Email"
                   value={this.state.cloneUser?.email}
                   onChange={this.handleChange.bind(this, "email")}
+                  disabled
                 />
                  <span style={{color: "red"}}>{this.state.errors["email"]}</span>
               </Col>
@@ -167,6 +170,7 @@ class UserUpdate  extends Component {
                   placeholder="userName"
                   value={this.state.cloneUser?.userName}
                   onChange={this.handleChange.bind(this, "userName")}
+                  disabled
                 />
                  <span style={{color: "red"}}>{this.state.errors["userName"]}</span>
               </Col>
