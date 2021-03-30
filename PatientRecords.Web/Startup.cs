@@ -39,6 +39,7 @@ namespace PatientRecords.Web
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseStaticFiles();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -51,7 +52,8 @@ namespace PatientRecords.Web
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseErrorHandlerMiddleware();
-            app.UseSystemEndpoints();
+            app.UseSystemEndpoints(env);
+
         }
  
     }

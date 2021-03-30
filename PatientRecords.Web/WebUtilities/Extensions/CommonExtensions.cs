@@ -16,14 +16,32 @@ using System.Data;
 using Newtonsoft.Json;
 using PatientRecords.Web.WebUtilities.Middlewares;
 using PatientRecords.BLLayer.BLUtilities.SystemConstants;
+using Microsoft.Net.Http.Headers;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
 
 namespace PatientRecords.Web.WebUtilities.Extensions
 {
     public static class CommonExtensions
     {
-        public static void UseSystemEndpoints(this IApplicationBuilder app)
+        public static void UseSystemEndpoints(this IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseEndpoints(endpoints => endpoints.MapControllers());
+            app.MapWhen(x => x.Request.Path.Value.StartsWith("/api"), builder =>
+            {
+                app.UseEndpoints(endpoints => {
+                    endpoints.MapControllers();
+                });
+            });
+
+            app.MapWhen(x => !x.Request.Path.Value.StartsWith("/api"), builder =>
+            {
+                app.Run(async (context) =>
+                {
+                    context.Response.ContentType = "text/html";
+                    context.Response.Headers[HeaderNames.CacheControl] = "no-store, no-cache, must-revalidate";
+                    await context.Response.SendFileAsync(Path.Combine(env.WebRootPath, "index.html"));
+                });
+            });
         }
 
         public static void AddUriToConfigure(this IServiceCollection services)
