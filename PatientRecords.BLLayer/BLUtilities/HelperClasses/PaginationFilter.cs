@@ -19,7 +19,7 @@ namespace PatientRecords.BLLayer.BLUtilities.HelperClasses
         public PaginationFilter(int pageNumber, int pageSize)
         {
             this.PageNumber = pageNumber < 1 ? 1 : pageNumber;
-            this.PageSize = pageSize > 20 ? 20 : pageSize;
+            this.PageSize = pageSize < 0 ? 0 : pageSize;
         }
     }
 }
