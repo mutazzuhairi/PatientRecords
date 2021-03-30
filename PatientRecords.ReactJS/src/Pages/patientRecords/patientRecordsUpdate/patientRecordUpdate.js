@@ -116,7 +116,7 @@ class PatientRecordUpdate  extends Component {
             <Form className="theme-form" onSubmit= {this.updatePationtOnSubmit.bind(this)}>
            <Row className="form-header"> 
                <Col>
-                    <h4> {this.state.name} - {id} </h4>
+                    <h4> {this.state.name?this.state.name:this.state.clonePationtRecord?.patient?.name} - {id} </h4>
                </Col>
             <Col>  
                {this.isObjectChange()? <Button  type="submit" color="info btn-pill" className="mr-1 float-right">
@@ -136,7 +136,7 @@ class PatientRecordUpdate  extends Component {
                   className="form-control btn-pill"
                   type="text"
                   placeholder=" Patient"
-                  value={this.state.name}
+                  value={this.state.name?this.state.name:this.state.clonePationtRecord?.patient?.name}
                   disabled
                   />
               </Col>
