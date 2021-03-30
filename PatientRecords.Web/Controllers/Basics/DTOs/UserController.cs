@@ -27,8 +27,8 @@ namespace PatientRecords.Web.Controllers.Basics.DTOs
         }
 
 
-        [HttpPut]
-        public override async Task<ActionResult<UserDTO>> Put(UserDTO userDTO)
+        [HttpPut("{id}")]
+        public override async Task<ActionResult<UserDTO>> Put(UserDTO userDTO,int id)
         {
             await _iUserUpdateService.Value.CustomUpdateAsync(userDTO);
             return Ok(new Response<UserDTO>(userDTO));

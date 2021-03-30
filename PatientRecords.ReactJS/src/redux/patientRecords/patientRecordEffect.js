@@ -14,7 +14,7 @@ export default class PationtRecordEffect {
   }
 
   static async requestPationtRecordUpdate(patientRecord) {
-    const endpoint = PationtRecordEffect.apiurl;
+    const endpoint = PationtRecordEffect.apiurl+"/"+patientRecord.id; 
     return EffectUtility.putToModel(PatientRecordDTO, endpoint,patientRecord);
   }
 

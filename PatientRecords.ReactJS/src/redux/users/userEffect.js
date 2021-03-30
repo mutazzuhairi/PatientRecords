@@ -17,7 +17,7 @@ export default class UserEffect {
 
   static async requestUserPost(user) {
     console.log(process.env.REACT_APP_API_URL);
-    const endpoint = UserEffect.apiurl;
+    const endpoint = UserEffect.apiurl+"/"+user.id;
     return EffectUtility.postToModel(UserDTO, endpoint,user);
   }
 

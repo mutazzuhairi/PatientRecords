@@ -61,12 +61,12 @@ namespace PatientRecords.Web.WebUtilities.Abstractions
             return Ok(new Response<TEntityDTO>(entityDTO));
 
         }
- 
-        [HttpPut]
-        public virtual async Task<ActionResult<TEntityDTO>> Put(TEntityDTO entityDTO)
+
+        [HttpPut("{id}")]
+        public virtual async Task<ActionResult<TEntityDTO>> Put(TEntityDTO entityDTO,int id)
         {
       
-            entityDTO = await _entityUpdateService.Value.UpdateAsync(entityDTO, entityDTO.Id);
+            entityDTO = await _entityUpdateService.Value.UpdateAsync(entityDTO, id);
             return Ok(new Response<TEntityDTO>(entityDTO));
 
         }
