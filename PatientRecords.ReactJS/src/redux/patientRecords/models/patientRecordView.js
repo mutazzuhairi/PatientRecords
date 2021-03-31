@@ -8,7 +8,7 @@ export default class PatientRecordView extends BaseModel {
     bill = 0.0;
     description = '';
     patientDTO = pationtView;
-    timeOfEntry = new Date();
+    timeOfEntry =  Date;
     createdDate = new Date;
     updatedDate = new Date;
     updatedBy = '';

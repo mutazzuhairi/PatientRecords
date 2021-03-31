@@ -50,6 +50,7 @@ namespace PatientRecords.BLLayer.QueryServices
         public override async Task<PagedResponse<List<PatientRecordView>>> GetPaginationViewAsync(PaginationFilter filter, string route)
         {
             var result = _iEntityRepositry.GetAll()
+                .OrderByDescending(s => s.TimeOfEntry)
                 .Include(a => a.Patient)
                 .Select(x => new PatientRecordView()
                 {
@@ -80,7 +81,7 @@ namespace PatientRecords.BLLayer.QueryServices
             {
                 var dateFilter = _commonServices.Value.GetQueryDateFilter(filter.DateFilter);
                 if (dateFilter != null)
-                    dataView = dataView.Where(s => s.CreatedDate > dateFilter.Value);
+                    dataView = dataView.Where(s => s.TimeOfEntry > dateFilter.Value);
             }
 
             return dataView;

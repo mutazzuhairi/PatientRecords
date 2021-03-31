@@ -41,7 +41,8 @@ namespace PatientRecords.BLLayer.QueryServices
             var dataView = ApplyFilters(filter);
 
             var result =  dataView.
-                          OrderByDescending(s=>s.CreatedDate)
+                          OrderByDescending(x=>x.PatientRecords.OrderByDescending(a => a.TimeOfEntry)
+                         .FirstOrDefault(p => p.PatientId == x.Id).TimeOfEntry)
                          .Include(a => a.PatientRecords)
                          .Select(x => new PatientView()
                          {
@@ -74,7 +75,11 @@ namespace PatientRecords.BLLayer.QueryServices
             {
                 var dateFilter = _commonServices.Value.GetQueryDateFilter(filter.DateFilter);
                 if (dateFilter != null)
-                    dataView = dataView.Where(s => s.CreatedDate > dateFilter.Value);
+                    dataView = dataView.Where(s => s.PatientRecords
+                                                   .OrderByDescending(a => a.TimeOfEntry)
+                                                   .FirstOrDefault().TimeOfEntry >
+                                                    dateFilter.Value);
+
             }
 
             return dataView;

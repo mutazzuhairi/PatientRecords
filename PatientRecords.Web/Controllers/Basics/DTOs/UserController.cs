@@ -16,14 +16,17 @@ namespace PatientRecords.Web.Controllers.Basics.DTOs
     {
 
         private readonly Lazy<IUserUpdateService> _iUserUpdateService;
+        private readonly Lazy<IUserQueryService> _iEntityQueryService;
+
         public UserController(Lazy<IUserQueryService> entityQueryService,
                               Lazy<IUserUpdateService> entityUpdateService,
                               Lazy<IApiExceptionBuilder> iApiExceptionBuilder) :
-          
+
             base(entityQueryService, entityUpdateService, iApiExceptionBuilder)
         {
 
             _iUserUpdateService = entityUpdateService;
+            _iEntityQueryService = entityQueryService;
         }
 
 
@@ -33,9 +36,6 @@ namespace PatientRecords.Web.Controllers.Basics.DTOs
             await _iUserUpdateService.Value.CustomUpdateAsync(userDTO);
             return Ok(new Response<UserDTO>(userDTO));
         }
-
-
-
-
+ 
     }
 }

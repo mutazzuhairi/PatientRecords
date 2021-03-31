@@ -77,6 +77,7 @@ class Pationts extends  Component   {
         const {headers} = this.state;
 
         var paggedData = pationts.data;
+ 
         return (
         <div>
        <LoadingIndicator isActive={this.props.PationtContext.loading} />
@@ -127,9 +128,9 @@ class Pationts extends  Component   {
                                <tr key={item.officialId}  onClick={() => this.goToUpdatePage(item.id)}>
                                       <td> {item.name}</td> 
                                       <td> {item.officialId}</td> 
-                                      <td> {Moment(item.dateOfBirth).format('YYYY-MM-DD')}</td> 
+                                      <td> {item.dateOfBirth? Moment(item.dateOfBirth).format('YYYY-MM-DD'):null}</td> 
                                       <td> {item.email}</td> 
-                                      <td> {Moment(item.lastEntry?.timeOfEntry).format('YYYY-MM-DD HH:mm:ss')}</td> 
+                                      <td> {item.lastEntry?.timeOfEntry? Moment(item.lastEntry?.timeOfEntry).format('YYYY-MM-DD HH:mm:ss'):null}</td> 
                                  </tr>
                              ))}
                         </tbody>
