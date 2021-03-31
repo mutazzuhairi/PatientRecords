@@ -10,10 +10,7 @@ export const handleValidation = (clonePationtRecord)=>{
        formIsValid = false;
        errors["description"] = "Cannot be empty";
     }
-    if(!fields["timeOfEntry"]){
-       formIsValid = false;
-       errors["timeOfEntry"] = "Cannot be empty";
-    }
+
     if(!fields["bill"]){
        formIsValid = false;
        errors["bill"] = "Cannot be empty";

@@ -20,7 +20,7 @@ export default class PationtEffect {
   }
 
   static async requestPationtUpdate(pationt) {
-    const endpoint = PationtEffect.apiurl+"/"+pationt.id;
+    const endpoint = PationtEffect.apiurl;
     return EffectUtility.putToModel(PationtDTO, endpoint, pationt);
   }
 

@@ -10,15 +10,11 @@ export const handleValidation = (clonePationt)=>{
        formIsValid = false;
        errors["officialId"] = "Cannot be empty";
     }
-    if(!fields["dateOfBirth"]){
-       formIsValid = false;
-       errors["dateOfBirth"] = "Cannot be empty";
-    }
     if(!fields["email"]){
        formIsValid = false;
        errors["email"] = "Cannot be empty";
     }
-    if(!fields["dateOfBirth"]){
+    if(!fields["email"]){
        formIsValid = false;
        errors["email"] = "Cannot be empty";
     }

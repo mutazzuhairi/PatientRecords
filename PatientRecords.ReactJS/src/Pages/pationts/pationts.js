@@ -45,7 +45,8 @@ class Pationts extends  Component   {
     }
 
     componentDidUpdate(prevProps, prevState){
-        if (this.state.pageSize !== prevState.pageSize ||
+        if (prevProps.location.key !== this.props.location.key||
+            this.state.pageSize !== prevState.pageSize ||
             this.state.pageNumber !== prevState.pageNumber|| 
             this.state.searchField !== prevState.searchField){
                this.refreshList();

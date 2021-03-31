@@ -5,10 +5,10 @@ export default class PatientView extends BaseModel {
     name = '';
     officialId = '';
     email = '';
-    dateOfBirth ;
+    dateOfBirth= Date;
     lastEntry = PatientRecordView;
-    createdDate;
-    updatedDate;
+    createdDate= new Date;
+    updatedDate= new Date;
     updatedBy = '';
     createdBy = '';
     constructor(data) {

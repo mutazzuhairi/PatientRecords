@@ -63,6 +63,7 @@ class PatientRecordUpdate  extends Component {
          }else{
             SweetAlertPopup("Missing Data","Please fill form with right data.");
          }
+ 
      }
      
  
@@ -107,8 +108,10 @@ class PatientRecordUpdate  extends Component {
  
     render() {
         const {id} = this.props.match.params;
-        const timeOfEntryselected = Moment(this.state.clonePationtRecord?.timeOfEntry).toDate();
-
+        const timeOfEntryselected =this.state.clonePationtRecord  && 
+                                   this.state.clonePationtRecord.timeOfEntry? 
+                                   Moment(this.state.clonePationtRecord?.timeOfEntry).toDate():
+                                   null;
         return (  
 
             <div className="update-form">
@@ -116,7 +119,7 @@ class PatientRecordUpdate  extends Component {
             <Form className="theme-form" onSubmit= {this.updatePationtOnSubmit.bind(this)}>
            <Row className="form-header"> 
                <Col>
-                    <h4> {this.state.name?this.state.name:this.state.clonePationtRecord?.patient?.name} - {id} </h4>
+                    <h4> {this.state.name?this.state.name:this.state.clonePationtRecord?.patient?.name}   {id?(<span> - {id}</span>):(null)} </h4>
                </Col>
             <Col>  
                {this.isObjectChange()? <Button  type="submit" color="info btn-pill" className="mr-1 float-right">
@@ -135,7 +138,6 @@ class PatientRecordUpdate  extends Component {
                 <Input
                   className="form-control btn-pill"
                   type="text"
-                  placeholder=" Patient"
                   value={this.state.name?this.state.name:this.state.clonePationtRecord?.patient?.name}
                   disabled
                   />
@@ -152,7 +154,6 @@ class PatientRecordUpdate  extends Component {
                 <Input
                   className="form-control btn-pill"
                   type="text"
-                  placeholder="Disease Name"
                   value={this.state.clonePationtRecord?.diseaseName}
                   onChange={this.handleChange.bind(this, "diseaseName")}
                   />
@@ -172,7 +173,6 @@ class PatientRecordUpdate  extends Component {
                   rows="5"
                   cols="5"
                   type="text"
-                  placeholder="Description"
                   value={this.state.clonePationtRecord?.description}
                   onChange={this.handleChange.bind(this, "description")}
                 />
@@ -188,9 +188,8 @@ class PatientRecordUpdate  extends Component {
               </Label>
               <Col sm="5">
                 <Input
-                  className="form-control btn-pill"
-                  type="text"
-                  placeholder="Bill"
+                  className="form-control digits"
+                  type="number"
                   value={this.state.clonePationtRecord?.bill}
                   onChange={this.handleChange.bind(this, "bill")}
                 />
@@ -208,10 +207,11 @@ class PatientRecordUpdate  extends Component {
               <Col sm="5">
                 <DatePicker
                   selected={timeOfEntryselected}
-                  dateFormat="yyyy-mm-dd"
+                  dateFormat="Pp"
                   onChange={this.handledateOfBirthChange.bind(this, "timeOfEntry")}
-                  className="form-control btn-pill"
-                  placeholderText="Time Of Entry"
+                  showTimeSelect
+                  showPopperArrow={false}
+                  className="form-control digits"
                 />
                 <span style={{color: "red"}}>{this.state.errors["timeOfEntry"]}</span>
               </Col>

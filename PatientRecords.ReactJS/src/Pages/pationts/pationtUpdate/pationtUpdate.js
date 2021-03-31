@@ -108,8 +108,10 @@ class pationtUpdate  extends Component {
  
     render() {
         const {id} = this.props.match.params;
-        const dateOfBirthselected = Moment(this.state.clonePationt?.dateOfBirth).toDate();
-
+        const dateOfBirthselected =this.state.clonePationt  && 
+                                   this.state.clonePationt.dateOfBirth? 
+                                   Moment(this.state.clonePationt?.dateOfBirth).toDate():
+                                   null;
         return (  
 
             <div className="update-form">
@@ -117,7 +119,7 @@ class pationtUpdate  extends Component {
                <Form className="theme-form" onSubmit= {this.updatePationtOnSubmit.bind(this)}>
                   <Row className="form-header">
                      <Col>
-                        <h4> {this.state.clonePationt?.name} - {id} </h4>
+                        <h4> {this.state.clonePationt?.name} {id?(<span> - {id}</span>):(null)} </h4>
                      </Col>
                      <Col> 
                      {this.state.pationtId? <Button  onClick={this.goToStatisticsPage}  color="info btn-pill" className="mr-10">
@@ -147,7 +149,6 @@ class pationtUpdate  extends Component {
                    <Input
                      className="form-control btn-pill"
                      type="text"
-                     placeholder="Name"
                      value={this.state.clonePationt?.name}
                      onChange={this.handleChange.bind(this, "name")}
                      />
@@ -160,13 +161,12 @@ class pationtUpdate  extends Component {
                      className="col-sm-3 col-form-label"
                      htmlFor="inputName3"
                     >
-                    official Id
+                   Official Id
                     </Label>
               <Col sm="5">
                 <Input
                   className="form-control btn-pill"
                   type="text"
-                  placeholder="official Id"
                   value={this.state.clonePationt?.officialId}
                   onChange={this.handleChange.bind(this, "officialId")}
                   />
@@ -184,7 +184,6 @@ class pationtUpdate  extends Component {
                 <Input
                   className="form-control btn-pill"
                   type="email"
-                  placeholder="Email"
                   value={this.state.clonePationt?.email}
                   onChange={this.handleChange.bind(this, "email")}
                 />
@@ -199,12 +198,12 @@ class pationtUpdate  extends Component {
                 Birth Date
               </Label>
               <Col sm="5">
+       
                 <DatePicker
                   selected={dateOfBirthselected}
-                  dateFormat="yyyy-mm-dd"
                   onChange={this.handledateOfBirthChange.bind(this, "dateOfBirth")}
-                  className="form-control btn-pill"
-                  placeholderText="Click to select a date"
+                  className="form-control digits"
+                  maxDate={new Date()}
                 />
                 <span style={{color: "red"}}>{this.state.errors["dateOfBirth"]}</span>
               </Col>

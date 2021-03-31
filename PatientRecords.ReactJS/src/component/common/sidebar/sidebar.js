@@ -204,7 +204,18 @@ const Sidebar = (props) => {
                   {menuItem.children.map((childrenItem, index) => (
                     <Fragment key={index}>
                       {childrenItem.type === "sub" ? (
-                        <li className="iconbar-header">{childrenItem.title}</li>
+                        <li className="iconbar-header">
+                        
+                        <Link
+                            className="iconbar-header"
+                            to={childrenItem.path}
+                            onClick={() => toggletNavActive(childrenItem)}
+                          >
+                            {childrenItem.title}
+                          </Link>
+
+                        
+                        </li>
                       ) : (
                         ""
                       )}

@@ -8,9 +8,9 @@ export default class PatientRecordDTO extends BaseModel {
     bill = 0.0;
     description = '';
     patient = PatientDTO;
-    timeOfEntry = new Date();
-    createdDate = new Date();
-    updatedDate = new Date();
+    timeOfEntry =  new Date;
+    createdDate = new Date;
+    updatedDate = new Date;
     updatedBy = '';
     createdBy = '';
     constructor(data) {

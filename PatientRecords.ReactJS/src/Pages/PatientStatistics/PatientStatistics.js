@@ -67,7 +67,7 @@ class PatientStatistics   extends Component {
  
                 <h5 className="patient-name">  {NameAndAge?.map((item, i) => {  
                             return (
-                                      <span >{item.Name} -{item.Age} years</span>
+                                      <span >{item.Name} {item.Age && item.Age >0? (<span> - {item.Age} years</span>):(null)} </span>
                                  )
                              })}
                  </h5>

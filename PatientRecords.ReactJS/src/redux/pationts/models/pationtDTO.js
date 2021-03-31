@@ -5,9 +5,9 @@ export default class PatientDTO extends BaseModel {
     name = '';
     officialId = '';
     email = '';
-    dateOfBirth = new Date();
-    createdDate = new Date();
-    updatedDate = new Date();
+    dateOfBirth = Date;
+    createdDate = new Date;
+    updatedDate = new Date;
     updatedBy = '';
     createdBy = '';
     constructor(data) {
