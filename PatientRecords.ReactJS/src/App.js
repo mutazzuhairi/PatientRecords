@@ -13,7 +13,7 @@ const App = ({children}) =>  {
       <div className="page-body-wrapper">
         <Header/>
         <Sidebar/>
-          <div className="main-body">
+          <div style={{minHeight:  `calc(100vh - 150px)` }} className="page-body main-body">
               {children} 
           </div>
         <Footer/> 

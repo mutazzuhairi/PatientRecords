@@ -10,15 +10,7 @@ export const handleValidation = (clonePationt)=>{
        formIsValid = false;
        errors["officialId"] = "Cannot be empty";
     }
-    if(!fields["email"]){
-       formIsValid = false;
-       errors["email"] = "Cannot be empty";
-    }
-    if(!fields["email"]){
-       formIsValid = false;
-       errors["email"] = "Cannot be empty";
-    }
-    if(typeof fields["email"] !== "undefined"){
+    if(fields["email"] && typeof fields["email"] !== "undefined"){
        let lastAtPos = fields["email"].lastIndexOf('@');
        let lastDotPos = fields["email"].lastIndexOf('.');
        if (!(lastAtPos < lastDotPos && lastAtPos > 0 && fields["email"].indexOf('@@') == -1 && 

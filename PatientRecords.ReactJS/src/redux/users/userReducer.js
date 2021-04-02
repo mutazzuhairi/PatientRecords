@@ -1,5 +1,6 @@
 import UserAction from "./userAction";
- 
+import PationtAction from '../pationts/pationtAction';
+
 const initialState = {
     user: null,
     users: [],
@@ -37,6 +38,10 @@ export default function(state = initialState, action){
           error: action.error,
           loading:false,
         }
+        case PationtAction.REQUEST_HEADER_GETALL:
+        case PationtAction.REQUEST_HEADER_GETALL_FINISHED:
+            return state
+
         default: return initialState
     }
 

@@ -78,6 +78,9 @@ class users extends Component {
                 <option>100</option>
                 <option>150</option>
              </select>
+             <h4 style={{color:  `#7E37D8` }}>
+                All Users     
+            </h4>
          </Col>
          {/* <Col sm="6">
              <Button onClick={this.goToCreatePage} color="info">New User</Button>
@@ -118,7 +121,7 @@ class users extends Component {
                              ))}
                         </tbody>
                        </Table>
-                      ):( <div>Loading ...</div>)}
+                      ):( <div></div>)}
                       </div>
                       <div>
                 </div>

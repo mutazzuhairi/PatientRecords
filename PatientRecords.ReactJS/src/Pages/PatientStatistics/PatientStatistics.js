@@ -15,11 +15,7 @@ class PatientStatistics   extends Component {
             pationtId:this.props.match.params.id,
         }
      }
-  
-     componentDidMount(){
-        //this.getpationtData();
-    }
-     
+ 
     getPatientData =()=>{
             this.props.dispatch(PatientStatisticsAction.requestGetNameAndAge(this.state.pationtId));
             this.props.dispatch(PatientStatisticsAction.requestGetAverageOfBillsRemovingOutliers(this.state.pationtId));
@@ -34,15 +30,6 @@ class PatientStatistics   extends Component {
         this.getPatientData();
     }
 
-    componentDidUpdate(prevProps, prevState){
-        if (this.state.pageSize !== prevState.pageSize ||
-            this.state.pageNumber !== prevState.pageNumber) {
-               this.getPatientData();
-          }
-    }
-
-  
-    
         
     render() {
           

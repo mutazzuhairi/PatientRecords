@@ -1,5 +1,6 @@
 import patientRecordAction from './patientRecordAction';
-  
+import PationtAction from '../pationts/pationtAction';
+
 const initialState = {
     pationtRecord: null,
     pationtRecords: [],
@@ -24,6 +25,7 @@ export default function(state = initialState, action){
             loading:false,
           }
         case patientRecordAction.REQUEST_PATIONTRECORD_GETALL_FINISHED:
+        case patientRecordAction.REQUEST_PATIONTRECORD_GETALL_PATIENTID_FINISHED:
         return {
           ...state,
           pationtRecords: action.payload,
@@ -37,6 +39,11 @@ export default function(state = initialState, action){
           error: action.error,
           loading:false,
         }
+
+        case PationtAction.REQUEST_HEADER_GETALL:
+        case PationtAction.REQUEST_HEADER_GETALL_FINISHED:
+        return state
+        
         default: return initialState
     }
 

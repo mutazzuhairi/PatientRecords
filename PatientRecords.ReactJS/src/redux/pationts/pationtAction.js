@@ -14,6 +14,9 @@ export default class PationtAction {
   static REQUEST_PATIONT_GETALL = 'PationtAction.REQUEST_GETALL';
   static REQUEST_PATIONT_GETALL_FINISHED = 'PationtAction.REQUEST_GETALL_FINISHED';
  
+  static REQUEST_HEADER_GETALL = 'HeadrerAction.REQUEST_GETALL';
+  static REQUEST_HEADER_GETALL_FINISHED = 'HeadrerAction.REQUEST_GETALL_FINISHED';
+ 
 
   static requestPost(patient) {
     return async (dispatch, getState) => {
@@ -39,4 +42,9 @@ export default class PationtAction {
     };
   }
  
+  static requestGetAllHeader(pageNum=1,pageSize=20,searchField='',dateFilter=null) {
+    return async (dispatch, getState) => {
+      await ActionUtility.createThunkEffect(dispatch, PationtAction.REQUEST_HEADER_GETALL, PationtEffect.requestPationtGetAll,pageNum,pageSize,searchField,dateFilter);
+    };
+  }
 }

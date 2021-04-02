@@ -29,5 +29,11 @@ export default class PationtRecordEffect {
     return EffectUtility.getToModel(PagedResponse, endpoint);
   }
 
+  
+  static async requestPationtRecordGetAllForPatient(pageNum,pageSize,searchField,patientId) {
+    const endpoint = PationtRecordEffect.apiurl+"View/AllForPatientId?PageSize="+pageSize+"&PageNumber="+pageNum+"&SearchField="+searchField+"&patientId="+patientId;
+
+    return EffectUtility.getToModel(PagedResponse, endpoint);
+  }
  
 }

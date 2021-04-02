@@ -14,6 +14,7 @@ export const routes = [
     { path:"/patients/:date", Component: pationts }, 
     { path:"/patientRecords", Component: patientRecords }, 
     { path:"/patientRecords/:date", Component: patientRecords }, 
+    { path:"/patientRecords/:pationtId/:name", Component: patientRecords }, 
 
     //For Update
     { path:"/pationtUpdate/:id", Component: pationtUpdate }, 
@@ -23,7 +24,7 @@ export const routes = [
     { path:"/pationtUpdate", Component: pationtUpdate }, 
     { path:"/patientRecordUpdate/:pationtname/:pationtid", Component: patientRecordUpdate }, 
     { path:"/userUpdate", Component: userUpdate }, 
-    { path:"/Statistics/:id", Component: PatientStatistics }, 
+    { path:"/statistics/:id", Component: PatientStatistics }, 
 
 
 

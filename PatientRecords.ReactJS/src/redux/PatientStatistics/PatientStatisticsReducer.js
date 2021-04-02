@@ -1,5 +1,6 @@
 import PatientStatisticsAction from './PatientStatisticsAction';
- 
+import PationtAction from '../pationts/pationtAction';
+
 const initialState = {
     NameAndAge: null,
     AverageOfBillsRemovingOutliers: 0,
@@ -55,7 +56,11 @@ export default function(state = initialState, action){
               error: action.error,
               loading:false,
             }
-        default: return initialState
+          case PationtAction.REQUEST_HEADER_GETALL:
+          case PationtAction.REQUEST_HEADER_GETALL_FINISHED:
+            return state
+  
+          default: return initialState 
     }
 
 }

@@ -17,8 +17,11 @@ class Pationts extends  Component   {
                "Date Of Birth",
                "Email",
                "Last Entry Date",
+               "Statistics",
+               "Records",
+               "Edit",
            ],
-           pageSize:Math.floor(window.innerHeight/70),
+           pageSize:Math.floor(window.innerHeight/90),
            pageNumber:1,
            searchField:'',
            lastEntryShow:false,
@@ -58,11 +61,14 @@ class Pationts extends  Component   {
     }
 
     goToCreatePage =()=> {
-        this.props.history.push('/pationtUpdate');
+        this.props.history.push('/PationtUpdate');
        }
-    goToUpdatePage =(id)=> {
-     this.props.history.push('/pationtUpdate/'+id);
-      }
+    goToUpdatePage =(e,id)=> {
+        if(e){
+            e.stopPropagation();
+        }
+       this.props.history.push('/PationtUpdate/'+id);
+   }
 
     refreshList =()=>{
         this.props.dispatch(pationtAction.requestGetAll(this.state.pageNumber,this.state.pageSize,this.state.searchField,this.state.dateFilter));
@@ -72,6 +78,17 @@ class Pationts extends  Component   {
     handlePageChange(pageNumber) {
         this.setState({pageNumber: pageNumber});
       }
+
+   goToStatisticsPage =(e,id)=> {
+        e.stopPropagation();
+        this.props.history.push('/Statistics/'+id);
+    }
+
+    goToPatientRecords =(e,id,name)=> {
+        e.stopPropagation();
+        this.props.history.push('/PatientRecords/'+id+'/'+name);
+    }
+
     render() {
         const {pationts,loading} = this.props.PationtContext;
         const {headers} = this.state;
@@ -92,6 +109,10 @@ class Pationts extends  Component   {
                 <option>100</option>
                 <option>150</option>
              </select>
+             <h4 style={{color:  `#7E37D8` }}>
+             {this.props.match.params.date ? <span>Patients For {this.props.match.params.date} </span>
+             : "All Patients"}     
+            </h4>
          </Col>
          <Col sm="6">
              <Button onClick={this.goToCreatePage} color="info">New Pationt</Button>
@@ -116,7 +137,7 @@ class Pationts extends  Component   {
                              <tr>
                              {headers.map((item, i) => {  
                             return (
-                                <th key={i} scope="col">{item}</th>
+                                <th className="patient-button" key={i} scope="col">{item}</th>
                                  )
                              })}
                              </tr>
@@ -124,18 +145,31 @@ class Pationts extends  Component   {
                         <tbody>
                             {paggedData.map(item => (
                                
-                               
-                               <tr key={item.officialId}  onClick={() => this.goToUpdatePage(item.id)}>
+                     
+                               <tr key={item.officialId} onClick={() => this.goToUpdatePage(null,item.id)} >
                                       <td> {item.name}</td> 
                                       <td> {item.officialId}</td> 
                                       <td> {item.dateOfBirth? Moment(item.dateOfBirth).format('YYYY-MM-DD'):null}</td> 
                                       <td> {item.email}</td> 
                                       <td> {item.lastEntry?.timeOfEntry? Moment(item.lastEntry?.timeOfEntry).format('YYYY-MM-DD HH:mm:ss'):null}</td> 
+                                      <td><Button   onClick={(e)=>this.goToStatisticsPage(e,item.id)}  color="info btn-pill" className="float-left patient-button patient-button-padding">
+                                           View 
+                                           </Button>
+                                         </td>
+                                      <td><Button   onClick={(e)=>this.goToPatientRecords(e,item.id,item.name)}  color="info btn-pill" className="float-left patient-button patient-button-padding">
+                                           View 
+                                           </Button>
+                                         </td>
+                                      <td><Button onClick={(e) => this.goToUpdatePage(e,item.id)}  color="dark btn-pill" className="float-left patient-button patient-button-padding">
+                                           Edit 
+                                           </Button>
+                                         </td>
+                                   
                                  </tr>
                              ))}
                         </tbody>
                        </Table>
-                      ):( <div>Loading ...</div>)}
+                      ):( <div></div>)}
                       </div>
                       <div>
                 </div>

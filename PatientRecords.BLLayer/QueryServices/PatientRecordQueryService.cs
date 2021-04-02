@@ -49,28 +49,42 @@ namespace PatientRecords.BLLayer.QueryServices
 
         public override async Task<PagedResponse<List<PatientRecordView>>> GetPaginationViewAsync(PaginationFilter filter, string route)
         {
-            var result = _iEntityRepositry.GetAll()
-                .OrderByDescending(s => s.TimeOfEntry)
-                .Include(a => a.Patient)
-                .Select(x => new PatientRecordView()
-                {
-                   Id = x.Id,
-                   Description =  x.Description,
-                   DiseaseName =  x.DiseaseName,
-                   CreatedDate =  x.CreatedDate,
-                   UpdatedDate =  x.UpdatedDate,
-                   TimeOfEntry = x.TimeOfEntry,
-                   Bill =  x.Bill,
-                   PatientId =  x.PatientId,
-                   SearchField = x.SearchField,
-                   Patient = this._mapper.Map<PatientView>(x.Patient),
-                });
-
+            var result = GetIQueryablePatientRecordView();
             var dataView = ApplyFilters(filter,result);
 
             return await base.GetCustomPaginationAsync<PatientRecordView>(filter, route, dataView, dataView.Count());
         }
 
+
+        public async Task<PagedResponse<List<PatientRecordView>>> GetAllForPatientId(PaginationFilter filter, string route,int patientId)
+        {
+            var result = GetIQueryablePatientRecordView();
+            result = result.Where(s=>s.PatientId == patientId);
+            var dataView = ApplyFilters(filter, result);
+            return await base.GetCustomPaginationAsync<PatientRecordView>(filter, route, dataView, dataView.Count());
+        }
+
+        private IQueryable<PatientRecordView> GetIQueryablePatientRecordView()
+        {
+            var result = _iEntityRepositry.GetAll()
+                   .OrderByDescending(s => s.TimeOfEntry)
+                   .Include(a => a.Patient)
+                   .Select(x => new PatientRecordView()
+                   {
+                       Id = x.Id,
+                       Description = x.Description,
+                       DiseaseName = x.DiseaseName,
+                       CreatedDate = x.CreatedDate,
+                       UpdatedDate = x.UpdatedDate,
+                       TimeOfEntry = x.TimeOfEntry,
+                       Bill = x.Bill,
+                       PatientId = x.PatientId,
+                       SearchField = x.SearchField,
+                       Patient = this._mapper.Map<PatientView>(x.Patient),
+                   });
+
+            return result;
+        }
 
 
         private IQueryable<PatientRecordView> ApplyFilters(PaginationFilter filter,IQueryable<PatientRecordView> dataView)

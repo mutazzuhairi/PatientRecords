@@ -17,12 +17,14 @@ class PatientRecords extends Component {
                "Entry",
                "Disease",
                "Description",
-               "Bill",
+               "Bill $",
            ],
            pageSize:Math.floor(window.innerHeight/70),
            pageNumber:1,
            searchField:'',
            dateFilter:this.props.match.params.date,
+           pationtId:this.props.match.params.pationtId,
+           name:this.props.match.params.name,
        };
     
     }
@@ -45,7 +47,7 @@ class PatientRecords extends Component {
     }
 
     goToUpdatePage =(id)=> {
-        this.props.history.push('/patientRecordUpdate/'+id);
+        this.props.history.push('/PatientRecordUpdate/'+id);
        }
  
     changePageSearchField =(event) =>{
@@ -53,7 +55,12 @@ class PatientRecords extends Component {
     }
 
     refreshList =()=>{
-        this.props.dispatch(patientRecordAction.requestGetAll(this.state.pageNumber,this.state.pageSize,this.state.searchField,this.state.dateFilter));
+        if(this.state.pationtId!=null && this.state.name!=null ) {
+            this.props.dispatch(patientRecordAction.requestGetAllfForPatientId(this.state.pationtId,this.state.pageNumber,this.state.pageSize,this.state.searchField));
+        }
+        else{
+            this.props.dispatch(patientRecordAction.requestGetAll(this.state.pageNumber,this.state.pageSize,this.state.searchField,this.state.dateFilter));
+        }
     }
  
   
@@ -81,6 +88,13 @@ class PatientRecords extends Component {
                 <option>100</option>
                 <option>150</option>
              </select>
+
+             <h4 style={{color:  `#7E37D8` }}>
+             {this.props.match.params.name? <span>Patient Records For  {this.props.match.params.name} </span> 
+             : this.props.match.params.date ? <span>Patient Records For  {this.props.match.params.date} </span>
+             : "All Patient Records"}     
+            </h4>
+       
          </Col>
           <Col sm="4">
                  <Input
@@ -119,7 +133,7 @@ class PatientRecords extends Component {
                              ))}
                         </tbody>
                        </Table>
-                      ):( <div>Loading ...</div>)}
+                      ):( <div></div>)}
                       </div>
                       <div>
                 </div>

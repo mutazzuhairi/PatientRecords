@@ -20,7 +20,7 @@ class pationtUpdate  extends Component {
                 name:'',
                 officialId:'',
                 email:'',
-                dateOfBirth: new Date(),
+                dateOfBirth: null,
             },
             isFire:false,
         }
@@ -32,7 +32,7 @@ class pationtUpdate  extends Component {
      
     getpationtData =()=>{
         if(this.state.pationtId){
-            this.props.dispatch(PationtAction.requestGetSingle(this.state.pationtId));
+            this.props.dispatch(PationtAction.requestGetSingle(this.props.match.params.id));
             this.setState({isFire:true});
         }
     }
@@ -66,6 +66,10 @@ class pationtUpdate  extends Component {
                 this.props.history.push('/Patients');
             }
           }
+          if(prevProps.location.key !== this.props.location.key){
+            this.setState({pationtId:this.props.match.params.id});
+            this.getpationtData();
+          }
        }
  
     
@@ -83,13 +87,17 @@ class pationtUpdate  extends Component {
 
     
     goToCreatePage =()=> {
-        this.props.history.push('/patientRecordUpdate/'+this.props.PationtContext.pationt.name+"/"+this.state.pationtId);
+        this.props.history.push('/PatientRecordUpdate/'+this.props.PationtContext.pationt.name+"/"+this.state.pationtId);
     }
 
     goToStatisticsPage =()=> {
         this.props.history.push('/Statistics/'+this.state.pationtId);
     }
 
+    goToPatientRecords =()=> {
+      this.props.history.push('/PatientRecords/'+this.state.pationtId+'/'+this.props.PationtContext.pationt.name);
+  }
+ 
      isObjectChange =()=>{  
         return (this.state.clonePationt!=null && this.props.PationtContext.pationt!=null &&  
                JSON.stringify(this.state.clonePationt) !== JSON.stringify(this.props.PationtContext.pationt))
@@ -124,6 +132,10 @@ class pationtUpdate  extends Component {
                      <Col> 
                      {this.state.pationtId? <Button  onClick={this.goToStatisticsPage}  color="info btn-pill" className="mr-10">
                      View Statistics
+                     </Button> :null} 
+
+                     {this.state.pationtId? <Button  onClick={this.goToPatientRecords}  color="info btn-pill" className="mr-10">
+                     View Records
                      </Button> :null} 
 
                      {this.state.pationtId? <Button  onClick={this.goToCreatePage}  color="info btn-pill" className="mr-10">

@@ -83,7 +83,7 @@ class PatientRecordUpdate  extends Component {
     componentDidUpdate(prevProps, prevState){
         if (!this.props.PationtRecordContext.loading && prevProps.PationtRecordContext.loading){
             if(!this.state.pationtRecordId && !this.props.PationtRecordContext.error){
-                this.props.history.push('/patientRecords');
+                this.props.history.push('/PatientRecords');
             }
           }
        }
@@ -105,7 +105,10 @@ class PatientRecordUpdate  extends Component {
          }
       
       }
- 
+      goToPatientPage =()=> {
+        this.props.history.push('/PationtUpdate/'+this.props.PationtRecordContext.pationtRecord.patientId);
+    }
+
     render() {
         const {id} = this.props.match.params;
         const timeOfEntryselected =this.state.clonePationtRecord  && 
@@ -122,6 +125,9 @@ class PatientRecordUpdate  extends Component {
                     <h4> {this.state.name?this.state.name:this.state.clonePationtRecord?.patient?.name}   {id?(<span> - {id}</span>):(null)} </h4>
                </Col>
             <Col>  
+               {this.state.pationtRecordId? <Button  onClick={this.goToPatientPage}  color="info btn-pill" className="mr-10">
+                      View Patient
+                     </Button> :null}  
                {this.isObjectChange()? <Button  type="submit" color="info btn-pill" className="mr-1 float-right">
                       Save
                 </Button> :null}
@@ -135,12 +141,7 @@ class PatientRecordUpdate  extends Component {
                  Patient
               </Label>
               <Col sm="5">
-                <Input
-                  className="form-control btn-pill"
-                  type="text"
-                  value={this.state.name?this.state.name:this.state.clonePationtRecord?.patient?.name}
-                  disabled
-                  />
+                <h5>{this.state.name?this.state.name:this.state.clonePationtRecord?.patient?.name}</h5>
               </Col>
             </FormGroup>
             <FormGroup className="row">
