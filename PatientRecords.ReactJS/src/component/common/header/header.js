@@ -142,7 +142,7 @@ class Header extends Component{
                         className="Typeahead-input form-control-plaintext"
                         id="demo-input"
                         type="text"
-                        placeholder="Search For Patient..."
+                        placeholder="Search For Patients..."
                         value={this.state.searchValue}
                         autoComplete="off" 
                         onFocus={this.onFocus}
