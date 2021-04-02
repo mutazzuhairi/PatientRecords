@@ -106,7 +106,7 @@ class PatientRecordUpdate  extends Component {
       
       }
       goToPatientPage =()=> {
-        this.props.history.push('/PationtUpdate/'+this.props.PationtRecordContext.pationtRecord.patientId);
+        this.props.history.push('/Patient/'+this.props.PationtRecordContext.pationtRecord.patientId);
     }
 
     render() {

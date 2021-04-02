@@ -39,14 +39,14 @@ const Root = (props) =>  {
             <Fragment>
             <App>
                <Route exact path="/" render={() => {
-                          return (<Redirect to="/patients" />)
+                          return (<Redirect to="/Patients" />)
                       }} />
-                {routes.map(({ path, Component }) => (
-                            <Route exact key={path} path={path}>
-                                    <Component/> 
-                            </Route>
+                {routes.map(({ path, Component}) => (
+               <Route exact key={path} path={path}>
+                       <Component/> 
+               </Route>
+                            
                 ))}
-
             </App>
             </Fragment> 
           </Switch>

@@ -21,8 +21,8 @@ export const MENUITEMS = [
  
     {
         title: 'Users', icon: <i className="pe-7s-users"></i>,  path: '/Users', type: 'sub',active: false, children: [
-                {title: 'Users', type: 'sub',path: '/users'},
-                { title: 'Roles', type: 'link', path: '/users' },
+                {title: 'Users', type: 'sub',path: '/Users'},
+                { title: 'Roles', type: 'link', path: '/Roles' },
         ]
         
     },

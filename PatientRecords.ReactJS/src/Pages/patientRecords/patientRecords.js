@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import patientRecordAction from '../../redux/patientRecords/patientRecordAction';
 import Pagination from "react-js-pagination";
-import {Col,Table,Input,Row,Label} from "reactstrap";
+import {Col,Table,Input,Row,Label,Button} from "reactstrap";
 import {withRouter } from "react-router-dom";
 import  './patientRecords.scss'
 import Moment from 'moment';
@@ -13,11 +13,13 @@ class PatientRecords extends Component {
         super(props);
         this.state = {
            headers:[
-               "Patient",
+               "Name",
                "Entry",
                "Disease",
                "Description",
                "Bill $",
+               "Patient",
+               "Edit",
            ],
            pageSize:Math.floor(window.innerHeight/70),
            pageNumber:1,
@@ -47,7 +49,7 @@ class PatientRecords extends Component {
     }
 
     goToUpdatePage =(id)=> {
-        this.props.history.push('/PatientRecordUpdate/'+id);
+        this.props.history.push('/PatientRecord/'+id);
        }
  
     changePageSearchField =(event) =>{
@@ -67,6 +69,11 @@ class PatientRecords extends Component {
     handlePageChange(pageNumber) {
         this.setState({pageNumber: pageNumber});
       }
+
+   goToPatientPage =(e,patientId)=> {
+        e.stopPropagation();
+        this.props.history.push('/Patient/'+patientId);
+    }
 
 
     render() {
@@ -128,7 +135,15 @@ class PatientRecords extends Component {
                                       <td> {Moment(item.timeOfEntry).format('YYYY-MM-DD HH:mm:ss')}</td> 
                                       <td> {item.diseaseName}</td> 
                                       <td> {item.description}</td> 
-                                      <td> {item.bill}</td> 
+                                      <td> {item.bill?.toFixed(2)}</td> 
+                                      <td><Button   onClick={(e)=>this.goToPatientPage(e,item.patientId)}  color="info btn-pill" className="float-left patient-button patient-button-padding">
+                                           View 
+                                           </Button>
+                                         </td>
+                                      <td><Button onClick={()=> this.goToUpdatePage(item.id)}  color="dark btn-pill" className="float-left patient-button patient-button-padding">
+                                           Edit 
+                                           </Button>
+                                         </td>
                                  </tr>
                              ))}
                         </tbody>

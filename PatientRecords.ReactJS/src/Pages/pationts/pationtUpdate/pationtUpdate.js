@@ -87,7 +87,7 @@ class pationtUpdate  extends Component {
 
     
     goToCreatePage =()=> {
-        this.props.history.push('/PatientRecordUpdate/'+this.props.PationtContext.pationt.name+"/"+this.state.pationtId);
+        this.props.history.push('/PatientRecord/'+this.props.PationtContext.pationt.name+"/"+this.state.pationtId);
     }
 
     goToStatisticsPage =()=> {
@@ -95,7 +95,7 @@ class pationtUpdate  extends Component {
     }
 
     goToPatientRecords =()=> {
-      this.props.history.push('/PatientRecords/'+this.state.pationtId+'/'+this.props.PationtContext.pationt.name);
+      this.props.history.push('/PatientRecords/'+this.props.PationtContext.pationt.name +'/'+this.state.pationtId);
   }
  
      isObjectChange =()=>{  
@@ -126,7 +126,7 @@ class pationtUpdate  extends Component {
               <LoadingIndicator isActive={this.props.PationtContext.loading && this.state.isFire} />
                <Form className="theme-form" onSubmit= {this.updatePationtOnSubmit.bind(this)}>
                   <Row className="form-header">
-                     <Col>
+                     <Col sm="3">
                         <h4> {this.state.clonePationt?.name} {id?(<span> - {id}</span>):(null)} </h4>
                      </Col>
                      <Col> 

@@ -106,7 +106,7 @@ class UserUpdate  extends Component {
                 First Name
               </Label>
               <Col sm="5">
-                <Input
+                {/* <Input
                   className="form-control btn-pill"
                   type="text"
                   placeholder="Name"
@@ -114,7 +114,8 @@ class UserUpdate  extends Component {
                   onChange={this.handleChange.bind(this, "firstName")}
                   disabled
                   />
-                  <span style={{color: "red"}}>{this.state.errors["firstName"]}</span>
+                  <span style={{color: "red"}}>{this.state.errors["firstName"]}</span> */}
+                  <h5>{this.state.cloneUser?.firstName}</h5>
               </Col>
             </FormGroup>
             <FormGroup className="row">
@@ -125,7 +126,7 @@ class UserUpdate  extends Component {
                 Last Name
               </Label>
               <Col sm="5">
-                <Input
+                {/* <Input
                   className="form-control btn-pill"
                   type="text"
                   placeholder="Name"
@@ -133,7 +134,8 @@ class UserUpdate  extends Component {
                   onChange={this.handleChange.bind(this, "lastName")}
                   disabled
                   />
-                  <span style={{color: "red"}}>{this.state.errors["lastName"]}</span>
+                  <span style={{color: "red"}}>{this.state.errors["lastName"]}</span> */}
+                  <h5>{this.state.cloneUser?.lastName}</h5>
               </Col>
             </FormGroup>
             <FormGroup className="row">
@@ -144,7 +146,7 @@ class UserUpdate  extends Component {
                 Email
               </Label>
               <Col sm="5">
-                <Input
+                {/* <Input
                   className="form-control btn-pill"
                   type="email"
                   placeholder="Email"
@@ -152,7 +154,9 @@ class UserUpdate  extends Component {
                   onChange={this.handleChange.bind(this, "email")}
                   disabled
                 />
-                 <span style={{color: "red"}}>{this.state.errors["email"]}</span>
+                 <span style={{color: "red"}}>{this.state.errors["email"]}</span> */}
+                 <h5>{this.state.cloneUser?.email}</h5>
+
               </Col>
             </FormGroup>
          
@@ -164,7 +168,7 @@ class UserUpdate  extends Component {
                 User Name
               </Label>
               <Col sm="5">
-                <Input
+                {/* <Input
                   className="form-control btn-pill"
                   type="text"
                   placeholder="userName"
@@ -172,7 +176,9 @@ class UserUpdate  extends Component {
                   onChange={this.handleChange.bind(this, "userName")}
                   disabled
                 />
-                 <span style={{color: "red"}}>{this.state.errors["userName"]}</span>
+                 <span style={{color: "red"}}>{this.state.errors["userName"]}</span> */}
+                 <h5>{this.state.cloneUser?.userName}</h5>
+
               </Col>
             </FormGroup>
         

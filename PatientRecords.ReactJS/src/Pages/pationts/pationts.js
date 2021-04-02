@@ -14,9 +14,9 @@ class Pationts extends  Component   {
            headers:[
                "Name",
                "Official Id",
-               "Date Of Birth",
+               "Birth",
                "Email",
-               "Last Entry Date",
+               "Last Entry",
                "Statistics",
                "Records",
                "Edit",
@@ -61,13 +61,13 @@ class Pationts extends  Component   {
     }
 
     goToCreatePage =()=> {
-        this.props.history.push('/PationtUpdate');
+        this.props.history.push('/Patient');
        }
     goToUpdatePage =(e,id)=> {
         if(e){
             e.stopPropagation();
         }
-       this.props.history.push('/PationtUpdate/'+id);
+       this.props.history.push('/Patient/'+id);
    }
 
     refreshList =()=>{
@@ -86,7 +86,7 @@ class Pationts extends  Component   {
 
     goToPatientRecords =(e,id,name)=> {
         e.stopPropagation();
-        this.props.history.push('/PatientRecords/'+id+'/'+name);
+        this.props.history.push('/PatientRecords/'+name+'/'+id);
     }
 
     render() {

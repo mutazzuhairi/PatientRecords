@@ -1,5 +1,6 @@
 
 import users from '../Pages/users/users'
+import roles from '../Pages/users/roles/roles'
 import pationts from '../Pages/pationts/pationts'
 import patientRecords from '../Pages/patientRecords/patientRecords'
 import pationtUpdate from '../Pages/pationts/pationtUpdate/pationtUpdate'
@@ -9,24 +10,22 @@ import PatientStatistics from '../Pages/PatientStatistics/PatientStatistics'
  
 
 export const routes = [
-    { path:"/users", Component: users }, 
-    { path:"/patients", Component: pationts }, 
-    { path:"/patients/:date", Component: pationts }, 
-    { path:"/patientRecords", Component: patientRecords }, 
-    { path:"/patientRecords/:date", Component: patientRecords }, 
-    { path:"/patientRecords/:pationtId/:name", Component: patientRecords }, 
+    { path:"/Users", Component: users }, 
+    { path:"/Roles", Component: roles }, 
+    { path:"/Patients", Component: pationts }, 
+    { path:"/Patients/:date", Component: pationts }, 
+    { path:"/PatientRecords", Component: patientRecords }, 
+    { path:"/PatientRecords/:date", Component: patientRecords }, 
+    { path:"/PatientRecords/:name/:pationtId", Component: patientRecords }, 
 
     //For Update
-    { path:"/pationtUpdate/:id", Component: pationtUpdate }, 
-    { path:"/patientRecordUpdate/:id", Component: patientRecordUpdate }, 
-    { path:"/userUpdate/:id", Component: userUpdate }, 
+    { path:"/Patient/:id", Component: pationtUpdate }, 
+    { path:"/PatientRecord/:id", Component: patientRecordUpdate }, 
+    { path:"/User/:id", Component: userUpdate }, 
     //For Create (same components with update)
-    { path:"/pationtUpdate", Component: pationtUpdate }, 
-    { path:"/patientRecordUpdate/:pationtname/:pationtid", Component: patientRecordUpdate }, 
-    { path:"/userUpdate", Component: userUpdate }, 
-    { path:"/statistics/:id", Component: PatientStatistics }, 
-
-
-
-
+    { path:"/Patient", Component: pationtUpdate }, 
+    { path:"/patientRecord/:pationtname/:pationtid", Component: patientRecordUpdate }, 
+    { path:"/User", Component: userUpdate }, 
+    { path:"/Statistics/:id", Component: PatientStatistics }, 
+ 
 ]

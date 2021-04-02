@@ -15,7 +15,7 @@ export default function(state = initialState, action){
           error: action.error,
           loading:false,
         }
-        default: return state
+        default: return initialState
     }
 
 }

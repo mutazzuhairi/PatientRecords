@@ -44,11 +44,11 @@ class users extends Component {
     }
 
     goToUpdatePage =(id)=> {
-        this.props.history.push('/userUpdate/'+id);
+        this.props.history.push('/User/'+id);
        }
  
     goToCreatePage =(id)=> {
-        this.props.history.push('/userUpdate');
+        this.props.history.push('/User');
        }
 
     refreshList =()=>{

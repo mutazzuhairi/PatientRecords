@@ -89,7 +89,7 @@ class Header extends Component{
   };
   goToPatientpage = (id) => {
     this.removeFix();
-    this.props.history.push('/pationtUpdate/'+id);
+    this.props.history.push('/patient/'+id);
 
   };
   
@@ -120,7 +120,7 @@ class Header extends Component{
         <div className="page-main-header">
         <div className="main-header-right">
           <div className="main-header-left text-center">
-            <div className="logo-wrapper"><Link to="/default/sample-page"><img src={require("../../../assets/images/logo/logo.png")} alt=""/></Link></div>
+            <div className="logo-wrapper"><Link to="/Patients"><img src={require("../../../assets/images/logo/logo.png")} alt=""/></Link></div>
           </div>
           <div className="mobile-sidebar">
             <div className="media-body text-right switch-sm">
@@ -167,7 +167,7 @@ class Header extends Component{
                             return (
                               <Link
                               key={index}
-                              to={'/pationtUpdate/'+data.id}
+                              to={'/patient/'+data.id}
                               className="realname"
                               onMouseDown={()=>this.goToPatientpage(data.id)} >
                               <div className="ProfileCard u-cf" >
