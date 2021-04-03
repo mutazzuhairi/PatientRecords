@@ -26,12 +26,16 @@ namespace PatientRecords.BLLayer.BLUtilities.SystemConstants
             public const string ExpiryInMinutes = "ExpiryInMinutes";
         }
 
-        public class Others
+        public class SwaggerProperites
         {
-            public const string SwaggerRoute = "/swagger/v1/swagger.json";
+            public const string SwaggerRoute = "/api/swagger/v1/swagger.json";
             public const string SwaggerTitle = "PatientRecord.Web";
             public const string SwaggesrName = "PatientRecord.Web v1";
             public const string SwaggerVersion = "v1";
+            public const string SwaggerRouteTemplate = "api/swagger/{documentname}/swagger.json";
+            public const string SwaggerPath = "api/swagger";
+
+
         }
 
     }

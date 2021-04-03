@@ -48,11 +48,13 @@ class Pationts extends  Component   {
     }
 
     componentDidUpdate(prevProps, prevState){
-        if (prevProps.location.key !== this.props.location.key||
-            this.state.pageSize !== prevState.pageSize ||
+        if (this.state.pageSize !== prevState.pageSize ||
             this.state.pageNumber !== prevState.pageNumber|| 
             this.state.searchField !== prevState.searchField){
                this.refreshList();
+          }
+          if (prevProps.location.key !== this.props.location.key){
+            this.refreshList(Math.floor(window.innerHeight/90),1,'');
           }
     }
 
@@ -70,8 +72,11 @@ class Pationts extends  Component   {
        this.props.history.push('/Patient/'+id);
    }
 
-    refreshList =()=>{
-        this.props.dispatch(pationtAction.requestGetAll(this.state.pageNumber,this.state.pageSize,this.state.searchField,this.state.dateFilter));
+    refreshList =(pageSize=this.state.pageSize,
+                  pageNumber=this.state.pageNumber,
+                  searchField=this.state.searchField)=>{
+
+        this.props.dispatch(pationtAction.requestGetAll(pageNumber,pageSize,searchField,this.props.match.params.date));
     }
  
  

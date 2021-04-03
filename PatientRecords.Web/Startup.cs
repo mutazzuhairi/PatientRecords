@@ -40,12 +40,11 @@ namespace PatientRecords.Web
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseStaticFiles();
+
             if (env.IsDevelopment())
-            {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerInterface();
-            }
+
+            app.UseSwaggerInterface();
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseCorsSecurity();

@@ -35,21 +35,25 @@ const Root = (props) =>  {
       <Fragment>
         <Provider store={store}>
         <BrowserRouter basename={`/`}>
-          <Switch>
+         
             <Fragment>
             <App>
+            <Switch>
                <Route exact path="/" render={() => {
                           return (<Redirect to="/Patients" />)
                       }} />
-                {routes.map(({ path, Component}) => (
-               <Route exact key={path} path={path}>
-                       <Component/> 
-               </Route>
-                            
+
+                {routes.map(({ path, Component,isRedirect}) => (
+                !isRedirect? <Route exact key={path} path={path}>
+                               <Component/> 
+                            </Route>
+                          :
+                          <Redirect to={path} />
                 ))}
+                </Switch>
             </App>
             </Fragment> 
-          </Switch>
+          
         </BrowserRouter>
         </Provider>
     </Fragment>

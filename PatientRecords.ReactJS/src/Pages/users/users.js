@@ -17,7 +17,7 @@ class users extends Component {
                "User Name",
                "Email",
            ],
-           pageSize:Math.floor(window.innerHeight/70),
+           pageSize:Math.floor(window.innerHeight/90),
            pageNumber:1,
            searchField:'',
        };

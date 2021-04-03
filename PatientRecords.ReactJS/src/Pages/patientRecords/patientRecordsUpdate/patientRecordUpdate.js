@@ -170,6 +170,7 @@ class PatientRecordUpdate  extends Component {
               </Label>
               <Col sm="5">
                 <textarea
+                  style={{color:"#a7a2a2"}}
                   className="form-control btn-pill"
                   rows="5"
                   cols="5"

@@ -21,7 +21,7 @@ class PatientRecords extends Component {
                "Patient",
                "Edit",
            ],
-           pageSize:Math.floor(window.innerHeight/70),
+           pageSize:Math.floor(window.innerHeight/90),
            pageNumber:1,
            searchField:'',
            dateFilter:this.props.match.params.date,
@@ -30,17 +30,19 @@ class PatientRecords extends Component {
        };
     
     }
-
+ 
     componentDidMount(){
         this.refreshList();
     }
 
     componentDidUpdate(prevProps, prevState){
-        if (prevProps.location.key !== this.props.location.key||
-            this.state.pageSize !== prevState.pageSize ||
+        if (this.state.pageSize !== prevState.pageSize ||
             this.state.pageNumber !== prevState.pageNumber|| 
             this.state.searchField !== prevState.searchField){
                 this.refreshList();
+          }
+          if (prevProps.location.key !== this.props.location.key){
+            this.refreshList(Math.floor(window.innerHeight/70),1,'');
           }
     }
 
@@ -56,12 +58,15 @@ class PatientRecords extends Component {
         this.setState({searchField:event.target.value});
     }
 
-    refreshList =()=>{
+    refreshList =(pageSize=this.state.pageSize,
+                  pageNumber=this.state.pageNumber,
+                  searchField=this.state.searchField)=>{
+
         if(this.state.pationtId!=null && this.state.name!=null ) {
-            this.props.dispatch(patientRecordAction.requestGetAllfForPatientId(this.state.pationtId,this.state.pageNumber,this.state.pageSize,this.state.searchField));
+            this.props.dispatch(patientRecordAction.requestGetAllfForPatientId(this.state.pationtId,pageNumber,pageSize,searchField));
         }
         else{
-            this.props.dispatch(patientRecordAction.requestGetAll(this.state.pageNumber,this.state.pageSize,this.state.searchField,this.state.dateFilter));
+            this.props.dispatch(patientRecordAction.requestGetAll(pageNumber,pageSize,searchField,this.props.match.params.date));
         }
     }
  

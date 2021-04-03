@@ -27,5 +27,7 @@ export const routes = [
     { path:"/patientRecord/:pationtname/:pationtid", Component: patientRecordUpdate }, 
     { path:"/User", Component: userUpdate }, 
     { path:"/Statistics/:id", Component: PatientStatistics }, 
- 
+    
+    { path:"/Patients", isRedirect: true }, 
+
 ]

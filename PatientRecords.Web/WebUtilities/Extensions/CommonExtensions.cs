@@ -67,16 +67,23 @@ namespace PatientRecords.Web.WebUtilities.Extensions
         }
         public static void UseSwaggerInterface(this IApplicationBuilder app)
         {
-            app.UseSwaggerUI(c => c.SwaggerEndpoint(SystemConstatnts.Others.SwaggerRoute, 
-                                                    SystemConstatnts.Others.SwaggesrName));
+            app.UseSwagger(c =>
+            {
+                c.RouteTemplate = SystemConstatnts.SwaggerProperites.SwaggerRouteTemplate;
+            });
+            app.UseSwaggerUI(c => {
+                c.SwaggerEndpoint(SystemConstatnts.SwaggerProperites.SwaggerRoute,
+                                 SystemConstatnts.SwaggerProperites.SwaggesrName);
+                c.RoutePrefix = SystemConstatnts.SwaggerProperites.SwaggerPath;
+            });
 
         }
 
         public static void AddSwagger(this IServiceCollection services)
         {
-            services.AddSwaggerGen(c => c.SwaggerDoc(SystemConstatnts.Others.SwaggerVersion, 
-                                                           new OpenApiInfo { Title = SystemConstatnts.Others.SwaggerTitle,
-                                                                             Version = SystemConstatnts.Others.SwaggerVersion
+            services.AddSwaggerGen(c => c.SwaggerDoc(SystemConstatnts.SwaggerProperites.SwaggerVersion, 
+                                                           new OpenApiInfo { Title = SystemConstatnts.SwaggerProperites.SwaggerTitle,
+                                                                             Version = SystemConstatnts.SwaggerProperites.SwaggerVersion
             }));
  
         }
