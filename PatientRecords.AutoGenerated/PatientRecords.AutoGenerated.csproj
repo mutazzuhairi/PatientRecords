@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net5.0</TargetFramework>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Mono.TextTemplating" Version="2.2.1" />
+		<TextTemplate Include="**\*.tt" />
+		<Generated Include="**\*.Generated.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\PatientRecords.BLLayer\PatientRecords.BLLayer.csproj" />
+	  <ProjectReference Include="..\PatientRecords.DataLayer\PatientRecords.DataLayer.csproj" />
+	  <ProjectReference Include="..\PatientRecords.Web\PatientRecords.Web.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Generated\" />
+	</ItemGroup>
+
+	<Target Name="TextTemplateTransform" BeforeTargets="BeforeBuild">
+		<Exec WorkingDirectory="$(ProjectDir)" Command="dotnet t4 %(TextTemplate.Identity) -c $(RootNameSpace).%(TextTemplate.Filename) -o %(TextTemplate.Filename).Generated.cs" />
+	</Target>
+
+	<Target Name="TextTemplateClean" AfterTargets="Clean">
+		<Delete Files="@(Generated)" />
+	</Target>
+
+</Project>
