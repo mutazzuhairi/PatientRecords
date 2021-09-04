@@ -28,9 +28,7 @@ namespace PatientRecords.BLLayer.Mapping
             entity.DiseaseName = entityDTO.DiseaseName;
             entity.Bill = entityDTO.Bill;
             entity.Description = entityDTO.Description;
-            entity.TimeOfEntry = entityDTO.TimeOfEntry == null ? DateTime.Now:
-                                                                (DateTime) entityDTO.TimeOfEntry.
-                                                                           Value.AddHours(3);
+            entity.TimeOfEntry = entityDTO.TimeOfEntry.AddHours(3);
 
             entity.SearchField = entityDTO.SearchField;
 

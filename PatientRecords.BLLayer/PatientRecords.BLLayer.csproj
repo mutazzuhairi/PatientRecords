@@ -16,4 +16,10 @@
     <ProjectReference Include="..\PatientRecords.DataLayer\PatientRecords.DataLayer.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="EntityDTOs\Generated\" />
+    <Folder Include="EntityViews\Generated\" />
+    <Folder Include="QueryServices\Generated\" />
+  </ItemGroup>
+
 </Project>

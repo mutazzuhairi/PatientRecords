@@ -4,23 +4,10 @@ using PatientRecords.BLLayer.BLUtilities.Abstractions;
  
 namespace PatientRecords.BLLayer.EntityDTOs
 {
-    public  class UserDTO : BaseEntityDTO
+    public partial class UserDTO  
     {
-        public string Id { get; set; }
-        [Required]
-        [StringLength(100)]
-        public string FirstName { get; set; }
-        [Required]
-        [StringLength(100)]
-        public string LastName { get; set; }
-        [Required]
-        [StringLength(100)]
-        public string Email { get; set; }
-        [Required]
-        [StringLength(200)]
-        public string UserName { get; set; }
-        [JsonIgnore]
         public string PasswordHash { get; set; }
-
+        public string Email { get; set; }
+        public string UserName { get; set; }
     }
 }

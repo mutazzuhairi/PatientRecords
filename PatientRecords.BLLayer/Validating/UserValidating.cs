@@ -29,7 +29,7 @@ namespace PatientRecords.BLLayer.Validating
             {
                 _serviceBuildException.Value.BuildException(SystemConstatnts.ValidationMessage.EmailNotValid);
             }
-            else if (IsUserNameAlreadyExist(entityDTO.UserName, entityDTO.Id))
+            else if (IsUserNameAlreadyExist(entityDTO.UserName,   entityDTO.Id+""))
             {
                 _serviceBuildException.Value.BuildException(SystemConstatnts.ValidationMessage.UserNameAlreadyExist);
             }

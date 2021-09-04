@@ -39,6 +39,7 @@ namespace PatientRecords.BLLayer.BLUtilities.Extensions
         private static void AddPatientRecordServicesToScoped(IServiceCollection services)
         {
             services.AddScoped<IPatientRecordRepositry, PatientRecordRepositry>();
+            services.AddScoped<IRoleRepositry, RoleRepositry>();
             services.AddScoped<IPatientRecordValidating, PatientRecordValidating>();
             services.AddScoped<IPatientRecordMapping, PatientRecordMapping>();
             services.AddScoped<IPatientRecordQueryService, PatientRecordQueryService>();

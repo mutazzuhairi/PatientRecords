@@ -7,22 +7,29 @@
 
 	<ItemGroup>
 		<PackageReference Include="Mono.TextTemplating" Version="2.2.1" />
-		<TextTemplate Include="**\*.tt" />
-		<Generated Include="**\*.Generated.cs" />
+		<TextTemplate Include="GeneratedStructure\T4GeneratedStructure\**\*.tt" />
+		<Generated Include="GeneratedStructure\ClassesGeneratedStructure\**\*.Generated.cs" />
 	</ItemGroup>
-
+ 
 	<ItemGroup>
 	  <ProjectReference Include="..\PatientRecords.BLLayer\PatientRecords.BLLayer.csproj" />
 	  <ProjectReference Include="..\PatientRecords.DataLayer\PatientRecords.DataLayer.csproj" />
 	  <ProjectReference Include="..\PatientRecords.Web\PatientRecords.Web.csproj" />
 	</ItemGroup>
 
+
 	<ItemGroup>
-	  <Folder Include="Generated\" />
+	  <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
 	</ItemGroup>
 
+
+	<ItemGroup>
+	  <Folder Include="GeneratedStructure\ClassesGeneratedStructure\Generated\" />
+	</ItemGroup>
+ 
+
 	<Target Name="TextTemplateTransform" BeforeTargets="BeforeBuild">
-		<Exec WorkingDirectory="$(ProjectDir)" Command="dotnet t4 %(TextTemplate.Identity) -c $(RootNameSpace).%(TextTemplate.Filename) -o %(TextTemplate.Filename).Generated.cs" />
+		<Exec WorkingDirectory="$(ProjectDir)" Command="dotnet t4 %(TextTemplate.Identity) -c $(RootNameSpace).GeneratedStructure.ClassesGeneratedStructure.%(TextTemplate.Filename) -o GeneratedStructure\ClassesGeneratedStructure\Generated\%(TextTemplate.Filename).Generated.cs" />
 	</Target>
 
 	<Target Name="TextTemplateClean" AfterTargets="Clean">

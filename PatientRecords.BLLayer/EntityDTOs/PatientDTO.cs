@@ -4,17 +4,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PatientRecords.BLLayer.EntityDTOs
 {
-    public class PatientDTO : BaseEntityDTO
+    public partial class PatientDTO 
     {
 
-        [Required]
-        [StringLength(200)]
-        public string Name { get; set; }
-        [Required]
-        public string OfficialId { get; set; }
-        public DateTime? DateOfBirth { get; set; }
-        public string Email { get; set; }
-        public string SearchField { get; set; }
+ 
 
     }
 }
