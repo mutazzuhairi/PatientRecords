@@ -17,20 +17,27 @@ using PatientRecords.BLLayer.BLUtilities.HelperServices.Interfaces;
 namespace <#= NameSpace #>
 {
  
-    public partial class <#= Table.Type.Name #>QueryService : EntityQueryService<<#= Table.Type.Name #>, I<#= Table.Type.Name #>Repositry, <#= Table.Type.Name #>DTO, <#= Table.Type.Name #>View>, I<#= Table.Type.Name #>QueryService
+    public class <#= Table.Type.Name #>QueryService : EntityQueryService<<#= Table.Type.Name #>, I<#= Table.Type.Name #>Repositry, <#= Table.Type.Name #>DTO, <#= Table.Type.Name #>View>, I<#= Table.Type.Name #>QueryService
     {
-        private readonly I<#= Table.Type.Name #>Repositry _iEntityRepositry;
-        private readonly IMapper _mapper;
+        private readonly Lazy<I<#= Table.Type.Name #>Repositry> _iEntityRepositry;
+        private readonly Lazy<<#= Table.CommonServices.Name #>> _iCommonServices;
+        private readonly Lazy<<#= Table.UriService.Name #>> _iUriService;
+        private readonly Lazy<<#= Table.PaginationHelperServices.Name #>> _paginationHelper;
+        private readonly <#= Table.Mapper.Name #> _mapper;
 
-        public <#= Table.Type.Name #>QueryService(I<#= Table.Type.Name #>Repositry iEntityRepositry, 
-                                IMapper mapper,
-                                IUriService  uriService,
-                                Lazy<IPaginationHelper>  paginationHelper) :
-            base(iEntityRepositry, mapper, uriService, paginationHelper)
+        public <#= Table.Type.Name #>QueryService(Lazy<I<#= Table.Type.Name #>Repositry> iEntityRepositry, 
+                                Lazy<<#= Table.CommonServices.Name #>> iCommonServices,
+                                Lazy<<#= Table.UriService.Name #>>  iUriService,
+                                Lazy<<#= Table.PaginationHelperServices.Name #>>  paginationHelper,
+                                <#= Table.Mapper.Name #> mapper) :
+            base(iEntityRepositry, iUriService, paginationHelper, mapper)
         {
 
             _iEntityRepositry = iEntityRepositry;
-             _mapper = mapper;
+            _iCommonServices = iCommonServices;
+            _iUriService = iUriService;
+            _paginationHelper = paginationHelper;
+            _mapper = mapper;
 
         }
 

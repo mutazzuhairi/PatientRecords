@@ -12,15 +12,15 @@ using PatientRecords.BLLayer.BLUtilities.HelperServices.Interfaces;
 namespace PatientRecords.BLLayer.QueryServices
 {
  
-    public class RoleQueryService : EntityQueryService<Role, IRoleRepositry, RoleDTO, RoleView>, IRoleQueryService
+    public class mutazQueryService : EntityQueryService<mutaz, ImutazRepositry, mutazDTO, mutazView>, ImutazQueryService
     {
-        private readonly Lazy<IRoleRepositry> _iEntityRepositry;
+        private readonly Lazy<ImutazRepositry> _iEntityRepositry;
         private readonly Lazy<ICommonServices> _iCommonServices;
         private readonly Lazy<IUriService> _uriService;
         private readonly Lazy<IPaginationHelper> _paginationHelper;
         private readonly IMapper _mapper;
 
-        public RoleQueryService(Lazy<IRoleRepositry> iEntityRepositry, 
+        public mutazQueryService(Lazy<ImutazRepositry> iEntityRepositry, 
                                 Lazy<ICommonServices> iCommonServices,
                                 Lazy<IUriService>  uriService,
                                 Lazy<IPaginationHelper>  paginationHelper,

@@ -19,15 +19,15 @@ namespace PatientRecords.BLLayer.QueryServices
     public class PatientQueryService : EntityQueryService<Patient, IPatientRepositry, PatientDTO, PatientView>, IPatientQueryService
     {
         
-        private readonly IPatientRepositry _iEntityRepositry;
+        private readonly Lazy<IPatientRepositry> _iEntityRepositry;
         private readonly IMapper _mapper;
         private readonly Lazy<ICommonServices> _commonServices;
-        public PatientQueryService(IPatientRepositry iEntityRepositry, 
-                                   IMapper mapper,
-                                   IUriService  uriService,
+        public PatientQueryService(Lazy<IPatientRepositry> iEntityRepositry, 
+                                   Lazy<IUriService>  uriService,
                                    Lazy<IPaginationHelper>  paginationHelper,
-                                   Lazy<ICommonServices> commonServices) : 
-            base(iEntityRepositry, mapper, uriService, paginationHelper)
+                                   Lazy<ICommonServices> commonServices,
+                                   IMapper mapper) : 
+            base(iEntityRepositry, uriService, paginationHelper, mapper)
         {
              _iEntityRepositry = iEntityRepositry;
              _mapper = mapper;
@@ -68,7 +68,7 @@ namespace PatientRecords.BLLayer.QueryServices
 
         private IQueryable<Patient> ApplyFilters(PaginationFilter filter)
         {
-            var dataView = _iEntityRepositry.GetAll();
+            var dataView = _iEntityRepositry.Value.GetAll();
             if (!string.IsNullOrEmpty(filter.SearchField))
                 dataView = dataView.Where(s => s.SearchField.Contains(filter.SearchField));
             if (!string.IsNullOrEmpty(filter.DateFilter))
@@ -91,11 +91,11 @@ namespace PatientRecords.BLLayer.QueryServices
 
         public bool IsOfficialIdAlreadyExist(string officialId , int entityId)
         {
-            return _iEntityRepositry.GetAll().Where(s => s.OfficialId == officialId && s.Id!= entityId).Any();
+            return _iEntityRepositry.Value.GetAll().Where(s => s.OfficialId == officialId && s.Id!= entityId).Any();
         }
         public bool IsEmailAlreadyExist(string email , int entityId)
         {
-            return _iEntityRepositry.GetAll().Where(s => s.Email == email && s.Id!= entityId).Any();
+            return _iEntityRepositry.Value.GetAll().Where(s => s.Email == email && s.Id!= entityId).Any();
         }
 
     }

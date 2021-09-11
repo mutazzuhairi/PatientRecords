@@ -16,14 +16,15 @@ namespace PatientRecords.BLLayer.BLUtilities.Abstractions
     public abstract class EntityQueryService<TEntity, TEntityRepositry, TEntityDTO, TEntityView> : IQueryService<TEntityDTO, TEntityView>
     where TEntityRepositry : IRepository<TEntity>
     {
-        private readonly TEntityRepositry _entityRepositry;
-        private readonly IMapper  _mapper;
-        private readonly IUriService _uriService;
+        private readonly Lazy<TEntityRepositry> _entityRepositry;
+        private readonly Lazy<IUriService> _uriService;
         private readonly Lazy<IPaginationHelper> _paginationHelper;
-        public EntityQueryService(TEntityRepositry entityRepositry, 
-                                  IMapper mapper, 
-                                  IUriService uriService,
-                                  Lazy<IPaginationHelper> paginationHelper)
+        private readonly IMapper _mapper;
+
+        public EntityQueryService(Lazy<TEntityRepositry> entityRepositry, 
+                                  Lazy<IUriService> uriService,
+                                  Lazy<IPaginationHelper> paginationHelper,
+                                  IMapper mapper)
         {
              _entityRepositry = entityRepositry;
              _mapper = mapper;
@@ -33,7 +34,7 @@ namespace PatientRecords.BLLayer.BLUtilities.Abstractions
 
         public virtual async Task<List<TEntityDTO>> GetAllAsync()
         {
-            var pocoList = await this._entityRepositry.GetAll().ToListAsync();
+            var pocoList = await this._entityRepositry.Value.GetAll().ToListAsync();
 
             return _mapper.Map<List<TEntityDTO>>(pocoList);
 
@@ -41,7 +42,7 @@ namespace PatientRecords.BLLayer.BLUtilities.Abstractions
 
         public virtual async Task<List<TEntityView>> GetAllViewAsync()
         {
-            var pocoList = await this._entityRepositry.GetAll().ToListAsync();
+            var pocoList = await this._entityRepositry.Value.GetAll().ToListAsync();
 
             return _mapper.Map<List<TEntityView>>(pocoList);
 
@@ -49,14 +50,14 @@ namespace PatientRecords.BLLayer.BLUtilities.Abstractions
          
         public virtual async Task<TEntityDTO> GetSingleAsync(params object[] keyValues)
         {
-            var poco = await this._entityRepositry.FindAsync(keyValues);
+            var poco = await this._entityRepositry.Value.FindAsync(keyValues);
  
             return  _mapper.Map<TEntityDTO>(poco);
         }
 
         public virtual async Task<TEntityView> GetSingleViewAsync(params object[] keyValues)
         {
-            var poco = await this._entityRepositry.FindAsync(keyValues);
+            var poco = await this._entityRepositry.Value.FindAsync(keyValues);
 
             return  _mapper.Map<TEntityView>(poco);
         }
@@ -87,13 +88,13 @@ namespace PatientRecords.BLLayer.BLUtilities.Abstractions
         private async Task<PaginationData> GetPaginationData(PaginationFilter filter, string route ,int? totalRecordsCount = null)
         {
             var validFilter = new PaginationFilter(filter.PageNumber, filter.PageSize);
-            var totalRecords = await this._entityRepositry.GetAll().CountAsync();
+            var totalRecords = await this._entityRepositry.Value.GetAll().CountAsync();
             var paginationData = new PaginationData()
             {
                 TotalRecords = totalRecordsCount!=null? (int)totalRecordsCount:totalRecords,
                 ValidFilter = validFilter,
                 Route = route,
-                UriService = _uriService,
+                UriService = _uriService.Value,
             };
 
             return paginationData;
@@ -118,7 +119,7 @@ namespace PatientRecords.BLLayer.BLUtilities.Abstractions
         private async Task<List<TEntity>> GetPaginationRecoreds(PaginationFilter validFilter)
         {
 
-            var pagedData = await this._entityRepositry.GetAll()
+            var pagedData = await this._entityRepositry.Value.GetAll()
                                   .Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
                                   .Take(validFilter.PageSize)
                                   .ToListAsync();

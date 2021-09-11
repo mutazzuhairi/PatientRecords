@@ -19,26 +19,27 @@ namespace PatientRecords.BLLayer.QueryServices
     public class PatientRecordQueryService : EntityQueryService<PatientRecord , IPatientRecordRepositry, PatientRecordDTO, PatientRecordView> , IPatientRecordQueryService
     {
         
-        private readonly IPatientRecordRepositry _iEntityRepositry;
-        private readonly IMapper _mapper;
+        private readonly Lazy<IPatientRecordRepositry> _iEntityRepositry;
         private readonly Lazy<ICommonServices> _commonServices;
+        private readonly IMapper  _mapper;
 
-        public PatientRecordQueryService(IPatientRecordRepositry iEntityRepositry, IMapper mapper,
-                                         IUriService  uriService,
+        public PatientRecordQueryService(Lazy<IPatientRecordRepositry> iEntityRepositry, 
+                                         Lazy<IUriService>  uriService,
                                          Lazy<IPaginationHelper>  paginationHelper,
-                                         Lazy<ICommonServices> commonServices) :
-            base(iEntityRepositry, mapper, uriService, paginationHelper)
+                                         Lazy<ICommonServices> commonServices,
+                                         IMapper mapper) :
+            base(iEntityRepositry, uriService, paginationHelper, mapper)
         {
 
              _iEntityRepositry = iEntityRepositry;
-            _commonServices = commonServices;
-            _mapper = mapper;
+             _commonServices = commonServices;
+             _mapper = mapper;
         }
 
 
         public override async Task<PatientRecordDTO> GetSingleAsync(params object[] keyValues)
         {
-            var poco = await _iEntityRepositry.GetAll()
+            var poco = await _iEntityRepositry.Value.GetAll()
                                        .Include(s => s.Patient)
                                        .Where(s => s.Id == (int)keyValues.First())
                                        .FirstOrDefaultAsync();
@@ -66,7 +67,7 @@ namespace PatientRecords.BLLayer.QueryServices
 
         private IQueryable<PatientRecordView> GetIQueryablePatientRecordView()
         {
-            var result = _iEntityRepositry.GetAll()
+            var result = _iEntityRepositry.Value.GetAll()
                    .OrderByDescending(s => s.TimeOfEntry)
                    .Include(a => a.Patient)
                    .Select(x => new PatientRecordView()
@@ -104,7 +105,7 @@ namespace PatientRecords.BLLayer.QueryServices
 
         public bool IsDiseaseNameAlreadyExist(string diseaseName)
         {
-            return _iEntityRepositry.GetAll().Where(s => s.DiseaseName == diseaseName).Any();
+            return _iEntityRepositry.Value.GetAll().Where(s => s.DiseaseName == diseaseName).Any();
         }
 
     }

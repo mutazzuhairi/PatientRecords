@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PatientRecords.DataLayer.Data.Entities
 {
-    public class mutaz
+    public class mutaz: BaseEntity
     {
         [Required]
         [StringLength(200)]

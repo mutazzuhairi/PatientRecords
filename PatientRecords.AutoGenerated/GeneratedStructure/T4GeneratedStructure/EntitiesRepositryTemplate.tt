@@ -14,9 +14,11 @@ namespace <#= NameSpace #>
     public class <#= Table.Type.Name #>Repositry : EntityRepository<<#= Table.Type.Name #>>, I<#= Table.Type.Name #>Repositry
     {
     
+        private readonly <#= Table.Context.Name #> _context;
+
         public <#= Table.Type.Name #>Repositry(<#= Table.Context.Name #> context) : base(context)
         {
-            
+            _context = context;
         }
  
     }
