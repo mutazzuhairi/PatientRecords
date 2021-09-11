@@ -3,6 +3,7 @@ using PatientRecords.BLLayer.BLUtilities.Interfaces;
 using PatientRecords.DataLayer.DataUtilities.Abstractions;
 using System.Security.Claims;
 using System;
+using AutoMapper;
 
 namespace PatientRecords.BLLayer.BLUtilities.Abstractions
 {
@@ -12,9 +13,12 @@ namespace PatientRecords.BLLayer.BLUtilities.Abstractions
 
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
-        public EntityMapping(IHttpContextAccessor httpContextAccessor)
+        private readonly IMapper _mapper;
+        public EntityMapping(IHttpContextAccessor httpContextAccessor, 
+                             IMapper mapper)
         {
             _httpContextAccessor = httpContextAccessor;
+            _mapper = mapper;
         }
         public virtual void MapEntity(TEntity entity, 
                                       TEntityDTO entityDto,
@@ -26,14 +30,12 @@ namespace PatientRecords.BLLayer.BLUtilities.Abstractions
             {
                 entityDto.CreatedDate = DateTime.UtcNow;
                 entityDto.CreatedBy = loggedUserName;
-                entity.CreatedBy = entityDto.CreatedBy;
-                entity.CreatedDate = entityDto.CreatedDate;
             }
             entityDto.UpdatedDate = DateTime.UtcNow;
             entityDto.UpdatedBy = loggedUserName;
-            entity.UpdatedDate = entityDto.UpdatedDate;
-            entity.UpdatedBy = entityDto.UpdatedBy;
- 
+
+            entity = _mapper.Map<TEntity>(entityDto);
+
         }
 
 

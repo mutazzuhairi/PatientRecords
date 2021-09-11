@@ -1,18 +1,17 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using PatientRecords.BLLayer.BLUtilities.Abstractions;
 using PatientRecords.BLLayer.EntityDTOs;
 using PatientRecords.BLLayer.Mapping.Interfaces;
-using PatientRecords.BLLayer.QueryServices;
 using PatientRecords.DataLayer.Data.Entities;
-using System;
-using System.Threading.Tasks;
 
 namespace PatientRecords.BLLayer.Mapping
 {
     public class  PatientRecordMapping : EntityMapping<PatientRecord , PatientRecordDTO>, IPatientRecordMapping
     {
 
-        public PatientRecordMapping(IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
+        public PatientRecordMapping(IHttpContextAccessor httpContextAccessor,
+                                    IMapper mapper) : base(httpContextAccessor, mapper)
         {
 
         }
