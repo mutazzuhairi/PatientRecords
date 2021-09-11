@@ -10,6 +10,7 @@
 		<TextTemplate Include="GeneratedStructure\T4GeneratedStructure\**\*.tt" />
 		<Generated Include="GeneratedStructure\ClassesGeneratedStructure\**\*.Generated.cs" />
 	</ItemGroup>
+
  
 	<ItemGroup>
 	  <ProjectReference Include="..\PatientRecords.BLLayer\PatientRecords.BLLayer.csproj" />
@@ -26,8 +27,8 @@
 	<ItemGroup>
 	  <Folder Include="GeneratedStructure\ClassesGeneratedStructure\Generated\" />
 	</ItemGroup>
+
  
-  
 	<Target Name="TextTemplateTransform" BeforeTargets="BeforeBuild">
 		<Exec WorkingDirectory="$(ProjectDir)" Command="dotnet t4 %(TextTemplate.Identity) -c $(RootNameSpace).GeneratedStructure.ClassesGeneratedStructure.%(TextTemplate.Filename) -o GeneratedStructure\ClassesGeneratedStructure\Generated\%(TextTemplate.Filename).Generated.cs" />
 	</Target>

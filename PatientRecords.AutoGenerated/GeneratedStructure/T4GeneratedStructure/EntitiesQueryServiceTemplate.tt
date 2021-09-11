@@ -22,7 +22,8 @@ namespace <#= NameSpace #>
         private readonly I<#= Table.Type.Name #>Repositry _iEntityRepositry;
         private readonly IMapper _mapper;
 
-        public <#= Table.Type.Name #>QueryService(I<#= Table.Type.Name #>Repositry iEntityRepositry, IMapper mapper,
+        public <#= Table.Type.Name #>QueryService(I<#= Table.Type.Name #>Repositry iEntityRepositry, 
+                                IMapper mapper,
                                 IUriService  uriService,
                                 Lazy<IPaginationHelper>  paginationHelper) :
             base(iEntityRepositry, mapper, uriService, paginationHelper)
